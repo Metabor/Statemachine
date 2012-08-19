@@ -11,7 +11,7 @@ abstrakten Typen definiert.
 Diese sind im Namespace Metabor beispielhaft 
 implementiert.
 
-Die Namespaces MetaborTrait und Metabor 54 ist 
+Die Namespaces MetaborTrait und Metabor54 ist 
 eine Implementierung in PHP 5.4, diese ist aber 
 aktuell nicht voll funktionsfähig.
 
