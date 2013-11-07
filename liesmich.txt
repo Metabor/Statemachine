@@ -1,6 +1,11 @@
 ﻿Das Beispiel aus dem Vortag befindet sich im Namespace Example.
 Als Startpunkt empfehle ich die dort befindliche index.php
 
+Über die graph.php kann der Prozess visualisiert werden.
+Die 2 Prozesse können über einen Parameter aufgerufen werden:
+graph.php?process=prepayment
+graph.php?process=postpayment
+
 Im Namespace MetaborStd sind die 
 abstrakten Typen definiert.
 Diese sind im Namespace Metabor beispielhaft 
