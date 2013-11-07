@@ -1,11 +1,11 @@
 <?php
 namespace Metabor\Statemachine;
 use Metabor\Observer\Subject;
-use MetaborInterface\Event\EventInterface;
-use MetaborInterface\Statemachine\StatemachineInterface;
-use MetaborInterface\Statemachine\ProcessInterface;
-use MetaborInterface\Statemachine\StateInterface;
-use MetaborInterface\Statemachine\TransitionInterface;
+use MetaborStd\Event\EventInterface;
+use MetaborStd\Statemachine\StatemachineInterface;
+use MetaborStd\Statemachine\ProcessInterface;
+use MetaborStd\Statemachine\StateInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 use ArrayAccess;
 use ArrayIterator;
 use RuntimeException;
@@ -55,7 +55,7 @@ class Statemachine extends Subject implements StatemachineInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StatemachineInterface::getCurrentState()
+	 * @see MetaborStd\Statemachine.StatemachineInterface::getCurrentState()
 	 */
 	public function getCurrentState() {
 		return $this->currentState;
@@ -103,7 +103,7 @@ class Statemachine extends Subject implements StatemachineInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StatemachineInterface::triggerEvent()
+	 * @see MetaborStd\Statemachine.StatemachineInterface::triggerEvent()
 	 */
 	public function triggerEvent($name, ArrayAccess $context = null) {
 		if (! $context) {
@@ -120,7 +120,7 @@ class Statemachine extends Subject implements StatemachineInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StatemachineInterface::checkTransitions()
+	 * @see MetaborStd\Statemachine.StatemachineInterface::checkTransitions()
 	 */
 	public function checkTransitions() {
 		$context = new ArrayIterator ( array () );

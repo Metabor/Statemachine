@@ -1,7 +1,7 @@
 <?php
 namespace Metabor;
-use MetaborInterface\NamedInterface;
-use MetaborInterface\NamedCollectionInterface;
+use MetaborStd\NamedInterface;
+use MetaborStd\NamedCollectionInterface;
 use IteratorAggregate;
 use ArrayIterator;
 
@@ -21,7 +21,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 
     /**
      *
-     * @see MetaborInterface.NamedCollectionInterface::add()
+     * @see MetaborStd.NamedCollectionInterface::add()
      */
     public function add (NamedInterface $object)
     {
@@ -30,7 +30,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 
     /**
      *
-     * @see MetaborInterface.NamedCollectionInterface::get()
+     * @see MetaborStd.NamedCollectionInterface::get()
      */
     public function get ($name)
     {
@@ -39,7 +39,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 
     /**
      *
-     * @see MetaborInterface.NamedCollectionInterface::getNames()
+     * @see MetaborStd.NamedCollectionInterface::getNames()
      */
     public function getNames ()
     {
@@ -48,7 +48,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 
     /**
      *
-     * @see MetaborInterface.NamedCollectionInterface::has()
+     * @see MetaborStd.NamedCollectionInterface::has()
      */
     public function has ($name)
     {

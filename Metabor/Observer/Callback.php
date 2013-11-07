@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Observer;
 
-use MetaborInterface\CallbackInterface;
+use MetaborStd\CallbackInterface;
 use SplObserver;
 use SplSubject;
 

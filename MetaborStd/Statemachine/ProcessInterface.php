@@ -1,6 +1,6 @@
 <?php
-namespace MetaborInterface\Statemachine;
-use MetaborInterface\NamedInterface;
+namespace MetaborStd\Statemachine;
+use MetaborStd\NamedInterface;
 
 /**
  *
@@ -12,7 +12,7 @@ interface ProcessInterface extends NamedInterface, StateCollectionInterface
 
     /**
      *
-     * @return \MetaborInterface\Statemachine\StateInterface
+     * @return \MetaborStd\Statemachine\StateInterface
      */
     public function getInitialState ();
 

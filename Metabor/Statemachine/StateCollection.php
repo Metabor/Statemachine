@@ -1,9 +1,9 @@
 <?php
 namespace Metabor\Statemachine;
 
-use MetaborInterface\Statemachine\StateInterface;
+use MetaborStd\Statemachine\StateInterface;
 use Metabor\NamedCollection;
-use MetaborInterface\Statemachine\StateCollectionInterface;
+use MetaborStd\Statemachine\StateCollectionInterface;
 
 /**
  *
@@ -28,7 +28,7 @@ class StateCollection implements StateCollectionInterface
 
     /**
      *
-     * @see MetaborInterface\Statemachine.StateCollectionInterface::getState()
+     * @see MetaborStd\Statemachine.StateCollectionInterface::getState()
      */
     public function getState ($name)
     {
@@ -37,7 +37,7 @@ class StateCollection implements StateCollectionInterface
 
     /**
      *
-     * @see MetaborInterface\Statemachine.StateCollectionInterface::getStates()
+     * @see MetaborStd\Statemachine.StateCollectionInterface::getStates()
      */
     public function getStates ()
     {
@@ -46,7 +46,7 @@ class StateCollection implements StateCollectionInterface
 
     /**
      *
-     * @see MetaborInterface\Statemachine.StateCollectionInterface::hasState()
+     * @see MetaborStd\Statemachine.StateCollectionInterface::hasState()
      */
     public function hasState ($name)
     {

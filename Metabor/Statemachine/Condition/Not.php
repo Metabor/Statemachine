@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Statemachine\Condition;
 
-use MetaborInterface\Statemachine\ConditionInterface;
+use MetaborStd\Statemachine\ConditionInterface;
 use ArrayAccess;
 
 class Not implements ConditionInterface {
@@ -21,7 +21,7 @@ class Not implements ConditionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.ConditionInterface::checkCondition()
+	 * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
 	 */
 	public function checkCondition($subject, ArrayAccess $context) {
 		return ! $this->condition->checkCondition ( $subject, $context );
@@ -29,7 +29,7 @@ class Not implements ConditionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface.NamedInterface::getName()
+	 * @see MetaborStd.NamedInterface::getName()
 	 */
 	public function getName() {
 		return 'not ( ' . $this->condition->getName () . ' )';

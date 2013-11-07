@@ -2,7 +2,7 @@
 namespace Metabor\Event;
 
 use Metabor\Observer\Subject;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Event\EventInterface;
 use SplObserver;
 
 /**
@@ -35,7 +35,7 @@ class Event extends Subject implements EventInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Event.EventInterface::getInvokeArgs()
+	 * @see MetaborStd\Event.EventInterface::getInvokeArgs()
 	 */
 	public function getInvokeArgs() {
 		return $this->invokeArgs;

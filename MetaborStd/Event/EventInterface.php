@@ -1,8 +1,8 @@
 <?php
-namespace MetaborInterface\Event;
+namespace MetaborStd\Event;
 
-use MetaborInterface\CallbackInterface;
-use MetaborInterface\NamedInterface;
+use MetaborStd\CallbackInterface;
+use MetaborStd\NamedInterface;
 use SplSubject;
 
 /**

@@ -1,5 +1,5 @@
 <?php
-namespace MetaborInterface\Statemachine;
+namespace MetaborStd\Statemachine;
 use Traversable;
 
 /**

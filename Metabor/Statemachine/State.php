@@ -2,11 +2,11 @@
 namespace Metabor\Statemachine;
 use Metabor\Event\Event;
 
-use MetaborInterface\Statemachine\TransitionInterface;
-use MetaborInterface\Statemachine\StateInterface;
+use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\Statemachine\StateInterface;
 use Metabor\NamedCollection;
 use Metabor\Named;
-use MetaborInterface\Statemachine\ProcessInterface;
+use MetaborStd\Statemachine\ProcessInterface;
 use SplObjectStorage;
 
 /**
@@ -60,7 +60,7 @@ class State extends Named implements StateInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StateInterface::getEventNames()
+	 * @see MetaborStd\Statemachine.StateInterface::getEventNames()
 	 */
 	public function getEventNames() {
 		return $this->events->getNames ();
@@ -68,7 +68,7 @@ class State extends Named implements StateInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StateInterface::hasEvent()
+	 * @see MetaborStd\Statemachine.StateInterface::hasEvent()
 	 */
 	public function hasEvent($name) {
 		return $this->events->has ( $name );
@@ -76,7 +76,7 @@ class State extends Named implements StateInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.StateInterface::getEvent()
+	 * @see MetaborStd\Statemachine.StateInterface::getEvent()
 	 */
 	public function getEvent($name) {
 		if ($this->events->has ( $name )) {

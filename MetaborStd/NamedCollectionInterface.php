@@ -1,5 +1,5 @@
 <?php
-namespace MetaborInterface;
+namespace MetaborStd;
 use Traversable;
 
 /**

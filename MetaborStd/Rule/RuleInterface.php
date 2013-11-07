@@ -1,6 +1,6 @@
 <?php
-namespace MetaborInterface\Rule;
-use MetaborInterface\Value\BooleanInterface;
+namespace MetaborStd\Rule;
+use MetaborStd\Value\BooleanInterface;
 
 /**
  *

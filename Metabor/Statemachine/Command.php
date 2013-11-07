@@ -1,6 +1,6 @@
 <?php
 namespace Metabor\Statemachine;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Event\EventInterface;
 
 use SplObserver;
 use SplSubject;

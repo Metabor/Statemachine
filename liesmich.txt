@@ -1,28 +1,7 @@
 ﻿Das Beispiel aus dem Vortag befindet sich im Namespace Example.
 Als Startpunkt empfehle ich die dort befindliche index.php
 
-Für die Graphische Darstellung (graph.php) 
-benötigt ihr das Pear Package:
-
-http://pear.php.net/package/Image_GraphViz
-
-Im Namespace MetaborInterface sind die 
+Im Namespace MetaborStd sind die 
 abstrakten Typen definiert.
 Diese sind im Namespace Metabor beispielhaft 
 implementiert.
-
-Die Namespaces MetaborTrait und Metabor54 ist 
-eine Implementierung in PHP 5.4, diese ist aber 
-aktuell nicht voll funktionsfähig.
-
-Sollte Interesse bestehen, werde ich hier einen 
-Baukasten für Statemachines entwickeln und sharen.
-
-Wer den Quellcode hier bereits als Grund für 
-seine Statemachineimplementierung nutzen möchte 
-noch ein Hinweis:
-
-Inspiriert vom Vortag von Kore Nordmann 
-(http://contribs.eu.phpunconf.org/d/14/) wird 
-sich der MetaborInterface Bereich bald noch 
-einmal ändern.

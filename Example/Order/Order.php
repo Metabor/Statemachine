@@ -2,8 +2,8 @@
 namespace Example\Order;
 
 use Metabor\Statemachine\Statemachine;
-use MetaborInterface\Statemachine\ProcessInterface;
-use MetaborInterface\Statemachine\StatemachineInterface;
+use MetaborStd\Statemachine\ProcessInterface;
+use MetaborStd\Statemachine\StatemachineInterface;
 use ArrayAccess;
 
 /**

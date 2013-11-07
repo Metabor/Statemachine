@@ -1,7 +1,7 @@
 <?php
-namespace MetaborInterface\Statemachine;
+namespace MetaborStd\Statemachine;
 use ArrayAccess;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Event\EventInterface;
 
 /**
  *
@@ -12,7 +12,7 @@ interface TransitionInterface {
 	
 	/**
 	 *
-	 * @return \MetaborInterface\Statemachine\StateInterface
+	 * @return \MetaborStd\Statemachine\StateInterface
 	 */
 	public function getTargetState();
 	

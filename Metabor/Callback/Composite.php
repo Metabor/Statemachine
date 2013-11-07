@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Callback;
 
-use MetaborInterface\CallbackInterface;
+use MetaborStd\CallbackInterface;
 use SplObjectStorage;
 
 /**
@@ -27,7 +27,7 @@ class Composite implements CallbackInterface
 
     /**
      *
-     * @see MetaborInterface.CallbackInterface::__invoke()
+     * @see MetaborStd.CallbackInterface::__invoke()
      */
     public function __invoke ()
     {

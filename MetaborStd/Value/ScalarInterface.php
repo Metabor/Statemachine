@@ -1,5 +1,5 @@
 <?php
-namespace MetaborInterface\Value;
+namespace MetaborStd\Value;
 
 /**
  *

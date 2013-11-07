@@ -3,7 +3,7 @@ namespace Example\Order\Process;
 
 use Example\Order\Condition\ShippingDateGreater14Days;
 use Example\Order\Condition\AuthorizedSuccessful;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Event\EventInterface;
 use Metabor\Callback\Callback;
 use Metabor\Observer\Callback as ObserverCallback;
 use Metabor\Statemachine\Condition\Not;

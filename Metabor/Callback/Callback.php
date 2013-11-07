@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Callback;
 
-use MetaborInterface\CallbackInterface;
+use MetaborStd\CallbackInterface;
 use SplObjectStorage;
 use InvalidArgumentException;
 
@@ -33,7 +33,7 @@ class Callback implements CallbackInterface
 
     /**
      *
-     * @see MetaborInterface.CallbackInterface::__invoke()
+     * @see MetaborStd.CallbackInterface::__invoke()
      */
     public function __invoke ()
     {

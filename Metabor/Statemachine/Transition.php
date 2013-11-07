@@ -1,9 +1,9 @@
 <?php
 namespace Metabor\Statemachine;
-use MetaborInterface\Statemachine\ConditionInterface;
-use MetaborInterface\Statemachine\TransitionInterface;
-use MetaborInterface\Statemachine\StateInterface;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Statemachine\ConditionInterface;
+use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\Statemachine\StateInterface;
+use MetaborStd\Event\EventInterface;
 use ArrayAccess;
 
 /**
@@ -45,7 +45,7 @@ class Transition implements TransitionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.TransitionInterface::getTargetState()
+	 * @see MetaborStd\Statemachine.TransitionInterface::getTargetState()
 	 */
 	public function getTargetState() {
 		return $this->targetState;
@@ -53,7 +53,7 @@ class Transition implements TransitionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.TransitionInterface::getEventName()
+	 * @see MetaborStd\Statemachine.TransitionInterface::getEventName()
 	 */
 	public function getEventName() {
 		return $this->eventName;
@@ -61,7 +61,7 @@ class Transition implements TransitionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.TransitionInterface::getConditionName()
+	 * @see MetaborStd\Statemachine.TransitionInterface::getConditionName()
 	 */
 	public function getConditionName() {
 		if ($this->condition) {
@@ -71,7 +71,7 @@ class Transition implements TransitionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.TransitionInterface::isActive()
+	 * @see MetaborStd\Statemachine.TransitionInterface::isActive()
 	 */
 	public function isActive($subject, ArrayAccess $context, EventInterface $event = null) {
 		if ($event) {

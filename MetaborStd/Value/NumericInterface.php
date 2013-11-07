@@ -1,17 +1,17 @@
 <?php
-namespace MetaborInterface\Value;
+namespace MetaborStd\Value;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-interface BooleanInterface extends ScalarInterface
+interface NumericInterface extends ScalarInterface
 {
 
     /**
      *
-     * @return boolean
+     * @return integer|float
      */
     public function getValue ();
 }

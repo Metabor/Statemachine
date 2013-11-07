@@ -1,17 +1,17 @@
 <?php
-namespace MetaborInterface\Value;
+namespace MetaborStd\Value;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-interface MixedInterface
+interface IntegerInterface extends NumericInterface
 {
 
     /**
      *
-     * @return mixed
+     * @return integer
      */
     public function getValue ();
 }

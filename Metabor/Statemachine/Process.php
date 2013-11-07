@@ -1,9 +1,9 @@
 <?php
 namespace Metabor\Statemachine;
-use MetaborInterface\Statemachine\TransitionInterface;
-use MetaborInterface\Statemachine\StateInterface;
+use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\Statemachine\StateInterface;
 use Metabor\Named;
-use MetaborInterface\Statemachine\ProcessInterface;
+use MetaborStd\Statemachine\ProcessInterface;
 use Exception;
 
 /**
@@ -71,7 +71,7 @@ class Process extends Named implements ProcessInterface
 
     /**
      *
-     * @see MetaborInterface\Statemachine.ProcessInterface::getInitialState()
+     * @see MetaborStd\Statemachine.ProcessInterface::getInitialState()
      */
     public function getInitialState ()
     {
@@ -80,7 +80,7 @@ class Process extends Named implements ProcessInterface
 
     /**
      *
-     * @see MetaborInterface\Statemachine.ProcessInterface::getStates()
+     * @see MetaborStd\Statemachine.ProcessInterface::getStates()
      */
     public function getStates ()
     {

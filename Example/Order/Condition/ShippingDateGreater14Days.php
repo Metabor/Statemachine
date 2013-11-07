@@ -2,7 +2,7 @@
 namespace Example\Order\Condition;
 
 use Example\Order\Order;
-use MetaborInterface\Statemachine\ConditionInterface;
+use MetaborStd\Statemachine\ConditionInterface;
 use InvalidArgumentException;
 use ArrayAccess;
 
@@ -15,7 +15,7 @@ class ShippingDateGreater14Days implements ConditionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface\Statemachine.ConditionInterface::checkCondition()
+	 * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
 	 */
 	public function checkCondition($subject, ArrayAccess $context) {
 		if (! $subject instanceof Order) {
@@ -26,7 +26,7 @@ class ShippingDateGreater14Days implements ConditionInterface {
 	
 	/**
 	 *
-	 * @see MetaborInterface.NamedInterface::getName()
+	 * @see MetaborStd.NamedInterface::getName()
 	 */
 	public function getName() {
 		return 'shipping-date >= 14 days';

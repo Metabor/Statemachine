@@ -2,7 +2,7 @@
 namespace Example\Order\Process;
 
 use Example\Order\Order;
-use MetaborInterface\Event\EventInterface;
+use MetaborStd\Event\EventInterface;
 use Example\Order\Command\Authorize;
 use Example\Order\Condition\ShippingDateGreater14Days;
 use Example\Order\Condition\AuthorizedSuccessful;
