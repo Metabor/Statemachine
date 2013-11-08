@@ -1,0 +1,23 @@
+{
+    "name": "metabor/statemachine",
+    "description": "Statemachine in PHP 5.3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Tischlinger",
+            "email": "oliver.tischlinger@metabor.de"
+        }
+    ],
+    "require": {
+		"clue/graph": "*"
+    },
+     "autoload": {
+        "psr-0": {
+			"Metabor\\": "",
+			"MetaborStd\\": "",
+			"Example\\": ""
+        }
+    },
+    "prefer-stable":true,
+    "minimum-stability":"dev"
+}
