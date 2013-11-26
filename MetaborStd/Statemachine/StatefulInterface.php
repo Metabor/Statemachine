@@ -15,4 +15,9 @@ interface StatefulInterface
      */
     public function getCurrentStateName();
 
+    /**
+     * @param string $stateName
+     */
+    public function setCurrentStateName($stateName);
+
 }
