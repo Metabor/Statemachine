@@ -20,7 +20,7 @@ class Composite implements CallbackInterface
 
     /**
      */
-    public function __construct ()
+    public function __construct()
     {
         $this->callbacks = new SplObjectStorage();
     }
@@ -29,7 +29,7 @@ class Composite implements CallbackInterface
      *
      * @see MetaborStd.CallbackInterface::__invoke()
      */
-    public function __invoke ()
+    public function __invoke()
     {
         $args = func_get_args();
         foreach ($this->callbacks as $callback) {
@@ -45,7 +45,7 @@ class Composite implements CallbackInterface
      *
      * @param CallbackInterface $callback            
      */
-    public function attach (CallbackInterface $callback)
+    public function attach(CallbackInterface $callback)
     {
         $this->callbacks->attach($callback);
     }
@@ -54,7 +54,7 @@ class Composite implements CallbackInterface
      *
      * @param CallbackInterface $callback            
      */
-    public function detach (CallbackInterface $callback)
+    public function detach(CallbackInterface $callback)
     {
         $this->callbacks->detach($callback);
     }

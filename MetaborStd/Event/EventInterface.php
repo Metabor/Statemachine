@@ -10,10 +10,11 @@ use SplSubject;
  * @author Oliver Tischlinger
  *        
  */
-interface EventInterface extends NamedInterface, SplSubject, CallbackInterface {
-	/**
-	 *
-	 * @return array
-	 */
-	public function getInvokeArgs();
+interface EventInterface extends NamedInterface, SplSubject, CallbackInterface
+{
+    /**
+     *
+     * @return array
+     */
+    public function getInvokeArgs();
 }

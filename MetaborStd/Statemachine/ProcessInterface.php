@@ -14,6 +14,6 @@ interface ProcessInterface extends NamedInterface, StateCollectionInterface
      *
      * @return \MetaborStd\Statemachine\StateInterface
      */
-    public function getInitialState ();
+    public function getInitialState();
 
 }

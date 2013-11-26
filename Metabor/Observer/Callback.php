@@ -23,7 +23,7 @@ class Callback implements SplObserver
      *
      * @param CallbackInterface $callback            
      */
-    public function __construct (CallbackInterface $callback)
+    public function __construct(CallbackInterface $callback)
     {
         $this->callback = $callback;
     }
@@ -32,7 +32,7 @@ class Callback implements SplObserver
      *
      * @see SplObserver::update()
      */
-    public function update (SplSubject $subject)
+    public function update(SplSubject $subject)
     {
         $this->callback->__invoke($subject);
     }

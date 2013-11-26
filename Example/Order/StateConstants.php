@@ -1,7 +1,8 @@
 <?php
 namespace Example\Order;
 
-interface StateConstants {
+interface StateConstants
+{
     const STATE_NEW = 'new';
     const STATE_PAYMENT_PENDING = 'payment pending';
     const STATE_PAYMENT_FAILED = 'payment failed';

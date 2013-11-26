@@ -13,5 +13,5 @@ interface BooleanInterface extends ScalarInterface
      *
      * @return boolean
      */
-    public function getValue ();
+    public function getValue();
 }

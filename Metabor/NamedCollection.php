@@ -23,7 +23,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
      *
      * @see MetaborStd.NamedCollectionInterface::add()
      */
-    public function add (NamedInterface $object)
+    public function add(NamedInterface $object)
     {
         $this->collection[$object->getName()] = $object;
     }
@@ -32,7 +32,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
      *
      * @see MetaborStd.NamedCollectionInterface::get()
      */
-    public function get ($name)
+    public function get($name)
     {
         return $this->collection[$name];
     }
@@ -41,7 +41,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
      *
      * @see MetaborStd.NamedCollectionInterface::getNames()
      */
-    public function getNames ()
+    public function getNames()
     {
         return array_keys($this->collection);
     }
@@ -50,7 +50,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
      *
      * @see MetaborStd.NamedCollectionInterface::has()
      */
-    public function has ($name)
+    public function has($name)
     {
         return isset($this->collection[$name]);
     }
@@ -59,7 +59,7 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
      *
      * @see IteratorAggregate::getIterator()
      */
-    public function getIterator ()
+    public function getIterator()
     {
         return new ArrayIterator($this->collection);
     }

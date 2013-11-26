@@ -20,7 +20,7 @@ class Named implements NamedInterface
      *
      * @param string $name            
      */
-    public function __construct ($name)
+    public function __construct($name)
     {
         $this->setName($name);
     }
@@ -29,7 +29,7 @@ class Named implements NamedInterface
      *
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -38,7 +38,7 @@ class Named implements NamedInterface
      *
      * @param string $name            
      */
-    protected function setName ($name)
+    protected function setName($name)
     {
         $this->name = $name;
     }
