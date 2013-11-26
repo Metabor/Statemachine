@@ -26,4 +26,9 @@ interface StatemachineInterface extends SplSubject {
 	 */
 	public function checkTransitions();
 
+    /**
+     * returns the owning object
+     * @return object
+     */
+    public function getSubject();
 }

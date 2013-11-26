@@ -126,5 +126,13 @@ class Statemachine extends Subject implements StatemachineInterface {
 		$context = new ArrayIterator ( array () );
 		$this->doCheckTransitions ( $context );
 	}
+	
+	/**
+	 * 
+	 * @see \MetaborStd\Statemachine\StatemachineInterface::getSubject()
+	 */
+	public function getSubject() {
+	    return $this->subject;
+	}
 
 }
