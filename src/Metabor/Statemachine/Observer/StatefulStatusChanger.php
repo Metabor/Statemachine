@@ -12,7 +12,7 @@ class StatefulStatusChanger implements \SplObserver
     /**
      * @see SplObserver::update()
      */
-    public function update($stateMachine)
+    public function update(\SplSubject $stateMachine)
     {
         if ($stateMachine instanceof StatemachineInterface) {
             $subject = $stateMachine->getSubject();
