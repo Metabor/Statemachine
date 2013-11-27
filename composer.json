@@ -9,12 +9,12 @@
         }
     ],
     "require": {
+	    "metabor/metabor-std": "*",
 		"clue/graph": "*"
     },
      "autoload": {
         "psr-0": {
-			"Metabor\\": "",
-			"MetaborStd\\": "",
+			"Metabor\\": "src/",
 			"Example\\": ""
         }
     },
