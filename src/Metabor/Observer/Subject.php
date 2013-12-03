@@ -55,4 +55,12 @@ class Subject implements SplSubject
         }
     }
 
+    /**
+     * @return \Traversable
+     */
+    public function getObservers()
+    {
+        return $this->observers;
+    }
+
 }
