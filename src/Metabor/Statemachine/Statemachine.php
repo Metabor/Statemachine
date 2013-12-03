@@ -1,5 +1,11 @@
 <?php
 namespace Metabor\Statemachine;
+use Metabor\Callback\Callback;
+
+use Metabor\Event\Dispatcher;
+
+use MetaborStd\Event\DispatcherInterface;
+
 use Metabor\Observer\Subject;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\StatemachineInterface;
@@ -35,6 +41,21 @@ class Statemachine extends Subject implements StatemachineInterface
      * @var StateInterface
      */
     private $currentState;
+
+    /**
+     * @var DispatcherInterface
+     */
+    private $dispatcher;
+
+    /**
+     * @var EventInterface
+     */
+    private $currentEvent;
+
+    /**
+     * @var \ArrayAccess
+     */
+    private $currentContext;
 
     /**
      *
@@ -106,21 +127,57 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
+     * is called after dispatcher was executed
+     */
+    public function onDispatcherReady()
+    {
+        if ($this->dispatcher && $this->dispatcher->isReady()) {
+            $context = $this->currentContext;
+            $event = $this->currentEvent;
+            $this->dispatcher = null;
+            $this->currentContext = null;
+            $this->currentEvent = null;
+            $this->doCheckTransitions($this->currentContext, $this->currentEvent);
+        }
+    }
+
+    /**
+     * @param DispatcherInterface $dispatcher
+     * @param string $name
+     * @param ArrayAccess $context
+     * @throws RuntimeException
+     */
+    public function dispatchEvent(DispatcherInterface $dispatcher, $name, ArrayAccess $context = null)
+    {
+        if ($this->dispatcher) {
+            throw new RuntimeException('Event dispatching is still running!');
+        } else {
+            if ($this->currentState->hasEvent($name)) {
+                $this->dispatcher = $dispatcher;
+
+                if ($context) {
+                    $this->currentContext = $context;
+                } else {
+                    $this->currentContext = new ArrayIterator(array());
+                }
+                $this->currentEvent = $this->currentState->getEvent($name);
+
+                $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
+            } else {
+                throw new RuntimeException('Current State did not have event "' . $name . '"');
+            }
+        }
+    }
+
+    /**
      *
      * @see MetaborStd\Statemachine.StatemachineInterface::triggerEvent()
      */
     public function triggerEvent($name, ArrayAccess $context = null)
     {
-        if (!$context) {
-            $context = new ArrayIterator(array());
-        }
-        if ($this->currentState->hasEvent($name)) {
-            $event = $this->currentState->getEvent($name);
-            $event($this->subject, $context);
-            $this->doCheckTransitions($context, $event);
-        } else {
-            throw new RuntimeException('Current State did not have event "' . $name . '"');
-        }
+        $dispatcher = new Dispatcher();
+        $this->dispatchEvent($dispatcher, $name, $context);
+        $dispatcher();
     }
 
     /**
