@@ -19,6 +19,57 @@ use Fhaculty\Graph\Graph as GraphLib;
 class Graph extends GraphLib
 {
     /**
+     * @var array
+     */
+    private $eventLayout = array();
+
+    /**
+     * @var array
+     */
+    private $stateLayout = array();
+
+    /**
+     * @param string $flag
+     * @param scalar $value
+     * @param array $layout
+     */
+    public function setEventLayout($flag, $value, array $layout)
+    {
+        $value = (string) $value;
+        $this->eventLayout[$flag][$value] = $layout;
+    }
+
+    /**
+     * @param string $flag
+     * @param scalar $value
+     * @param array $layout
+     */
+    public function setStateLayout($flag, $value, array $layout)
+    {
+        $value = (string) $value;
+        $this->stateLayout[$flag][$value] = $layout;
+    }
+
+    /**
+     * @param \ArrayAccess $flagedObject
+     * @param array $layout
+     * @return array
+     */
+    protected function getLayoutOptions(\ArrayAccess $flagedObject, array $layout)
+    {
+        foreach ($layout as $flag => $options) {
+            if ($flagedObject->offsetExists($flag)) {
+                $value = $flagedObject->offsetGet($flag);
+                $value = (string) $value;
+                if (isset($options[$value])) {
+                    return $options[$value];
+                }
+            }
+        }
+        return array();
+    }
+
+    /**
      * @param StateInterface $state
      * @return \Fhaculty\Graph\Vertex
      */
@@ -26,6 +77,10 @@ class Graph extends GraphLib
     {
         $stateName = $state->getName();
         $vertex = $this->createVertex($stateName, true);
+        if ($state instanceof \ArrayAccess) {
+            $layout = $this->getLayoutOptions($state, $this->stateLayout);
+            $vertex->setLayout($layout);
+        }
         return $vertex;
     }
 
@@ -71,6 +126,15 @@ class Graph extends GraphLib
         $label = $this->getTransitionLabel($state, $transition);
         if ($label) {
             $edge->setLayoutAttribute('label', $label);
+        }
+
+        $eventName = $transition->getEventName();
+        if ($eventName) {
+            $event = $state->getEvent($eventName);
+            if ($event instanceof \ArrayAccess) {
+                $layout = $this->getLayoutOptions($event, $this->eventLayout);
+                $edge->setLayout($layout);
+            }
         }
     }
 
