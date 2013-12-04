@@ -1,16 +1,19 @@
 <?php
 namespace Metabor\Event;
 
+use Metabor\KeyValue\Nullable;
+
 use Metabor\Observer\Subject;
 use MetaborStd\Event\EventInterface;
 use SplObserver;
+use ArrayAccess;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-class Event extends Subject implements EventInterface
+class Event extends Subject implements EventInterface, ArrayAccess
 {
 
     /**
@@ -27,12 +30,19 @@ class Event extends Subject implements EventInterface
 
     /**
      *
+     * @var \ArrayAccess
+     */
+    private $metadata;
+
+    /**
+     *
      * @param string $name        	
      */
     public function __construct($name)
     {
         parent::__construct();
         $this->name = $name;
+        $this->metadata = new Nullable();
     }
 
     /**
@@ -60,6 +70,38 @@ class Event extends Subject implements EventInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @see ArrayAccess::offsetExists()
+     */
+    public function offsetExists($offset)
+    {
+        return $this->metadata->offsetExists($offset);
+    }
+
+    /**
+     * @see ArrayAccess::offsetGet()
+     */
+    public function offsetGet($offset)
+    {
+        return $this->metadata->offsetGet($offset);
+    }
+
+    /**
+     * @see ArrayAccess::offsetSet()
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->metadata->offsetSet($offset, $value);
+    }
+
+    /**
+     * @see ArrayAccess::offsetUnset()
+     */
+    public function offsetUnset($offset)
+    {
+        $this->metadata->offsetUnset($offset);
     }
 
 }

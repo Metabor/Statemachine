@@ -1,5 +1,7 @@
 <?php
 namespace Metabor\Statemachine;
+use Metabor\KeyValue\Nullable;
+
 use Metabor\Event\Event;
 
 use MetaborStd\Statemachine\TransitionInterface;
@@ -8,13 +10,14 @@ use Metabor\NamedCollection;
 use Metabor\Named;
 use MetaborStd\Statemachine\ProcessInterface;
 use SplObjectStorage;
+use ArrayAccess;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-class State extends Named implements StateInterface
+class State extends Named implements StateInterface, ArrayAccess
 {
 
     /**
@@ -30,6 +33,12 @@ class State extends Named implements StateInterface
     private $events;
 
     /**
+     * 
+     * @var \ArrayAccess
+     */
+    private $metadata;
+
+    /**
      *
      * @param string $name        	
      */
@@ -38,6 +47,7 @@ class State extends Named implements StateInterface
         parent::__construct($name);
         $this->transitions = new SplObjectStorage();
         $this->events = new NamedCollection();
+        $this->metadata = new Nullable();
     }
 
     /**
@@ -93,6 +103,38 @@ class State extends Named implements StateInterface
             $this->events->add($event);
         }
         return $event;
+    }
+
+    /**
+     * @see ArrayAccess::offsetExists()
+     */
+    public function offsetExists($offset)
+    {
+        return $this->metadata->offsetExists($offset);
+    }
+
+    /**
+     * @see ArrayAccess::offsetGet()
+     */
+    public function offsetGet($offset)
+    {
+        return $this->metadata->offsetGet($offset);
+    }
+
+    /**
+     * @see ArrayAccess::offsetSet()
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->metadata->offsetSet($offset, $value);
+    }
+
+    /**
+     * @see ArrayAccess::offsetUnset()
+     */
+    public function offsetUnset($offset)
+    {
+        $this->metadata->offsetUnset($offset);
     }
 
 }
