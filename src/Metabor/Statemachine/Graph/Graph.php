@@ -1,5 +1,7 @@
 <?php
 namespace Metabor\Statemachine\Graph;
+use Metabor\Statemachine\Command;
+
 use MetaborStd\Statemachine\TransitionInterface;
 
 use Fhaculty\Graph\Vertex;
@@ -42,6 +44,15 @@ class Graph extends GraphLib
         if ($conditionName) {
             $labelParts[] = 'C: ' . $conditionName;
         }
+        if ($eventName) {
+            $event = $state->getEvent($eventName);
+            $observers = $event->getObservers();
+            $observerName = implode(', ', $observers);
+            if ($observerName) {
+                $labelParts[] = 'O: ' . $observerName;
+            }
+        }
+
         $label = implode(PHP_EOL, $labelParts);
 
         return $label;
