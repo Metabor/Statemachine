@@ -24,7 +24,6 @@ class Graph extends GraphLib
     {
         $stateName = $state->getName();
         $vertex = $this->createVertex($stateName, true);
-        $vertex->setGroup(rand(0, 10));
         return $vertex;
     }
 
