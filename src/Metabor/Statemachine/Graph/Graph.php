@@ -29,6 +29,8 @@ class Graph extends GraphLib
     private $stateLayout = array();
 
     /**
+     * @link http://www.graphviz.org/doc/info/attrs.html
+     * 
      * @param string $flag
      * @param scalar $value
      * @param array $layout
@@ -40,6 +42,8 @@ class Graph extends GraphLib
     }
 
     /**
+     * @link http://www.graphviz.org/doc/info/attrs.html
+     * 
      * @param string $flag
      * @param scalar $value
      * @param array $layout
