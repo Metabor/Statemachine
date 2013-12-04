@@ -26,4 +26,12 @@ abstract class Command implements SplObserver
         call_user_func_array($this, $subject->getInvokeArgs());
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return get_class($this);
+    }
+
 }
