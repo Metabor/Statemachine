@@ -27,6 +27,8 @@ abstract class Command implements SplObserver
     }
 
     /**
+     * Overwrite this to change the name for the Command that is displayed in the graph
+     * 
      * @return string
      */
     public function __toString()
