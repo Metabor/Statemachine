@@ -47,7 +47,7 @@ class Graph extends GraphLib
         if ($eventName) {
             $event = $state->getEvent($eventName);
             $observers = $event->getObservers();
-            $observerName = implode(', ', $observers);
+            $observerName = implode(', ', iterator_to_array($observers, false));
             if ($observerName) {
                 $labelParts[] = 'O: ' . $observerName;
             }
