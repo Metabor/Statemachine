@@ -61,16 +61,17 @@ class Graph extends GraphLib
      */
     protected function getLayoutOptions(\ArrayAccess $flagedObject, array $layout)
     {
+        $result = array();
         foreach ($layout as $flag => $options) {
             if ($flagedObject->offsetExists($flag)) {
                 $value = $flagedObject->offsetGet($flag);
                 $value = (string) $value;
                 if (isset($options[$value])) {
-                    return $options[$value];
+                    $result += $options[$value];
                 }
             }
         }
-        return array();
+        return $result;
     }
 
     /**
