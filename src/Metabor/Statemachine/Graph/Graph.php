@@ -101,14 +101,14 @@ class Graph extends GraphLib
         }
         $conditionName = $transition->getConditionName();
         if ($conditionName) {
-            $labelParts[] = 'C: ' . $conditionName;
+            $labelParts[] = 'IF: ' . $conditionName;
         }
         if ($eventName) {
             $event = $state->getEvent($eventName);
             $observers = $event->getObservers();
             $observerName = implode(', ', iterator_to_array($observers, false));
             if ($observerName) {
-                $labelParts[] = 'O: ' . $observerName;
+                $labelParts[] = 'C: ' . $observerName;
             }
         }
 
