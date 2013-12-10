@@ -1,6 +1,8 @@
 <?php
 namespace Metabor\Statemachine\Factory;
 
+use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
+
 use Metabor\Statemachine\Statemachine;
 use MetaborStd\Statemachine\Factory\FactoryInterface;
 use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
@@ -29,15 +31,27 @@ class Factory implements FactoryInterface
     private $statemachineObserver;
 
     /**
+     * @var TransitionSelectorInterface
+     */
+    private $transitonSelector;
+
+    /**
      * @param ProcessDetectorInterface $processDetector
      * @param StateNameDetectorInterface $stateNameDetector
      */
-    public function __construct(ProcessDetectorInterface $processDetector,
-            StateNameDetectorInterface $stateNameDetector = null)
+    public function __construct(ProcessDetectorInterface $processDetector, StateNameDetectorInterface $stateNameDetector = null)
     {
         $this->processDetector = $processDetector;
         $this->stateNameDetector = $stateNameDetector;
         $this->statemachineObserver = new \SplObjectStorage();
+    }
+
+    /**
+     * @param TransitionSelectorInterface $transitionSelector
+     */
+    public function setTransitonSelector(TransitionSelectorInterface $transitionSelector)
+    {
+        $this->transitonSelector = $transitionSelector;
     }
 
     /**
@@ -74,9 +88,9 @@ class Factory implements FactoryInterface
         $process = $this->processDetector->detectProcess($subject);
         if ($this->stateNameDetector) {
             $stateName = $this->stateNameDetector->detectCurrentStateName($subject);
-            $statemachine = new Statemachine($subject, $process, $stateName);
+            $statemachine = new Statemachine($subject, $process, $stateName, $this->transitonSelector);
         } else {
-            $statemachine = new Statemachine($subject, $process);
+            $statemachine = new Statemachine($subject, $process, null, $this->transitonSelector);
         }
 
         foreach ($this->statemachineObserver as $observer) {

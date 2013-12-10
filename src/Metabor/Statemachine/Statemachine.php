@@ -1,5 +1,11 @@
 <?php
 namespace Metabor\Statemachine;
+use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
+
+use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
+
+use Metabor\Statemachine\Transition\ActiveTransitionFilter;
+
 use Metabor\Callback\Callback;
 
 use Metabor\Event\Dispatcher;
@@ -56,6 +62,11 @@ class Statemachine extends Subject implements StatemachineInterface
      * @var \ArrayAccess
      */
     private $currentContext;
+    
+    /**
+     * @var TransitionSelectorInterface
+     */
+    private $transitonSelector;
 
     /**
      *
@@ -63,7 +74,7 @@ class Statemachine extends Subject implements StatemachineInterface
      * @param ProcessInterface $process        	
      * @param string $stateName        	
      */
-    public function __construct($subject, ProcessInterface $process, $stateName = null)
+    public function __construct($subject, ProcessInterface $process, $stateName = null, TransitionSelectorInterface $transitonSelector = null)
     {
         parent::__construct();
         $this->subject = $subject;
@@ -73,6 +84,12 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             $this->currentState = $process->getInitialState();
         }
+        if ($transitonSelector) {
+            $this->transitonSelector = $transitonSelector;
+        } else {
+            $this->transitonSelector = new OneOrNoneActiveTransition();
+        }
+        
         $this->checkTransitions();
     }
 
@@ -84,29 +101,7 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         return $this->currentState;
     }
-
-    /**
-     *
-     * @param array $activeTransitions        	
-     * @throws RuntimeException
-     */
-    protected function selectTransition(array $activeTransitions)
-    {
-        switch (count($activeTransitions)) {
-        case 0:
-            break;
-        case 1: /* @var $transition TransitionInterface */
-            $transition = reset($activeTransitions);
-            $this->currentState = $transition->getTargetState();
-            $this->notify();
-            $this->checkTransitions();
-            break;
-        default:
-            throw new RuntimeException('More than one transition is active!');
-            break;
-        }
-    }
-
+    
     /**
      *
      * @param ArrayAccess $context        	
@@ -114,16 +109,15 @@ class Statemachine extends Subject implements StatemachineInterface
      */
     protected function doCheckTransitions(ArrayAccess $context, EventInterface $event = null)
     {
-        $activeTransitions = array();
         $transitions = $this->currentState->getTransitions();
-        /* @var $transition TransitionInterface */
-        foreach ($transitions as $transition) {
-            $isActive = $transition->isActive($this->subject, $context, $event);
-            if ($isActive) {
-                $activeTransitions[] = $transition;
-            }
+        $activeTransitions = new ActiveTransitionFilter($transitions, $this, $context, $event);
+        $selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
+        if ($selectedTransition) {
+            $selectedTransition->getTargetState();
+            $this->currentState = $transition->getTargetState();
+            $this->notify();
+            $this->checkTransitions();
         }
-        $this->selectTransition($activeTransitions);
     }
 
     /**
