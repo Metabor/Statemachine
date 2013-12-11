@@ -131,7 +131,7 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->dispatcher = null;
             $this->currentContext = null;
             $this->currentEvent = null;
-            $this->doCheckTransitions($this->currentContext, $this->currentEvent);
+            $this->doCheckTransitions($context, $event);
         }
     }
 
