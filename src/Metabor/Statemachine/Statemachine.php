@@ -110,7 +110,7 @@ class Statemachine extends Subject implements StatemachineInterface
     protected function doCheckTransitions(ArrayAccess $context, EventInterface $event = null)
     {
         $transitions = $this->currentState->getTransitions();
-        $activeTransitions = new ActiveTransitionFilter($transitions, $this, $context, $event);
+        $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
         $selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
         if ($selectedTransition) {
             $selectedTransition->getTargetState();
