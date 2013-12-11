@@ -1,6 +1,8 @@
 <?php
 namespace Metabor\Event;
 
+use MetaborStd\CallbackInterface;
+
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Event\DispatcherInterface;
 use RuntimeException;
@@ -68,7 +70,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * @see \MetaborStd\Event\DispatcherInterface::dispatch()
      */
-    public function dispatch(EventInterface $event, array $arguments = array(), $onReadyCallback = null)
+    public function dispatch(EventInterface $event, array $arguments = array(), CallbackInterface $onReadyCallback = null)
     {
         if (!$this->isReady) {
             $this->addEvent($event, $arguments);
