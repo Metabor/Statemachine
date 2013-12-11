@@ -17,11 +17,11 @@ class Filter extends FilterIterator
     private $criteria;
 
     /**
-     * @param Iterator $iterator
+     * @param \Traversable $iterator
      */
-    public function __construct(Iterator $iterator, Criteria $criteria)
+    public function __construct(\Traversable $iterator, Criteria $criteria)
     {
-        parent::__construct($iterator);
+        parent::__construct(new \IteratorIterator($iterator));
         $this->criteria = $criteria;
     }
 
