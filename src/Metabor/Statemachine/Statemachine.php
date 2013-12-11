@@ -90,7 +90,7 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
         
-        $this->checkTransitions();
+        //$this->checkTransitions();
     }
 
     /**
@@ -116,7 +116,7 @@ class Statemachine extends Subject implements StatemachineInterface
             $selectedTransition->getTargetState();
             $this->currentState = $selectedTransition->getTargetState();
             $this->notify();
-            $this->checkTransitions();
+            //$this->checkTransitions();
         }
     }
 
