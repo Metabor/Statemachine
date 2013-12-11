@@ -18,7 +18,7 @@ class Composite implements ArrayAccess
      */
     public function __construct()
     {
-        $container = new SplObjectStorage();
+        $this->container = new SplObjectStorage();
     }
 
     /**
