@@ -30,10 +30,10 @@ class Dispatcher implements DispatcherInterface
     private $isReady = false;
 
     /**
-     * @param CallbackInterface $command
+     * @param callable $command
      * @param array $arguments
      */
-    protected function addCommand(CallbackInterface $command, array $arguments)
+    protected function addCommand($command, array $arguments)
     {
         $this->commands[] = func_get_args();
     }
@@ -47,10 +47,10 @@ class Dispatcher implements DispatcherInterface
     }
 
     /**
-     * @param CallbackInterface $command
+     * @param callable $command
      * @param array $arguments
      */
-    protected function removeCommand(CallbackInterface $command, array $arguments)
+    protected function removeCommand($command, array $arguments)
     {
         $key = array_search(func_get_args(), $this->commands);
         if ($key !== false) {
