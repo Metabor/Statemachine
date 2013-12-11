@@ -114,7 +114,7 @@ class Statemachine extends Subject implements StatemachineInterface
         $selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
         if ($selectedTransition) {
             $selectedTransition->getTargetState();
-            $this->currentState = $transition->getTargetState();
+            $this->currentState = $selectedTransition->getTargetState();
             $this->notify();
             $this->checkTransitions();
         }
