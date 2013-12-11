@@ -18,9 +18,9 @@ class FilterStateByEvent extends \FilterIterator
      * @param \Traversable $iterator
      * @param string $eventName
      */
-    public function __construct(\Traversable $iterator, $eventName)
+    public function __construct(\Traversable $states, $eventName)
     {
-        parent::__construct(new \IteratorIterator($iterator));
+        parent::__construct(new \IteratorIterator($states));
         $this->eventName = $eventName;
     }
 
