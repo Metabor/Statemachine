@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Statemachine\Factory\TransitionSelector;
 use MetaborStd\Statemachine\TransitionInterface;
-
+use Traversable;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 
 /**
