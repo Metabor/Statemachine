@@ -99,18 +99,16 @@ class Graph extends GraphLib
         $eventName = $transition->getEventName();
         if ($eventName) {
             $labelParts[] = 'E: ' . $eventName;
-        }
-        $conditionName = $transition->getConditionName();
-        if ($conditionName) {
-            $labelParts[] = 'IF: ' . $conditionName;
-        }
-        if ($eventName) {
             $event = $state->getEvent($eventName);
             $observers = $event->getObservers();
             $observerName = implode(', ', iterator_to_array($observers, false));
             if ($observerName) {
                 $labelParts[] = 'C: ' . $observerName;
             }
+        }
+        $conditionName = $transition->getConditionName();
+        if ($conditionName) {
+            $labelParts[] = 'IF: ' . $conditionName;
         }
 
         $label = implode(PHP_EOL, $labelParts);
