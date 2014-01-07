@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -24,17 +25,17 @@ class Process extends Named implements ProcessInterface
      *
      * @var StateInterface
      */
-    private $initinalState;
+    private $initialState;
 
     /**
      *
      * @param string $name            
-     * @param StateInterface $initinalState            
+     * @param StateInterface $initialState            
      */
-    public function __construct($name, StateInterface $initinalState)
+    public function __construct($name, StateInterface $initialState)
     {
         parent::__construct($name);
-        $this->initinalState = $initinalState;
+        $this->initialState = $initialState;
         $this->createCollection();
     }
 
@@ -65,7 +66,7 @@ class Process extends Named implements ProcessInterface
     protected function createCollection()
     {
         $this->states = new StateCollection();
-        $this->addState($this->initinalState);
+        $this->addState($this->initialState);
     }
 
     /**
@@ -74,7 +75,7 @@ class Process extends Named implements ProcessInterface
      */
     public function getInitialState()
     {
-        return $this->initinalState;
+        return $this->initialState;
     }
 
     /**
