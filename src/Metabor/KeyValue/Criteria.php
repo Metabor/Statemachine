@@ -16,7 +16,7 @@ class Criteria extends ArrayObject
     public function check(ArrayAccess $keyvalue)
     {
         foreach ($this as $key => $value) {
-            if (!($keyvalue->offsetExists($key) && ($keyvalue->offsetGet($key) === $key))) {
+            if (!($keyvalue->offsetExists($key) && ($keyvalue->offsetGet($key) === $value))) {
                 return false;
             }
         }
