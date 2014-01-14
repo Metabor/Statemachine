@@ -2,7 +2,7 @@
     "name": "metabor/statemachine",
     "description": "Statemachine in PHP 5.3",
     "license": "MIT",
-    "keywords": ["statemachine", "state machine", "status", "process"]
+    "keywords": ["statemachine", "state machine", "status", "process"],
     "authors": [
         {
             "name": "Oliver Tischlinger",
