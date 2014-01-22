@@ -10,8 +10,12 @@
         }
     ],
     "require": {
+        "php": ">=5.3",
 	    "metabor/metabor-std": "*",
 		"clue/graph": "*"
+    },
+    "suggest": {
+        "metabor/doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine"
     },
      "autoload": {
         "psr-0": {
