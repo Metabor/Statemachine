@@ -36,9 +36,9 @@ class Callback extends Named implements ConditionInterface
      *
      * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
      */
-    public function checkCondition($subject, ArrayAccess $subject)
+    public function checkCondition($subject, ArrayAccess $context)
     {
-        return call_user_func($this->callable, $subject, $subject);
+        return call_user_func($this->callable, $subject, $context);
     }
 
 }

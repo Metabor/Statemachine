@@ -15,7 +15,8 @@
 		"clue/graph": "*"
     },
     "suggest": {
-        "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine"
+        "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine",
+        "symfony/expression-language": "To use symfony expressions as conditions"
     },
      "autoload": {
         "psr-0": {
