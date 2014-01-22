@@ -15,7 +15,7 @@
 		"clue/graph": "*"
     },
     "suggest": {
-        "metabor/metabor-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine"
+        "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine"
     },
      "autoload": {
         "psr-0": {

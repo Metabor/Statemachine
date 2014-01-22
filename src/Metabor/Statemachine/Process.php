@@ -48,7 +48,7 @@ class Process extends Named implements ProcessInterface
         if ($this->states->hasState($name)) {
             if ($this->states->getState($name) !== $state) {
                 throw new Exception(
-                        'There is allready a different state with name "' . $name . '"');
+                        'There is already a different state with name "' . $name . '"');
             }
         } else {
             $this->states->addState($state);
