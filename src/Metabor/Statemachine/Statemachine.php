@@ -62,7 +62,7 @@ class Statemachine extends Subject implements StatemachineInterface
      * @var \ArrayAccess
      */
     private $currentContext;
-    
+
     /**
      * @var TransitionSelectorInterface
      */
@@ -89,7 +89,7 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
-        
+
         $this->checkTransitions();
     }
 
@@ -101,7 +101,7 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         return $this->currentState;
     }
-    
+
     /**
      *
      * @param ArrayAccess $context        	
@@ -113,7 +113,6 @@ class Statemachine extends Subject implements StatemachineInterface
         $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
         $selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
         if ($selectedTransition) {
-            $selectedTransition->getTargetState();
             $this->currentState = $selectedTransition->getTargetState();
             $this->notify();
             $this->checkTransitions();
