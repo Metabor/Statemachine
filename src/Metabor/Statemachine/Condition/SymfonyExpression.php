@@ -26,13 +26,20 @@ class SymfonyExpression extends Named implements ConditionInterface
     private $expression;
 
     /**
+     * @var array
+     */
+    private $values;
+
+    /**
      * 
      * @param string $name
+     * @param array $values
      * @param ExpressionLanguage $expressionLanguage
      */
-    public function __construct($name, ExpressionLanguage $expressionLanguage = null)
+    public function __construct($name, array $values = array(), ExpressionLanguage $expressionLanguage = null)
     {
         parent::__construct($name);
+        $this->values = $values;
         if ($expressionLanguage) {
             $this->expressionLanguage = $expressionLanguage;
         } else {
@@ -57,6 +64,9 @@ class SymfonyExpression extends Named implements ConditionInterface
      */
     public function checkCondition($subject, ArrayAccess $context)
     {
-        return $this->expressionLanguage->evaluate($this->getExpression(), array('subject' => $subject, 'context' => $context));
+        $values = $this->values;
+        $values['subject'] = $subject;
+        $values['context'] = $context;
+        return $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }
 }
