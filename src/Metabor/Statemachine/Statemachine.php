@@ -89,8 +89,6 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
-
-        $this->checkTransitions();
     }
 
     /**
