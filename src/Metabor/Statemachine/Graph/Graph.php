@@ -1,5 +1,7 @@
 <?php
 namespace Metabor\Statemachine\Graph;
+use Metabor\Callback\Callback;
+
 use Metabor\Statemachine\Command;
 
 use MetaborStd\Statemachine\TransitionInterface;
@@ -29,6 +31,20 @@ class Graph extends GraphLib
     private $stateLayout = array();
 
     /**
+     * @var \SplObjectStorage
+     */
+    private $layoutCallback;
+
+    /**
+     * 
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->layoutCallback = new \SplObjectStorage();
+    }
+
+    /**
      * @link http://www.graphviz.org/doc/info/attrs.html
      * 
      * @param string $flag
@@ -55,6 +71,24 @@ class Graph extends GraphLib
     }
 
     /**
+     * 
+     * @param Callback $callback
+     */
+    public function attachLayoutCallback(Callback $callback)
+    {
+        $this->layoutCallback->attach($callback);
+    }
+
+    /**
+     *
+     * @param Callback $callback
+     */
+    public function detachLayoutCallback(Callback $callback)
+    {
+        $this->layoutCallback->detach($callback);
+    }
+
+    /**
      * @param \ArrayAccess $flagedObject
      * @param array $layout
      * @return array
@@ -71,6 +105,11 @@ class Graph extends GraphLib
                 }
             }
         }
+
+        foreach ($this->layoutCallback as $callback) {
+            $result = $callback($flagedObject, $result);
+        }
+
         return $result;
     }
 
