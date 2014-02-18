@@ -69,6 +69,11 @@ class Statemachine extends Subject implements StatemachineInterface
     private $transitonSelector;
 
     /**
+     * @var TransitionInterface
+     */
+    private $selectedTransition;
+
+    /**
      *
      * @param object $subject        	
      * @param ProcessInterface $process        	
@@ -109,12 +114,21 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         $transitions = $this->currentState->getTransitions();
         $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
-        $selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
-        if ($selectedTransition) {
-            $this->currentState = $selectedTransition->getTargetState();
+        $this->selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
+        if ($this->selectedTransition) {
+            $this->currentState = $this->selectedTransition->getTargetState();
             $this->notify();
+            $this->selectedTransition = null;
             $this->checkTransitions();
         }
+    }
+
+    /**
+     * @return \MetaborStd\Statemachine\TransitionInterface
+     */
+    public function getSelectedTransition()
+    {
+        return $this->selectedTransition;
     }
 
     /**
