@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.3",
-	    "metabor/metabor-std": "*",
+	    "metabor/metabor-std": "1.0.*",
 		"clue/graph": "*"
     },
     "suggest": {
