@@ -53,7 +53,10 @@ class SymfonyExpression extends Named implements ConditionInterface
     protected function getExpression()
     {
         if (!$this->expression) {
-            $this->expression = $this->expressionLanguage->parse($this->getName(), array('subject', 'context'));
+            $keys = array_keys($this->values);
+            $keys[] = 'subject';
+            $keys[] = 'context';
+            $this->expression = $this->expressionLanguage->parse($this->getName(), $keys);
         }
         return $this->expression;
     }
