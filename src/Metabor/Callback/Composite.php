@@ -33,10 +33,10 @@ class Composite implements CallbackInterface
     {
         $args = func_get_args();
         foreach ($this->callbacks as $callback) {
-            if ($args) {
-                call_user_func_array($callback, $args);
-            } else {
+            if (empty($args)) {
                 $callback();
+            } else {
+                call_user_func_array($callback, $args);
             }
         }
     }
