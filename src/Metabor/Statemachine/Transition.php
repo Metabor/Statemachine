@@ -91,4 +91,12 @@ class Transition implements TransitionInterface
         return $result;
     }
 
+    /**
+     * @return \MetaborStd\Statemachine\ConditionInterface
+     */
+    public function getCondition()
+    {
+        return $this->condition;
+    }
+
 }

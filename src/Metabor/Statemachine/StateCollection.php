@@ -1,16 +1,18 @@
 <?php
 namespace Metabor\Statemachine;
 
-use MetaborStd\Statemachine\StateInterface;
 use Metabor\NamedCollection;
+use Metabor\Statemachine\Util\StateCollectionMerger;
+use MetaborStd\MergeableInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
+use MetaborStd\Statemachine\StateInterface;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-class StateCollection implements StateCollectionInterface
+class StateCollection implements StateCollectionInterface, MergeableInterface
 {
 
     /**
@@ -62,4 +64,12 @@ class StateCollection implements StateCollectionInterface
         $this->states->add($state);
     }
 
+    /**
+     * @see \MetaborStd\MergeableInterface::merge()
+     */
+    public function merge($source)
+    {
+        $merger = new StateCollectionMerger($this);
+        $merger->merge($source);
+    }
 }

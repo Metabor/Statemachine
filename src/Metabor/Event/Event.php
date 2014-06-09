@@ -1,6 +1,10 @@
 <?php
 namespace Metabor\Event;
 
+use MetaborStd\ArrayConvertableInterface;
+
+use MetaborStd\MetadataInterface;
+
 use Metabor\KeyValue\Nullable;
 
 use Metabor\Observer\Subject;
@@ -102,6 +106,20 @@ class Event extends Subject implements EventInterface, ArrayAccess
     public function offsetUnset($offset)
     {
         $this->metadata->offsetUnset($offset);
+    }
+
+    /**
+     * @see \MetaborStd\MetadataInterface::getMetaData()
+     */
+    public function getMetaData()
+    {
+        if ($this->metadata instanceof MetadataInterface) {
+            return $this->metadata->getMetaData();
+        } elseif ($this->metadata instanceof ArrayConvertableInterface) {
+            return $this->metadata->toArray();
+        } else {
+            throw new \RuntimeException('Unable to get MetaData!');
+        }
     }
 
 }

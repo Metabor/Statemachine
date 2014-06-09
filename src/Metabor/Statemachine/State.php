@@ -1,13 +1,15 @@
 <?php
 namespace Metabor\Statemachine;
-use Metabor\KeyValue\Nullable;
 
-use Metabor\Event\Event;
+use MetaborStd\ArrayConvertableInterface;
 
+use MetaborStd\MetadataInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
-use Metabor\NamedCollection;
+use Metabor\Event\Event;
+use Metabor\KeyValue\Nullable;
 use Metabor\Named;
+use Metabor\NamedCollection;
 use MetaborStd\Statemachine\ProcessInterface;
 use SplObjectStorage;
 use ArrayAccess;
@@ -17,7 +19,8 @@ use ArrayAccess;
  * @author Oliver Tischlinger
  *        
  */
-class State extends Named implements StateInterface, ArrayAccess
+class State extends Named implements StateInterface, ArrayAccess,
+        MetadataInterface
 {
 
     /**
@@ -135,6 +138,20 @@ class State extends Named implements StateInterface, ArrayAccess
     public function offsetUnset($offset)
     {
         $this->metadata->offsetUnset($offset);
+    }
+
+    /**
+     * @see \MetaborStd\MetadataInterface::getMetaData()
+     */
+    public function getMetaData()
+    {
+        if ($this->metadata instanceof MetadataInterface) {
+            return $this->metadata->getMetaData();
+        } elseif ($this->metadata instanceof ArrayConvertableInterface) {
+            return $this->metadata->toArray();
+        } else {
+            throw new \RuntimeException('Unable to get MetaData!');
+        }
     }
 
 }

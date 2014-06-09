@@ -1,18 +1,20 @@
 <?php
-
 namespace Metabor\Statemachine;
+
+use Exception;
+use Metabor\Named;
+use Metabor\Statemachine\Util\StateCollectionMerger;
+use MetaborStd\MergeableInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
-use Metabor\Named;
 use MetaborStd\Statemachine\ProcessInterface;
-use Exception;
 
 /**
  *
  * @author Oliver Tischlinger
  *        
  */
-class Process extends Named implements ProcessInterface
+class Process extends Named implements ProcessInterface, MergeableInterface
 {
 
     /**
@@ -49,7 +51,8 @@ class Process extends Named implements ProcessInterface
         if ($this->states->hasState($name)) {
             if ($this->states->getState($name) !== $state) {
                 throw new Exception(
-                        'There is already a different state with name "' . $name . '"');
+                        'There is already a different state with name "'
+                                . $name . '"');
             }
         } else {
             $this->states->addState($state);
@@ -104,6 +107,15 @@ class Process extends Named implements ProcessInterface
     public function hasState($name)
     {
         return $this->states->hasState($name);
+    }
+
+    /**
+     * @see \MetaborStd\MergeableInterface::merge()
+     */
+    public function merge($source)
+    {
+        $merger = new StateCollectionMerger($this->states);
+        $merger->merge($source);
     }
 
 }

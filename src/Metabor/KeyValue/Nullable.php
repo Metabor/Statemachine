@@ -1,12 +1,14 @@
 <?php
 namespace Metabor\KeyValue;
+
 use ArrayAccess;
+use MetaborStd\ArrayConvertableInterface;
 
 /**
  * @author otischlinger
  *
  */
-class Nullable implements ArrayAccess
+class Nullable implements ArrayAccess, ArrayConvertableInterface
 {
     /**
      *
@@ -55,4 +57,13 @@ class Nullable implements ArrayAccess
     {
         $this->keyValue[$offset];
     }
+
+    /**
+     * @see \MetaborStd\ArrayConvertableInterface::toArray()
+     */
+    public function toArray()
+    {
+        return $this->keyValue;
+    }
+
 }
