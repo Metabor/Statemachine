@@ -156,7 +156,7 @@ class StateCollectionMerger implements MergeableInterface
         /* @var $transition TransitionInterface*/
         foreach ($sourceState->getTransitions() as $sourceTransition) {
             $targetTransition = $this->createTransition($sourceTransition);
-            $this->addTransition($sourceState, $targetTransition);
+            $this->addTransition($targetState, $targetTransition);
         }
         
         foreach ($sourceState->getEventNames() as $eventName) {

@@ -1,14 +1,11 @@
 <?php
 namespace Metabor\Event;
 
-use MetaborStd\ArrayConvertableInterface;
-
-use MetaborStd\MetadataInterface;
-
 use Metabor\KeyValue\Nullable;
-
 use Metabor\Observer\Subject;
+use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\Event\EventInterface;
+use MetaborStd\MetadataInterface;
 use SplObserver;
 use ArrayAccess;
 
@@ -17,7 +14,7 @@ use ArrayAccess;
  * @author Oliver Tischlinger
  *        
  */
-class Event extends Subject implements EventInterface, ArrayAccess
+class Event extends Subject implements EventInterface, ArrayAccess, MetadataInterface
 {
 
     /**
