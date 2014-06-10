@@ -1,12 +1,10 @@
 <?php
 namespace Metabor\Statemachine\Util;
+use Metabor\Observer\Callback;
 use Metabor\Statemachine\Condition\Tautology;
-
-use Metabor\Statemachine\Transition;
-
 use Metabor\Statemachine\State;
-
 use Metabor\Statemachine\StateCollection;
+use Metabor\Statemachine\Transition;
 
 /**
  * @author Oliver Tischlinger
@@ -14,6 +12,11 @@ use Metabor\Statemachine\StateCollection;
  */
 class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function __invoke()
+    {
+
+    }
 
     /**
      * @return \Metabor\Statemachine\StateCollection
@@ -28,9 +31,16 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $sourceCollection->addState($stateInProcess);
         $stateDone = new State('done');
         $sourceCollection->addState($stateDone);
-        
+
         $stateNew->addTransition(new Transition($stateInProcess, 'start'));
-        $stateInProcess->addTransition(new Transition($stateDone, null, new Tautology('is finished')));
+
+        $callback = new \Metabor\Callback\Callback($this);
+        $observer = new Callback($callback);
+        $stateNew->getEvent('start')->attach($observer);
+        $stateInProcess
+                ->addTransition(
+                        new Transition($stateDone, null,
+                                new Tautology('is finished')));
 
         return $sourceCollection;
     }
@@ -61,19 +71,29 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $sourceCollection = $this->createSourceCollection();
         $merger->merge($sourceCollection);
 
-//         $this->assertEquals($sourceCollection->getState('new'),
-//                         $targetCollection->getState('new'));
-//         $this->assertEquals($sourceCollection->getState('in progress'),
-//                         $targetCollection->getState('in progress'));
-//         $this->assertEquals($sourceCollection->getState('done'),
-//                         $targetCollection->getState('done'));
-        
-        $this->assertNotSame($sourceCollection->getState('new'),
-        		$targetCollection->getState('new'));
-        $this->assertNotSame($sourceCollection->getState('in progress'),
-        		$targetCollection->getState('in progress'));
-        $this->assertNotSame($sourceCollection->getState('done'),
-        		$targetCollection->getState('done'));
+        /* @var $sourceState State */
+        foreach ($sourceCollection->getStates() as $sourceState) {
+            /* @var $targetState State */
+            $targetState = $targetCollection->getState($sourceState->getName());
+            $this->assertNotSame($sourceState, $targetState);
+            $this
+                    ->assertSameSize($sourceState->getTransitions(),
+                            $targetState->getTransitions());
+            $this
+                    ->assertEquals($sourceState->getEventNames(),
+                            $targetState->getEventNames());
+
+            foreach ($sourceState->getEventNames() as $eventName) {
+                $sourceEvent = $sourceState->getEvent($eventName);
+                $targetEvent = $targetState->getEvent($eventName);
+                
+                $this->assertNotSame($sourceEvent, $targetEvent);
+                
+                $this
+                        ->assertEquals($sourceEvent->getObservers(),
+                                $targetEvent->getObservers());
+            }
+        }
     }
 
 }
