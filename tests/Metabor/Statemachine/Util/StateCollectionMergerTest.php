@@ -39,7 +39,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $event = $stateNew->getEvent('start');
         $event->attach($observer);
         $event['event flag'] = 'has command';
-        
+
         $stateInProcess
                 ->addTransition(
                         new Transition($stateDone, null,
@@ -87,18 +87,24 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
                             $targetState->getEventNames());
 
             foreach ($sourceState->getEventNames() as $eventName) {
+                $this->assertTrue($targetState->hasEvent($eventName));
+
                 $sourceEvent = $sourceState->getEvent($eventName);
                 $targetEvent = $targetState->getEvent($eventName);
-                
+
                 $this->assertNotSame($sourceEvent, $targetEvent);
-                $this->assertEquals($sourceEvent->getMetaData(), $targetEvent->getMetaData());
-                
+                $this
+                        ->assertEquals($sourceEvent->getMetaData(),
+                                $targetEvent->getMetaData());
+
                 $this
                         ->assertEquals($sourceEvent->getObservers(),
                                 $targetEvent->getObservers());
             }
-            
-            $this->assertEquals($sourceState->getMetaData(), $targetState->getMetaData());
+
+            $this
+                    ->assertEquals($sourceState->getMetaData(),
+                            $targetState->getMetaData());
         }
     }
 
