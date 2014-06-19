@@ -53,7 +53,7 @@ class State extends Named implements StateInterface, ArrayAccess,
 
     /**
      *
-     * @return multitype:TransitionInterface
+     * @return \Traversable
      */
     public function getTransitions()
     {
