@@ -5,7 +5,7 @@ use MetaborStd\NamedInterface;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Named implements NamedInterface
 {
@@ -18,7 +18,7 @@ class Named implements NamedInterface
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -36,7 +36,7 @@ class Named implements NamedInterface
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      */
     protected function setName($name)
     {

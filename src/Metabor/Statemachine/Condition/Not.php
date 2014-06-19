@@ -14,7 +14,7 @@ class Not implements ConditionInterface
     private $condition;
     /**
      *
-     * @param ConditionInterface $condition        	
+     * @param ConditionInterface $condition
      */
     public function __construct(ConditionInterface $condition)
     {

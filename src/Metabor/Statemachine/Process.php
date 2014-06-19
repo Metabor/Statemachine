@@ -11,7 +11,7 @@ use MetaborStd\Statemachine\ProcessInterface;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Process extends Named implements ProcessInterface, MergeableInterface
 {
@@ -30,8 +30,8 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param string $name            
-     * @param StateInterface $initialState            
+     * @param string $name
+     * @param StateInterface $initialState
      */
     public function __construct($name, StateInterface $initialState)
     {
@@ -42,7 +42,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param StateInterface $state            
+     * @param StateInterface $state
      */
     protected function addState(StateInterface $state)
     {
@@ -91,7 +91,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param unknown_type $name            
+     * @param unknown_type $name
      */
     public function getState($name)
     {
@@ -100,7 +100,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      * @return boolean
      */
     public function hasState($name)

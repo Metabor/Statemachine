@@ -10,7 +10,7 @@ use MetaborStd\Statemachine\Factory\ProcessDetectorInterface;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Factory implements FactoryInterface
 {
@@ -78,7 +78,7 @@ class Factory implements FactoryInterface
     }
 
     /**
-     * 
+     *
      * @param object $subject
      * @return \MetaborStd\Statemachine\StatemachineInterface
      */

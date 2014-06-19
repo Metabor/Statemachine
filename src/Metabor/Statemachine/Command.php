@@ -8,13 +8,13 @@ use InvalidArgumentException;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 abstract class Command implements SplObserver
 {
     /**
      *
-     * @param SplSubject $subject        	
+     * @param SplSubject $subject
      * @throws InvalidArgumentException
      */
     public function update(SplSubject $subject)
@@ -27,7 +27,7 @@ abstract class Command implements SplObserver
 
     /**
      * Overwrite this to change the name for the Command that is displayed in the graph
-     * 
+     *
      * @return string
      */
     public function __toString()

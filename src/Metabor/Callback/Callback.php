@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Callback implements CallbackInterface
 {
@@ -20,7 +20,7 @@ class Callback implements CallbackInterface
 
     /**
      *
-     * @param callable $callable            
+     * @param callable $callable
      */
     public function __construct($callable)
     {

@@ -19,7 +19,7 @@ use RuntimeException;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Statemachine extends Subject implements StatemachineInterface
 {
@@ -69,9 +69,9 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param object $subject        	
-     * @param ProcessInterface $process        	
-     * @param string $stateName        	
+     * @param object $subject
+     * @param ProcessInterface $process
+     * @param string $stateName
      */
     public function __construct($subject, ProcessInterface $process, $stateName = null, TransitionSelectorInterface $transitonSelector = null)
     {
@@ -101,8 +101,8 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param ArrayAccess $context        	
-     * @param EventInterface $event        	
+     * @param ArrayAccess $context
+     * @param EventInterface $event
      */
     protected function doCheckTransitions(ArrayAccess $context, EventInterface $event = null)
     {
@@ -190,7 +190,7 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * 
+     *
      * @see \MetaborStd\Statemachine\StatemachineInterface::getSubject()
      */
     public function getSubject()

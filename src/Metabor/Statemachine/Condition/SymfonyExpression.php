@@ -30,7 +30,7 @@ class SymfonyExpression extends Named implements ConditionInterface
     private $values;
 
     /**
-     * 
+     *
      * @param string $name
      * @param array $values
      * @param ExpressionLanguage $expressionLanguage

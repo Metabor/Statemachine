@@ -29,7 +29,7 @@ class Graph extends GraphLib
     private $layoutCallback;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {
@@ -39,7 +39,7 @@ class Graph extends GraphLib
 
     /**
      * @link http://www.graphviz.org/doc/info/attrs.html
-     * 
+     *
      * @param string $flag
      * @param scalar $value
      * @param array $layout
@@ -52,7 +52,7 @@ class Graph extends GraphLib
 
     /**
      * @link http://www.graphviz.org/doc/info/attrs.html
-     * 
+     *
      * @param string $flag
      * @param scalar $value
      * @param array $layout
@@ -64,7 +64,7 @@ class Graph extends GraphLib
     }
 
     /**
-     * 
+     *
      * @param Callback $callback
      */
     public function attachLayoutCallback(Callback $callback)
@@ -149,7 +149,7 @@ class Graph extends GraphLib
     }
 
     /**
-     * 
+     *
      * @param StateInterface $state
      * @param TransitionInterface $transition
      */
@@ -174,7 +174,7 @@ class Graph extends GraphLib
     }
 
     /**
-     * 
+     *
      * @param StateInterface $state
      */
     public function addState(StateInterface $state)
