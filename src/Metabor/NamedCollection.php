@@ -8,7 +8,7 @@ use ArrayIterator;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 {

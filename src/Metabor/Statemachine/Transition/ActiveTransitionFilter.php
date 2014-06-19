@@ -25,8 +25,8 @@ class ActiveTransitionFilter extends \FilterIterator
 
     /**
      * @param \Traversable $transitions
-     * @param object $subject        	
-     * @param \ArrayAccess $context        	
+     * @param object $subject
+     * @param \ArrayAccess $context
      * @param EventInterface $event
      */
     public function __construct(\Traversable $transitions, $subject, \ArrayAccess $context, EventInterface $event = null)

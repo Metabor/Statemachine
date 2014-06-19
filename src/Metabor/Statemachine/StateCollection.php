@@ -10,7 +10,7 @@ use MetaborStd\Statemachine\StateInterface;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class StateCollection implements StateCollectionInterface, MergeableInterface
 {
@@ -57,7 +57,7 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
 
     /**
      *
-     * @param StateInterface $state            
+     * @param StateInterface $state
      */
     public function addState(StateInterface $state)
     {

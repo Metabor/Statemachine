@@ -15,7 +15,7 @@ class Composite implements ArrayAccess
     private $container;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {

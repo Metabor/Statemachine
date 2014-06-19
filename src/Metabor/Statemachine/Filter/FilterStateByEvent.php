@@ -13,7 +13,7 @@ class FilterStateByEvent extends \FilterIterator
     private $eventName;
 
     /**
-     * 
+     *
      * @param string $eventName
      */
     public function __construct(\Traversable $states, $eventName)

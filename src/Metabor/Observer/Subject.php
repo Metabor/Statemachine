@@ -7,7 +7,7 @@ use SplObjectStorage;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Subject implements SplSubject
 {

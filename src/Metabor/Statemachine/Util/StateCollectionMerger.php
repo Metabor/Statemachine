@@ -13,7 +13,7 @@ use MetaborStd\Statemachine\TransitionInterface;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class StateCollectionMerger implements MergeableInterface
 {
@@ -23,7 +23,7 @@ class StateCollectionMerger implements MergeableInterface
     private $targetCollection;
 
     /**
-     * 
+     *
      * @param StateCollectionInterface $targetCollection
      */
     public function __construct(StateCollectionInterface $targetCollection)
@@ -32,7 +32,7 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @return \MetaborStd\Statemachine\StateCollectionInterface 
+     * @return \MetaborStd\Statemachine\StateCollectionInterface
      */
     public function getTargetCollection()
     {
@@ -152,21 +152,21 @@ class StateCollectionMerger implements MergeableInterface
         $name = $sourceState->getName();
         $targetState = $this->findOrCreateState($name);
         $this->mergeMetadata($sourceState, $targetState);
-        
+
         /* @var $transition TransitionInterface*/
         foreach ($sourceState->getTransitions() as $sourceTransition) {
             $targetTransition = $this->createTransition($sourceTransition);
             $this->addTransition($targetState, $targetTransition);
         }
-        
+
         foreach ($sourceState->getEventNames() as $eventName) {
             $sourceEvent = $sourceState->getEvent($eventName);
             $targetEvent = $targetState->getEvent($eventName);
-            
+
             $this->mergeMetadata($sourceEvent, $targetEvent);
-            
+
             foreach ($sourceEvent->getObservers() as $observer) {
-            	$targetEvent->attach($observer);
+                $targetEvent->attach($observer);
             }
         }
     }

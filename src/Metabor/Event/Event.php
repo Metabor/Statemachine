@@ -11,7 +11,7 @@ use ArrayAccess;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Event extends Subject implements EventInterface, ArrayAccess, MetadataInterface
 {
@@ -36,7 +36,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
 
     /**
      *
-     * @param string $name        	
+     * @param string $name
      */
     public function __construct($name)
     {

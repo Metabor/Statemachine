@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Dispatcher implements DispatcherInterface
 {

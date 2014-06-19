@@ -8,7 +8,7 @@ use SplSubject;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Callback implements SplObserver
 {
@@ -21,7 +21,7 @@ class Callback implements SplObserver
 
     /**
      *
-     * @param CallbackInterface $callback            
+     * @param CallbackInterface $callback
      */
     public function __construct(CallbackInterface $callback)
     {

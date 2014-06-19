@@ -7,7 +7,7 @@ use SplObjectStorage;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Composite implements CallbackInterface
 {
@@ -43,7 +43,7 @@ class Composite implements CallbackInterface
 
     /**
      *
-     * @param CallbackInterface $callback            
+     * @param CallbackInterface $callback
      */
     public function attach(CallbackInterface $callback)
     {
@@ -52,7 +52,7 @@ class Composite implements CallbackInterface
 
     /**
      *
-     * @param CallbackInterface $callback            
+     * @param CallbackInterface $callback
      */
     public function detach(CallbackInterface $callback)
     {

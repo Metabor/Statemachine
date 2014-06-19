@@ -9,7 +9,7 @@ use ArrayAccess;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class Transition implements TransitionInterface
 {
@@ -34,9 +34,9 @@ class Transition implements TransitionInterface
 
     /**
      *
-     * @param StateInterface $targetState        	
-     * @param string $eventName        	
-     * @param ConditionInterface $condition        	
+     * @param StateInterface $targetState
+     * @param string $eventName
+     * @param ConditionInterface $condition
      */
     public function __construct(StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
     {

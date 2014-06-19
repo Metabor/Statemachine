@@ -15,7 +15,7 @@ use ArrayAccess;
 /**
  *
  * @author Oliver Tischlinger
- *        
+ *
  */
 class State extends Named implements StateInterface, ArrayAccess,
         MetadataInterface
@@ -34,14 +34,14 @@ class State extends Named implements StateInterface, ArrayAccess,
     private $events;
 
     /**
-     * 
+     *
      * @var \ArrayAccess
      */
     private $metadata;
 
     /**
      *
-     * @param string $name        	
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -62,7 +62,7 @@ class State extends Named implements StateInterface, ArrayAccess,
 
     /**
      *
-     * @param TransitionInterface $transition        	
+     * @param TransitionInterface $transition
      */
     public function addTransition(TransitionInterface $transition)
     {
