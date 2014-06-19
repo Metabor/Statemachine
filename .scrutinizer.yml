@@ -1,6 +1,6 @@
 filter:
     paths: [src/*]
-    excluded_paths: [vendor/*, tests/*]
+    excluded_paths: [tests/*]
 before_commands:
     - 'composer install --dev --prefer-source'
 tools:
@@ -18,9 +18,5 @@ tools:
     sensiolabs_security_checker: true
     php_code_coverage: true
     php_pdepend: true
-    php_loc:
-        enabled: true
-        excluded_dirs: [vendor, tests]
-    php_cpd:
-        enabled: true
-        excluded_dirs: [vendor, tests]
+    php_loc: true
+    php_cpd: true
