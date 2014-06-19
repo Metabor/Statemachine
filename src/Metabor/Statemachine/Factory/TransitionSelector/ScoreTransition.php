@@ -13,7 +13,7 @@ class ScoreTransition implements TransitionSelectorInterface
 
     /**
      * @param TransitionInterface $transition
-     * @return number
+     * @return integer
      */
     protected function calculcateScore(TransitionInterface $transition)
     {

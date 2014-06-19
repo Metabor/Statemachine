@@ -29,7 +29,7 @@ class SymfonyExpression extends Expression implements CallbackInterface
     private $keys;
 
     /**
-     * @param string $expressionText
+     * @param string $expression
      * @param array $keys
      * @param ExpressionLanguage $expressionLanguage
      */

@@ -2,7 +2,6 @@
 namespace Example\Order\Command;
 
 use Metabor\Statemachine\Command;
-
 use Example\Order\Order;
 use ArrayAccess;
 

@@ -2,7 +2,6 @@
 namespace Metabor\Statemachine;
 
 use MetaborStd\ArrayConvertableInterface;
-
 use MetaborStd\MetadataInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -10,7 +9,6 @@ use Metabor\Event\Event;
 use Metabor\KeyValue\Nullable;
 use Metabor\Named;
 use Metabor\NamedCollection;
-use MetaborStd\Statemachine\ProcessInterface;
 use SplObjectStorage;
 use ArrayAccess;
 

@@ -60,7 +60,7 @@ class Order
 
     /**
      *
-     * @return Traversable
+     * @return \Traversable
      */
     public function getEventNames()
     {

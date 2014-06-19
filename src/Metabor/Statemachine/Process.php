@@ -5,7 +5,6 @@ use Exception;
 use Metabor\Named;
 use Metabor\Statemachine\Util\StateCollectionMerger;
 use MetaborStd\MergeableInterface;
-use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\ProcessInterface;
 

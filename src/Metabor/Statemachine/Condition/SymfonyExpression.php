@@ -6,7 +6,6 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Metabor\Named;
 use MetaborStd\Statemachine\ConditionInterface;
 use ArrayAccess;
-use InvalidArgumentException;
 
 /**
  * @author otischlinger

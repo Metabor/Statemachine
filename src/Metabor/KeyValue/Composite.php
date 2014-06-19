@@ -1,6 +1,7 @@
 <?php
 namespace Metabor\KeyValue;
-use ArrayAccess, SplObjectStorage;
+use ArrayAccess;
+use SplObjectStorage;
 
 /**
  * @author otischlinger

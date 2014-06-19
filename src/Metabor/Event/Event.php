@@ -6,7 +6,6 @@ use Metabor\Observer\Subject;
 use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\MetadataInterface;
-use SplObserver;
 use ArrayAccess;
 
 /**

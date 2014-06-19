@@ -2,7 +2,6 @@
 namespace Metabor\Callback;
 
 use MetaborStd\CallbackInterface;
-use SplObjectStorage;
 use InvalidArgumentException;
 
 /**

@@ -2,7 +2,6 @@
 namespace Metabor\Statemachine\Factory;
 
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
-
 use Metabor\Statemachine\Statemachine;
 use MetaborStd\Statemachine\Factory\FactoryInterface;
 use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
