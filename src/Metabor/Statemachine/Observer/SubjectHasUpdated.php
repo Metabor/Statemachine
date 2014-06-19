@@ -1,6 +1,5 @@
 <?php
 namespace Metabor\Statemachine\Observer;
-use MetaborStd\Statemachine\StatemachineInterface;
 
 /**
  * @author otischlinger

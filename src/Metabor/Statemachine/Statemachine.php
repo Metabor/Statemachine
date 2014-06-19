@@ -1,17 +1,11 @@
 <?php
 namespace Metabor\Statemachine;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
-
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
-
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
-
 use Metabor\Callback\Callback;
-
 use Metabor\Event\Dispatcher;
-
 use MetaborStd\Event\DispatcherInterface;
-
 use Metabor\Observer\Subject;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\StatemachineInterface;

@@ -1,17 +1,10 @@
 <?php
 namespace Metabor\Statemachine\Graph;
 use Metabor\Callback\Callback;
-
-use Metabor\Statemachine\Command;
-
 use MetaborStd\Statemachine\TransitionInterface;
-
 use Fhaculty\Graph\Vertex;
-
 use MetaborStd\Statemachine\StateInterface;
-
 use MetaborStd\Statemachine\StateCollectionInterface;
-
 use Fhaculty\Graph\Graph as GraphLib;
 
 /**

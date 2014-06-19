@@ -1,7 +1,6 @@
 <?php
 namespace Metabor\Statemachine\Transition;
 use MetaborStd\Event\EventInterface;
-use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger

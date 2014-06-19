@@ -1,7 +1,6 @@
 <?php
 namespace Metabor\Statemachine;
 use MetaborStd\Event\EventInterface;
-
 use SplObserver;
 use SplSubject;
 use InvalidArgumentException;

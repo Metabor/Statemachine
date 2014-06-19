@@ -3,7 +3,6 @@ namespace Example\Order\Condition;
 
 use Example\Order\Order;
 use MetaborStd\Statemachine\ConditionInterface;
-use InvalidArgumentException;
 use ArrayAccess;
 
 /**

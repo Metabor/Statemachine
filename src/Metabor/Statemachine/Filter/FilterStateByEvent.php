@@ -1,6 +1,5 @@
 <?php
 namespace Metabor\Statemachine\Filter;
-use MetaborStd\Statemachine\StateInterface;
 
 /**
  * @author otischlinger
@@ -15,7 +14,6 @@ class FilterStateByEvent extends \FilterIterator
 
     /**
      * 
-     * @param \Traversable $iterator
      * @param string $eventName
      */
     public function __construct(\Traversable $states, $eventName)

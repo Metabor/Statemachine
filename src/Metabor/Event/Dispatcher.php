@@ -2,7 +2,6 @@
 namespace Metabor\Event;
 
 use MetaborStd\CallbackInterface;
-
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Event\DispatcherInterface;
 use RuntimeException;

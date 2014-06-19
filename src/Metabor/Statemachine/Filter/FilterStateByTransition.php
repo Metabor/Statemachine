@@ -1,7 +1,5 @@
 <?php
 namespace Metabor\Statemachine\Filter;
-use MetaborStd\Statemachine\StateInterface;
-use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger

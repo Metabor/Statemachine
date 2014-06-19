@@ -41,7 +41,7 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param unknown_type $name
+     * @param string $name
      * @return \MetaborStd\Statemachine\StateInterface
      */
     protected function createState($name)
@@ -173,7 +173,6 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param StateCollectionInterface $sourceStateCollection
      */
     protected function mergeStateCollection(StateCollectionInterface $source)
     {

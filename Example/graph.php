@@ -5,8 +5,6 @@ require_once '../autoloader.php';
 use Example\Order\Process\Postpayment;
 use Example\Order\Process\Prepayment;
 use Metabor\NamedCollection;
-use MetaborStd\Statemachine\StateInterface;
-use MetaborStd\Statemachine\TransitionInterface;
 use Metabor\Statemachine\Graph\Graph;
 use Fhaculty\Graph\GraphViz;
 try {
