@@ -14,7 +14,7 @@ class ActiveTransitionFilter extends \FilterIterator
     protected $subject;
 
     /**
-     * @var ArrayAccess
+     * @var \ArrayAccess
      */
     protected $context;
 
