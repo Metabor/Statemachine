@@ -7,7 +7,24 @@ tools:
     php_sim: true
     php_changetracking: true
     php_cs_fixer:
-        config: { level: psr2 }
+        config:
+            level: psr2
+            fixers:
+                indentation:          true
+                linefeed:             true
+                trailing_spaces:      true
+                unused_use:           true
+                phpdoc_params:        true
+                visibility:           true
+                return:               true
+                short_tag:            true
+                braces:               true
+                include:              true
+                php_closing_tag:      true
+                extra_empty_lines:    true
+                controls_spaces:      true
+                elseif:               true
+                eof_ending:           true        
     php_analyzer: true
     external_code_coverage: true
     php_mess_detector: true
