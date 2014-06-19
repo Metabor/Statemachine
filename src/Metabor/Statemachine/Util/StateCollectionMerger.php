@@ -9,7 +9,6 @@ use MetaborStd\MetadataInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
-use MetaborStd\Statemachine\ProcessInterface;
 
 /**
  *
@@ -19,7 +18,7 @@ use MetaborStd\Statemachine\ProcessInterface;
 class StateCollectionMerger implements MergeableInterface
 {
     /**
-     * @var ProcessInterface
+     * @var StateCollectionInterface
      */
     private $targetCollection;
 
@@ -33,7 +32,7 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @return \MetaborStd\Statemachine\ProcessInterface
+     * @return \MetaborStd\Statemachine\StateCollectionInterface 
      */
     public function getTargetCollection()
     {
