@@ -6,7 +6,9 @@ before_commands:
 tools:
     php_sim: true
     php_changetracking: true
-    php_cs_fixer: { level: all }
+    php_cs_fixer: 
+        config:
+            level: all
     php_analyzer: true
     external_code_coverage: true
     php_mess_detector: true
