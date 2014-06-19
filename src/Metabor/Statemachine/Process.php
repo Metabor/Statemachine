@@ -91,7 +91,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param unknown_type $name
+     * @param string $name
      */
     public function getState($name)
     {
