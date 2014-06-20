@@ -42,7 +42,7 @@ class Graph extends GraphLib
      *
      * @param string $flag
      * @param scalar $value
-     * @param array $layout
+     * @param array  $layout
      */
     public function setEventLayout($flag, $value, array $layout)
     {
@@ -55,7 +55,7 @@ class Graph extends GraphLib
      *
      * @param string $flag
      * @param scalar $value
-     * @param array $layout
+     * @param array  $layout
      */
     public function setStateLayout($flag, $value, array $layout)
     {
@@ -82,8 +82,8 @@ class Graph extends GraphLib
     }
 
     /**
-     * @param \ArrayAccess $flagedObject
-     * @param array $layout
+     * @param  \ArrayAccess $flagedObject
+     * @param  array        $layout
      * @return array
      */
     protected function getLayoutOptions(\ArrayAccess $flagedObject, array $layout)
@@ -107,7 +107,7 @@ class Graph extends GraphLib
     }
 
     /**
-     * @param StateInterface $state
+     * @param  StateInterface         $state
      * @return \Fhaculty\Graph\Vertex
      */
     public function createStatusVertex(StateInterface $state)
@@ -118,11 +118,12 @@ class Graph extends GraphLib
             $layout = $this->getLayoutOptions($state, $this->stateLayout);
             $vertex->setLayout($layout);
         }
+
         return $vertex;
     }
 
     /**
-     * @param TransitionInterface $transition
+     * @param  TransitionInterface $transition
      * @return string
      */
     protected function getTransitionLabel(StateInterface $state, TransitionInterface $transition)
@@ -150,7 +151,7 @@ class Graph extends GraphLib
 
     /**
      *
-     * @param StateInterface $state
+     * @param StateInterface      $state
      * @param TransitionInterface $transition
      */
     protected function addTransition(StateInterface $state, TransitionInterface $transition)

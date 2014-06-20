@@ -34,8 +34,8 @@ class Transition implements TransitionInterface
 
     /**
      *
-     * @param StateInterface $targetState
-     * @param string $eventName
+     * @param StateInterface     $targetState
+     * @param string             $eventName
      * @param ConditionInterface $condition
      */
     public function __construct(StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
@@ -88,6 +88,7 @@ class Transition implements TransitionInterface
         if ($this->condition) {
             $result = $result && $this->condition->checkCondition($subject, $context);
         }
+
         return $result;
     }
 

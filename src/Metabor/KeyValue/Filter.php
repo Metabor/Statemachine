@@ -26,6 +26,7 @@ class Filter extends \FilterIterator
     public function accept()
     {
         $current = $this->current();
+
         return (($current instanceof \ArrayAccess) && $this->criteria->check($current));
     }
 

@@ -21,6 +21,7 @@ class FilterStateByTransition extends \FilterIterator
                 return true;
             }
         }
+
         return false;
     }
 }

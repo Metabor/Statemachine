@@ -31,8 +31,8 @@ class SymfonyExpression extends Named implements ConditionInterface
 
     /**
      *
-     * @param string $name
-     * @param array $values
+     * @param string             $name
+     * @param array              $values
      * @param ExpressionLanguage $expressionLanguage
      */
     public function __construct($name, array $values = array(), ExpressionLanguage $expressionLanguage = null)
@@ -57,6 +57,7 @@ class SymfonyExpression extends Named implements ConditionInterface
             $keys[] = 'context';
             $this->expression = $this->expressionLanguage->parse($this->getName(), $keys);
         }
+
         return $this->expression;
     }
 
@@ -69,6 +70,7 @@ class SymfonyExpression extends Named implements ConditionInterface
         $values = $this->values;
         $values['subject'] = $subject;
         $values['context'] = $context;
+
         return $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }
 }

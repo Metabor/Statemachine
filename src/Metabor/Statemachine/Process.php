@@ -30,7 +30,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param string $name
+     * @param string         $name
      * @param StateInterface $initialState
      */
     public function __construct($name, StateInterface $initialState)
@@ -100,7 +100,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
 
     /**
      *
-     * @param string $name
+     * @param  string  $name
      * @return boolean
      */
     public function hasState($name)
