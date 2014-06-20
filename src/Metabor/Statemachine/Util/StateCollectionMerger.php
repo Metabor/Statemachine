@@ -199,5 +199,4 @@ class StateCollectionMerger implements MergeableInterface
             throw new \InvalidArgumentException('Source can not be merged!');
         }
     }
-
 }

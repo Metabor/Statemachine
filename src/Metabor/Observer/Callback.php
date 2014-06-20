@@ -36,5 +36,4 @@ class Callback implements SplObserver
     {
         $this->callback->__invoke($subject);
     }
-
 }

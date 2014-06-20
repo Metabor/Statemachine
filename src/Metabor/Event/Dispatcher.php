@@ -107,5 +107,4 @@ class Dispatcher implements DispatcherInterface
     {
         return $this->isReady;
     }
-
 }

@@ -34,5 +34,4 @@ abstract class Command implements SplObserver
     {
         return get_class($this);
     }
-
 }

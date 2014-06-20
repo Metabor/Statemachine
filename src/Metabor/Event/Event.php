@@ -117,5 +117,4 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
             throw new \RuntimeException('Unable to get MetaData!');
         }
     }
-
 }

@@ -40,5 +40,4 @@ class Callback extends Named implements ConditionInterface
     {
         return call_user_func($this->callable, $subject, $context);
     }
-
 }

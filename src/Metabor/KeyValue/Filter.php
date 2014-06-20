@@ -29,5 +29,4 @@ class Filter extends \FilterIterator
 
         return (($current instanceof \ArrayAccess) && $this->criteria->check($current));
     }
-
 }

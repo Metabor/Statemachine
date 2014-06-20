@@ -197,5 +197,4 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         return $this->subject;
     }
-
 }

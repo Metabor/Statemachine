@@ -116,5 +116,4 @@ class Process extends Named implements ProcessInterface, MergeableInterface
         $merger = new StateCollectionMerger($this->states);
         $merger->merge($source);
     }
-
 }

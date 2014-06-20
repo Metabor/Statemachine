@@ -38,5 +38,4 @@ class Not implements ConditionInterface
     {
         return 'not ( ' . $this->condition->getName() . ' )';
     }
-
 }

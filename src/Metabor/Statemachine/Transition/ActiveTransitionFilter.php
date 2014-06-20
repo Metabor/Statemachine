@@ -47,5 +47,4 @@ class ActiveTransitionFilter extends \FilterIterator
 
         return $transition->isActive($this->subject, $this->context, $this->event);
     }
-
 }

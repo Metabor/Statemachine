@@ -42,5 +42,4 @@ class Named implements NamedInterface
     {
         $this->name = $name;
     }
-
 }

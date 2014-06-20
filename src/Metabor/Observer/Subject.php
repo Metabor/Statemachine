@@ -62,5 +62,4 @@ class Subject implements SplSubject
     {
         return $this->observers;
     }
-
 }

@@ -205,5 +205,4 @@ class Graph extends GraphLib
     {
         $this->addStates($stateCollection->getStates());
     }
-
 }

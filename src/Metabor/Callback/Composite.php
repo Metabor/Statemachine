@@ -58,5 +58,4 @@ class Composite implements CallbackInterface
     {
         $this->callbacks->detach($callback);
     }
-
 }

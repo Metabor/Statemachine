@@ -19,5 +19,4 @@ class Contradiction extends Named implements ConditionInterface
     {
         return false;
     }
-
 }

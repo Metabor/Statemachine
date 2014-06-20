@@ -63,5 +63,4 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
     {
         return new ArrayIterator($this->collection);
     }
-
 }

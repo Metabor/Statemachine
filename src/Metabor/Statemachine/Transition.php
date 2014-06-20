@@ -99,5 +99,4 @@ class Transition implements TransitionInterface
     {
         return $this->condition;
     }
-
 }

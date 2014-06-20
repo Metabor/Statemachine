@@ -152,5 +152,4 @@ class State extends Named implements StateInterface, ArrayAccess,
             throw new \RuntimeException('Unable to get MetaData!');
         }
     }
-
 }

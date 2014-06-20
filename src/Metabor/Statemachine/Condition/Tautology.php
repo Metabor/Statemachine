@@ -19,5 +19,4 @@ class Tautology extends Named implements ConditionInterface
     {
         return true;
     }
-
 }

@@ -65,5 +65,4 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
     {
         return $this->keyValue;
     }
-
 }

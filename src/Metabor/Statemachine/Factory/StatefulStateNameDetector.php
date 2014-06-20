@@ -20,5 +20,4 @@ class StatefulStateNameDetector implements StateNameDetectorInterface
             throw new \InvalidArgumentException('Subject has to implement the StatefulInterface!');
         }
     }
-
 }
