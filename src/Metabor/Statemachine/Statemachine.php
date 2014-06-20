@@ -69,9 +69,9 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param object $subject
+     * @param object           $subject
      * @param ProcessInterface $process
-     * @param string $stateName
+     * @param string           $stateName
      */
     public function __construct($subject, ProcessInterface $process, $stateName = null, TransitionSelectorInterface $transitonSelector = null)
     {
@@ -101,7 +101,7 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param ArrayAccess $context
+     * @param ArrayAccess    $context
      * @param EventInterface $event
      */
     protected function doCheckTransitions(ArrayAccess $context, EventInterface $event = null)
@@ -141,9 +141,9 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * @param DispatcherInterface $dispatcher
-     * @param string $name
-     * @param ArrayAccess $context
+     * @param  DispatcherInterface $dispatcher
+     * @param  string              $name
+     * @param  ArrayAccess         $context
      * @throws RuntimeException
      */
     public function dispatchEvent(DispatcherInterface $dispatcher, $name, ArrayAccess $context = null)

@@ -20,7 +20,7 @@ class Callback extends Named implements ConditionInterface
 
     /**
      *
-     * @param string $name
+     * @param string   $name
      * @param callable $callable
      */
     public function __construct($name, $callable)

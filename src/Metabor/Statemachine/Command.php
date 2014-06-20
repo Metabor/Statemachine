@@ -14,7 +14,7 @@ abstract class Command implements SplObserver
 {
     /**
      *
-     * @param SplSubject $subject
+     * @param  SplSubject               $subject
      * @throws InvalidArgumentException
      */
     public function update(SplSubject $subject)

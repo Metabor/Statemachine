@@ -24,9 +24,9 @@ class ActiveTransitionFilter extends \FilterIterator
     protected $event;
 
     /**
-     * @param \Traversable $transitions
-     * @param object $subject
-     * @param \ArrayAccess $context
+     * @param \Traversable   $transitions
+     * @param object         $subject
+     * @param \ArrayAccess   $context
      * @param EventInterface $event
      */
     public function __construct(\Traversable $transitions, $subject, \ArrayAccess $context, EventInterface $event = null)
@@ -44,6 +44,7 @@ class ActiveTransitionFilter extends \FilterIterator
     public function accept()
     {
         $transition = $this->current();
+
         return $transition->isActive($this->subject, $this->context, $this->event);
     }
 

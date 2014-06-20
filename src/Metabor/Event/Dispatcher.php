@@ -30,7 +30,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      * @param callable $command
-     * @param array $arguments
+     * @param array    $arguments
      */
     protected function addCommand($command, array $arguments)
     {
@@ -47,7 +47,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      * @param callable $command
-     * @param array $arguments
+     * @param array    $arguments
      */
     protected function removeCommand($command, array $arguments)
     {
@@ -59,7 +59,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      * @param EventInterface $event
-     * @param array $arguments
+     * @param array          $arguments
      */
     protected function addEvent(EventInterface $event, array $arguments)
     {

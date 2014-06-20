@@ -37,6 +37,7 @@ class Callback implements CallbackInterface
     public function __invoke()
     {
         $args = func_get_args();
+
         return call_user_func_array($this->callable, $args);
     }
 }

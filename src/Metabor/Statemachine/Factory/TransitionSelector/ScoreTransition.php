@@ -12,7 +12,7 @@ class ScoreTransition implements TransitionSelectorInterface
 {
 
     /**
-     * @param TransitionInterface $transition
+     * @param  TransitionInterface $transition
      * @return integer
      */
     protected function calculcateScore(TransitionInterface $transition)
@@ -24,6 +24,7 @@ class ScoreTransition implements TransitionSelectorInterface
         if ($transition->getConditionName()) {
             $score++;
         }
+
         return $score;
     }
 
@@ -44,6 +45,7 @@ class ScoreTransition implements TransitionSelectorInterface
             }
         }
         $disctinctSelector = new OneOrNoneActiveTransition();
+
         return $disctinctSelector->selectTransition(new \ArrayIterator($bestTransitions));
     }
 }

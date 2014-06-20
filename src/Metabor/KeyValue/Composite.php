@@ -49,6 +49,7 @@ class Composite implements ArrayAccess
             foreach ($this->container as $keyValue) {
                 $result = $result && $keyValue->offsetExists($offset);
             }
+
             return $result;
         } else {
             return false;

@@ -103,6 +103,7 @@ class State extends Named implements StateInterface, ArrayAccess,
             $event = new Event($name);
             $this->events->add($event);
         }
+
         return $event;
     }
 

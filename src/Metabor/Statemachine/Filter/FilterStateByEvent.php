@@ -29,6 +29,7 @@ class FilterStateByEvent extends \FilterIterator
     {
         /* @var $state StateInterface */
         $state = $this->current();
+
         return $state->hasEvent($this->eventName);
     }
 }

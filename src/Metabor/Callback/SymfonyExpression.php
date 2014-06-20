@@ -29,8 +29,8 @@ class SymfonyExpression extends Expression implements CallbackInterface
     private $keys;
 
     /**
-     * @param string $expression
-     * @param array $keys
+     * @param string             $expression
+     * @param array              $keys
      * @param ExpressionLanguage $expressionLanguage
      */
     public function __construct($expression, array $keys = array(), ExpressionLanguage $expressionLanguage = null)
@@ -52,6 +52,7 @@ class SymfonyExpression extends Expression implements CallbackInterface
         if (!$this->parsedExpression) {
             $this->parsedExpression = $this->expressionLanguage->parse($this, $this->keys);
         }
+
         return $this->parsedExpression;
     }
 
@@ -62,6 +63,7 @@ class SymfonyExpression extends Expression implements CallbackInterface
     {
         $args = func_get_args();
         $values = array_combine($this->keys, $args);
+
         return $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }
 

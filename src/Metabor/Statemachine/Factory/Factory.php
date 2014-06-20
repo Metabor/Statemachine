@@ -35,7 +35,7 @@ class Factory implements FactoryInterface
     private $transitonSelector;
 
     /**
-     * @param ProcessDetectorInterface $processDetector
+     * @param ProcessDetectorInterface   $processDetector
      * @param StateNameDetectorInterface $stateNameDetector
      */
     public function __construct(ProcessDetectorInterface $processDetector, StateNameDetectorInterface $stateNameDetector = null)
@@ -79,7 +79,7 @@ class Factory implements FactoryInterface
 
     /**
      *
-     * @param object $subject
+     * @param  object                                         $subject
      * @return \MetaborStd\Statemachine\StatemachineInterface
      */
     public function createStatemachine($subject)
