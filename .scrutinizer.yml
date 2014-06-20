@@ -14,7 +14,7 @@ tools:
                 linefeed: true
                 trailing_spaces: true
                 unused_use: true
-                phpdoc_params: false
+                phpdoc_params: true
                 visibility: true
                 return: true
                 short_tag: true
