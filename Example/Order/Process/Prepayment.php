@@ -1,7 +1,6 @@
 <?php
 namespace Example\Order\Process;
 
-use Example\Order\Order;
 use MetaborStd\Event\EventInterface;
 use Example\Order\Command\Authorize;
 use Example\Order\Condition\ShippingDateGreater14Days;
@@ -69,5 +68,4 @@ class Prepayment extends Process implements ProcessConstants, StateConstants, Ev
 
         parent::__construct(self::PROCESS_PREPAYMENT, $new);
     }
-
 }

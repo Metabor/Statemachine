@@ -1,7 +1,6 @@
 <?php
 namespace Example\Order\Condition;
 
-use Example\Order\Order;
 use MetaborStd\Statemachine\ConditionInterface;
 use ArrayAccess;
 
@@ -30,5 +29,4 @@ class AuthorizedSuccessful implements ConditionInterface
     {
         return 'authorized successful';
     }
-
 }

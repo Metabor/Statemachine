@@ -1,0 +1,138 @@
+# metabor/statemachine
+
+[![Build Status](https://travis-ci.org/Metabor/Statemachine.svg?branch=master)](https://travis-ci.org/Metabor/Statemachine)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Metabor/Statemachine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Metabor/Statemachine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
+
+
+Statemachine in PHP 5.3
+
+## Quickstart examples
+
+Once [installed](#install), let's use a sample statemachine:
+
+````php
+<?php
+require_once 'vendor/autoload.php';
+
+use Metabor\Statemachine\Process;
+use Metabor\Statemachine\State;
+use Metabor\Statemachine\Statemachine;
+use Metabor\Statemachine\Transition;
+
+$closed = new State('closed');
+$opened = new State('opened');
+
+$eventOpen = 'open';
+$eventClose = 'close';
+$closed->addTransition(new Transition($opened, $eventOpen));
+$closed->addTransition(new Transition($closed, $eventClose));
+$opened->addTransition(new Transition($opened, $eventOpen));
+$opened->addTransition(new Transition($closed, $eventClose));
+
+// adding some action to events
+// the parts of observing the event and executing the command are separated in this example
+// normaly it could be put all together into your own command (base)class
+$openCommand = new \Metabor\Callback\Callback(
+        function ()
+        {
+            echo 'motor is opening door' . PHP_EOL;
+        });
+$observerForOpenEvent = new \Metabor\Observer\Callback($openCommand);
+$closed->getEvent($eventOpen)->attach($observerForOpenEvent);
+
+$closeCommand = new \Metabor\Callback\Callback(
+        function ()
+        {
+            echo 'motor is closing door' . PHP_EOL;
+        });
+$observerForCloseEvent = new \Metabor\Observer\Callback($closeCommand);
+$opened->getEvent($eventClose)->attach($observerForCloseEvent);
+
+// stateful subject that belongs to this statemachine
+$subject = new stdClass();
+
+// start process with closed status;
+$initialState = $closed;
+$process = new Process('process name', $initialState);
+
+$statemachine = new Statemachine($subject, $process);
+
+echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
+
+echo 'Event:' . $eventOpen . PHP_EOL;
+$statemachine->triggerEvent($eventOpen);
+echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
+
+// opening an open door would not activate the motor
+echo 'Event:' . $eventOpen . PHP_EOL;
+$statemachine->triggerEvent($eventOpen);
+echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
+
+echo 'Event:' . $eventClose . PHP_EOL;
+$statemachine->triggerEvent($eventClose);
+echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
+````
+
+## Features
+
+This library implements a [finite-state machine](http://en.wikipedia.org/wiki/Finite-state_machine) in PHP 5.3.
+
+It was first developed for a talk at a conference. The example from my talk is in the namespace Example.
+As a starting point I recommend the index.php located there.
+
+Graph.php visualize the process.
+The two processes can be called with a parameter:
+- graph.php?process=prepayment
+- graph.php?process=postpayment
+
+In the namespace MetaborStd are abstract types defined that are exemplified implemented in this project.
+If you have to implement or use a statemachine in your project, feel free to either use this libary at all or replace the parts that didn't fit your needs by using the MetaborStd Interfaces.
+
+
+### Process Graph Drawing
+
+The library supports visualizing of the process graph by using clue/graph and [GraphViz](http://www.graphviz.org/) "Graph Visualization Software".
+
+## Install
+
+The recommended way to install this library is [through composer](http://getcomposer.org). [New to composer?](http://getcomposer.org/doc/00-intro.md)
+
+```JSON
+{
+    "require": {
+        "metabor/statemachine": "*"
+    }
+}
+```
+
+Optional recommendation:
+In order to be able to use the [process graph drawing feature](#process-graph-drawing) you'll have to
+install GraphViz (`dot` executable). Users of Debian/Ubuntu-based distributions may simply
+invoke `sudo apt-get install graphviz`, Windows users have to
+[download GraphViZ for Windows](http://www.graphviz.org/Download_windows.php) and remaining
+users should install from [GraphViz homepage](http://www.graphviz.org/Download.php).
+
+## Tests
+
+This library uses phpunit for its extensive testsuite.
+You can either use a global installation or rely on the one composer installs
+when you first run `$ composer install`.
+This sets up the developer environment, so that you
+can now run it from the project root directory:
+
+```bash
+$ php vendor/bin/phpunit`
+```
+
+## Contributing
+
+If you encounter any issues, please don't hesitate to drop us a line, file a bug report or even best provide us with a patch / pull request and/or unit test to reproduce your problem.
+
+Besides directly working with the code, any additional documentation, additions to our readme or even fixing simple typos are appreciated just as well.
+
+Any feedback and/or contribution is welcome!
+
+## License
+
+Released under the terms of the permissive [MIT license](http://opensource.org/licenses/MIT).

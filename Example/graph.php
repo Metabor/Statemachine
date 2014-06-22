@@ -27,7 +27,6 @@ try {
     $graph->addStateCollection($process);
 
     $viz = new GraphViz($graph);
-    //$viz->setExecutable('"C:\\Program Files (x86)\\Graphviz2.34\\bin\\dot.exe"');
     $viz->setFormat('svg');
     echo file_get_contents($viz->createImageFile());
 } catch (Exception $e) {
