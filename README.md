@@ -1,11 +1,51 @@
 # metabor/statemachine
 
-[![Build Status](https://travis-ci.org/Metabor/Statemachine.svg?branch=master)](https://travis-ci.org/Metabor/Statemachine)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Metabor/Statemachine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
+Statemachine in PHP 5.3
+
+### Continous Integration/Deployment
+
+#### TravisCI
+[![Build Status](http://img.shields.io/travis/Metabor/Statemachine.svg)](https://travis-ci.org/Metabor/Statemachine)
+
+#### Open Issues
+[![Open Issues](http://img.shields.io/github/issues/Metabor/Statemachine.svg)](https://github.com/Metabor/Statemachine/issues?state=open)
+
+### Package Information
+
+#### Version Badge
+[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.0-green.svg)](https://github.com/Metabor/MetaborStd)
+
+#### Packagist
+[![Packagist](http://img.shields.io/packagist/v/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+[![Packagist](http://img.shields.io/packagist/dm/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+[![Packagist](http://img.shields.io/packagist/dd/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+[![Packagist](http://img.shields.io/packagist/dt/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+
+### Dependency Status
+
+#### VersionEye
+[![Dependency Status](https://www.versioneye.com/php/metabor:statemachine/badge.svg)](https://www.versioneye.com/php/metabor:statemachine)
+
+### Test Coverage
+
+#### Scrutinizer
 [![Code Coverage](https://scrutinizer-ci.com/g/Metabor/Statemachine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
 
+### Code Quality
 
-Statemachine in PHP 5.3
+#### Code Climate
+[![Code Climate](http://img.shields.io/codeclimate/github/Metabor/Statemachine.svg)](https://codeclimate.com/github/Metabor/Statemachine)
+
+#### Scrutinizer
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/Metabor/Statemachine.svg)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
+
+#### SensioLabsInsight
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ac1d76c8-e9e1-4780-b21f-a0d01f582a21/big.png)](https://insight.sensiolabs.com/projects/ac1d76c8-e9e1-4780-b21f-a0d01f582a21)
+
+### Other
+
+[![License](http://img.shields.io/packagist/l/Metabor/Statemachine.svg)](http://opensource.org/licenses/MIT)
+[![Gittip](http://img.shields.io/gittip/metabor.svg)](https://www.gittip.com/metabor/)
 
 ## Quickstart examples
 
