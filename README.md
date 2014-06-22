@@ -17,9 +17,9 @@ Statemachine in PHP 5.3
 
 #### Packagist
 [![Packagist](http://img.shields.io/packagist/v/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+[![Packagist](http://img.shields.io/packagist/dt/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 [![Packagist](http://img.shields.io/packagist/dm/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 [![Packagist](http://img.shields.io/packagist/dd/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
-[![Packagist](http://img.shields.io/packagist/dt/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 
 ### Dependency Status
 
@@ -34,7 +34,7 @@ Statemachine in PHP 5.3
 ### Code Quality
 
 #### Codacy
-[![Codacy](https://www.codacy.com/project/badge/c83d65fc6188425d92c6b7de57f201eb)](https://www.codacy.com)
+[![Codacy](https://www.codacy.com/project/badge/c83d65fc6188425d92c6b7de57f201eb)](https://www.codacy.com/public/Metabor/Statemachine.git)
 
 #### Code Climate
 [![Code Climate](http://img.shields.io/codeclimate/github/Metabor/Statemachine.svg)](https://codeclimate.com/github/Metabor/Statemachine)
