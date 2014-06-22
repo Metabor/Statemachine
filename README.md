@@ -33,6 +33,9 @@ Statemachine in PHP 5.3
 
 ### Code Quality
 
+#### Codacy
+[![Codacy](https://www.codacy.com/project/badge/c83d65fc6188425d92c6b7de57f201eb)](https://www.codacy.com)
+
 #### Code Climate
 [![Code Climate](http://img.shields.io/codeclimate/github/Metabor/Statemachine.svg)](https://codeclimate.com/github/Metabor/Statemachine)
 

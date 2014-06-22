@@ -53,14 +53,12 @@ class StateCollectionMerger implements MergeableInterface
      * @param  TransitionInterface       $sourceTransition
      * @throws \InvalidArgumentException
      */
-    protected function addTransition(StateInterface $sourceState,
-            TransitionInterface $sourceTransition)
+    protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition)
     {
         if ($sourceState instanceof State) {
             $sourceState->addTransition($sourceTransition);
         } else {
-            throw new \InvalidArgumentException(
-                    'Overwrite this method to implement a different type!');
+            throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
         }
     }
 
@@ -79,8 +77,7 @@ class StateCollectionMerger implements MergeableInterface
             if ($sourceTransition instanceof Transition) {
                 $condition = $sourceTransition->getCondition();
             } else {
-                throw new \InvalidArgumentException(
-                        'Overwrite this method to implement a different type!');
+                throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
             }
         } else {
             $condition = null;
@@ -104,12 +101,10 @@ class StateCollectionMerger implements MergeableInterface
                         $target->offsetSet($offset, $value);
                     }
                 } else {
-                    throw new \RuntimeException(
-                            'Source had to make all metadata available!');
+                    throw new \RuntimeException('Source had to make all metadata available!');
                 }
             } else {
-                throw new \RuntimeException(
-                        'Source metadata can not be merged!');
+                throw new \RuntimeException('Source metadata can not be merged!');
             }
         }
     }
@@ -123,8 +118,7 @@ class StateCollectionMerger implements MergeableInterface
         if ($this->targetCollection instanceof StateCollection) {
             $this->targetCollection->addState($state);
         } else {
-            throw new \InvalidArgumentException(
-                    'TargetCollection has to be a StateCollection. Overwrite this method to implement a different type!');
+            throw new \InvalidArgumentException('TargetCollection has to be a StateCollection. Overwrite this method to implement a different type!');
         }
     }
 
