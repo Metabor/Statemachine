@@ -122,13 +122,7 @@ echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
 
 This library implements a [finite-state machine](http://en.wikipedia.org/wiki/Finite-state_machine) in PHP 5.3.
 
-It was first developed for a talk at a conference. The example from my talk is in the namespace Example.
-As a starting point I recommend the index.php located there.
-
-Graph.php visualize the process.
-The two processes can be called with a parameter:
-- graph.php?process=prepayment
-- graph.php?process=postpayment
+It was first developed for a talk at a conference. The example from my talk is available on Github and Packagist as [metabor/statemachine-example](https://github.com/Metabor/Statemachine-Example).
 
 In the namespace MetaborStd are abstract types defined that are exemplified implemented in this project.
 If you have to implement or use a statemachine in your project, feel free to either use this libary at all or replace the parts that didn't fit your needs by using the MetaborStd Interfaces.
