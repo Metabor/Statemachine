@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "43ec56add1f36ebcd404de1d912b751282c9f360"
+                "reference": "b87a745bd343cae4782929a4ff2f1222e27ca234"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/43ec56add1f36ebcd404de1d912b751282c9f360",
-                "reference": "43ec56add1f36ebcd404de1d912b751282c9f360",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/b87a745bd343cae4782929a4ff2f1222e27ca234",
+                "reference": "b87a745bd343cae4782929a4ff2f1222e27ca234",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-06-23 22:20:35"
+            "time": "2014-06-23 23:06:24"
         }
     ],
     "packages-dev": [
