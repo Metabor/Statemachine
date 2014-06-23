@@ -12,14 +12,15 @@ Statemachine in PHP 5.3
 
 ### Package Information
 
-#### Version Badge
-[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.0-green.svg)](https://github.com/Metabor/MetaborStd)
-
 #### Packagist
 [![Packagist](http://img.shields.io/packagist/v/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 [![Packagist](http://img.shields.io/packagist/dt/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 [![Packagist](http://img.shields.io/packagist/dm/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 [![Packagist](http://img.shields.io/packagist/dd/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
+
+#### Compatibility
+[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.0-green.svg)](https://github.com/Metabor/MetaborStd)
+[![HHVM Status](http://hhvm.h4cc.de/badge/metabor/statemachine.png)](http://hhvm.h4cc.de/package/metabor/statemachine)
 
 ### Dependency Status
 
