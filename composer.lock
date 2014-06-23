@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4c128504d8591b40fdefd3f19232cb5",
+    "hash": "ad67e96f0d2960c399f94aee8cf88603",
     "packages": [
         {
             "name": "clue/graph",
@@ -60,12 +60,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "0a676c7fbf19fcc6d680bf3878d93f0e18113fd5"
+                "reference": "8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/0a676c7fbf19fcc6d680bf3878d93f0e18113fd5",
-                "reference": "0a676c7fbf19fcc6d680bf3878d93f0e18113fd5",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6",
+                "reference": "8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6",
                 "shasum": ""
             },
             "require": {
@@ -78,7 +78,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -102,7 +102,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-06-20 10:53:35"
+            "time": "2014-06-23 13:29:22"
         }
     ],
     "packages-dev": [
@@ -856,9 +856,9 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "metabor/metabor-std": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3"
     },

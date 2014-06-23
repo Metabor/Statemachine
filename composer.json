@@ -11,12 +11,12 @@
     ],
     "require": {
         "php": ">=5.3",
-	"metabor/metabor-std": "dev-master",
-	"clue/graph": "*"
+    	"metabor/metabor-std": "~1.1",
+    	"clue/graph": ">=0.7"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "symfony/expression-language": "*"
+        "phpunit/phpunit": "~4.1",
+        "symfony/expression-language": "~2.5"
     },
     "suggest": {
         "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine",
@@ -32,7 +32,7 @@
     "minimum-stability":"dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }
