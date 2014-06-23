@@ -55,7 +55,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
      */
     public function offsetUnset($offset)
     {
-        $this->keyValue[$offset];
+        unset($this->keyValue[$offset]);
     }
 
     /**
