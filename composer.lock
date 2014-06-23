@@ -12,16 +12,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6"
+                "reference": "43ec56add1f36ebcd404de1d912b751282c9f360"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6",
-                "reference": "8f72414ff8cb6239ffd0fe40bd2bbc790df40ab6",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/43ec56add1f36ebcd404de1d912b751282c9f360",
+                "reference": "43ec56add1f36ebcd404de1d912b751282c9f360",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.1"
             },
             "suggest": {
                 "metabor/statemachine": "Working implementation of the statemachine interfaces",
@@ -54,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-06-23 13:29:22"
+            "time": "2014-06-23 22:20:35"
         }
     ],
     "packages-dev": [
