@@ -16,4 +16,18 @@ class EventTest extends EventInterfaceTest
     {
         return new Event('TestEvent');
     }
+
+    /**
+     *
+     */
+    public function testUsesMetadataForFlags()
+    {
+        $offset = 'TestOffset';
+        $value = 'TestValue';
+        $instance = $this->createTestInstance();
+        $this->assertArrayNotHasKey($offset, $instance);
+        $instance[$offset] = $value;
+        $this->assertArrayHasKey($offset, $instance);
+        $this->assertEquals($value, $instance[$offset]);
+    }
 }

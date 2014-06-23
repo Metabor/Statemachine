@@ -16,4 +16,18 @@ class StateTest extends StateInterfaceTest
     {
         return new State('TestState');
     }
+
+    /**
+     * 
+     */
+    public function testUsesMetadataForFlags()
+    {
+        $offset = 'TestOffset';
+        $value = 'TestValue';
+        $instance = $this->createTestInstance();
+        $this->assertArrayNotHasKey($offset, $instance);
+        $instance[$offset] = $value;
+        $this->assertArrayHasKey($offset, $instance);
+        $this->assertEquals($value, $instance[$offset]);
+    }
 }
