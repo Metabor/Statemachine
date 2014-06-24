@@ -40,10 +40,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $event->attach($observer);
         $event['event flag'] = 'has command';
 
-        $stateInProcess
-                ->addTransition(
-                        new Transition($stateDone, null,
-                                new Tautology('is finished')));
+        $stateInProcess->addTransition(new Transition($stateDone, null, new Tautology('is finished')));
 
         return $sourceCollection;
     }
@@ -79,12 +76,8 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
             /* @var $targetState State */
             $targetState = $targetCollection->getState($sourceState->getName());
             $this->assertNotSame($sourceState, $targetState);
-            $this
-                    ->assertSameSize($sourceState->getTransitions(),
-                            $targetState->getTransitions());
-            $this
-                    ->assertEquals($sourceState->getEventNames(),
-                            $targetState->getEventNames());
+            $this->assertSameSize($sourceState->getTransitions(), $targetState->getTransitions());
+            $this->assertEquals($sourceState->getEventNames(), $targetState->getEventNames());
 
             foreach ($sourceState->getEventNames() as $eventName) {
                 $this->assertTrue($targetState->hasEvent($eventName));
@@ -93,19 +86,11 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
                 $targetEvent = $targetState->getEvent($eventName);
 
                 $this->assertNotSame($sourceEvent, $targetEvent);
-                $this
-                        ->assertEquals($sourceEvent->getMetaData(),
-                                $targetEvent->getMetaData());
-
-                $this
-                        ->assertEquals($sourceEvent->getObservers(),
-                                $targetEvent->getObservers());
+                $this->assertEquals($sourceEvent->getMetaData(), $targetEvent->getMetaData());
+                $this->assertEquals($sourceEvent->getObservers(), $targetEvent->getObservers());
             }
 
-            $this
-                    ->assertEquals($sourceState->getMetaData(),
-                            $targetState->getMetaData());
+            $this->assertEquals($sourceState->getMetaData(), $targetState->getMetaData());
         }
     }
-
 }

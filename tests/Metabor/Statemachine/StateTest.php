@@ -29,5 +29,7 @@ class StateTest extends StateInterfaceTest
         $instance[$offset] = $value;
         $this->assertArrayHasKey($offset, $instance);
         $this->assertEquals($value, $instance[$offset]);
+        unset($instance[$offset]);
+        $this->assertArrayNotHasKey($offset, $instance);
     }
 }
