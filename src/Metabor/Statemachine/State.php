@@ -9,15 +9,14 @@ use Metabor\Event\Event;
 use Metabor\KeyValue\Nullable;
 use Metabor\Named;
 use Metabor\NamedCollection;
-use SplObjectStorage;
-use ArrayAccess;
+use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
 
 /**
  *
  * @author Oliver Tischlinger
  *
  */
-class State extends Named implements StateInterface, ArrayAccess,
+class State extends Named implements StateInterface, \ArrayAccess,
         MetadataInterface
 {
 
@@ -46,7 +45,7 @@ class State extends Named implements StateInterface, ArrayAccess,
     public function __construct($name)
     {
         parent::__construct($name);
-        $this->transitions = new SplObjectStorage();
+        $this->transitions = new \SplObjectStorage();
         $this->events = new NamedCollection();
         $this->metadata = new Nullable();
     }
@@ -144,12 +143,7 @@ class State extends Named implements StateInterface, ArrayAccess,
      */
     public function getMetaData()
     {
-        if ($this->metadata instanceof MetadataInterface) {
-            return $this->metadata->getMetaData();
-        } elseif ($this->metadata instanceof ArrayConvertableInterface) {
-            return $this->metadata->toArray();
-        } else {
-            throw new \RuntimeException('Unable to get MetaData!');
-        }
+        $converter = new ArrayAccessToArrayConverter($this->metadata);
+        return $converter->toArray();
     }
 }

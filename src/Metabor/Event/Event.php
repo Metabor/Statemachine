@@ -3,17 +3,18 @@ namespace Metabor\Event;
 
 use Metabor\KeyValue\Nullable;
 use Metabor\Observer\Subject;
+use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
 use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\MetadataInterface;
-use ArrayAccess;
 
 /**
  *
  * @author Oliver Tischlinger
  *
  */
-class Event extends Subject implements EventInterface, ArrayAccess, MetadataInterface
+class Event extends Subject implements EventInterface, \ArrayAccess,
+        MetadataInterface
 {
 
     /**
@@ -55,6 +56,8 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
+     * 
+     * @see \MetaborStd\CallbackInterface::__invoke()
      */
     public function __invoke()
     {
@@ -64,8 +67,8 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
-     *
-     * @see Metabor.Named::getName()
+     * 
+     * @see \MetaborStd\NamedInterface::getName()
      */
     public function getName()
     {
@@ -73,7 +76,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
-     * @see ArrayAccess::offsetExists()
+     * @see \ArrayAccess::offsetExists()
      */
     public function offsetExists($offset)
     {
@@ -81,7 +84,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
-     * @see ArrayAccess::offsetGet()
+     * @see \ArrayAccess::offsetGet()
      */
     public function offsetGet($offset)
     {
@@ -89,7 +92,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
-     * @see ArrayAccess::offsetSet()
+     * @see \ArrayAccess::offsetSet()
      */
     public function offsetSet($offset, $value)
     {
@@ -97,7 +100,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
     }
 
     /**
-     * @see ArrayAccess::offsetUnset()
+     * @see \ArrayAccess::offsetUnset()
      */
     public function offsetUnset($offset)
     {
@@ -109,12 +112,7 @@ class Event extends Subject implements EventInterface, ArrayAccess, MetadataInte
      */
     public function getMetaData()
     {
-        if ($this->metadata instanceof MetadataInterface) {
-            return $this->metadata->getMetaData();
-        } elseif ($this->metadata instanceof ArrayConvertableInterface) {
-            return $this->metadata->toArray();
-        } else {
-            throw new \RuntimeException('Unable to get MetaData!');
-        }
+        $converter = new ArrayAccessToArrayConverter($this->metadata);
+        return $converter->toArray();
     }
 }
