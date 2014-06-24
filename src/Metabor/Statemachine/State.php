@@ -142,6 +142,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     public function getMetaData()
     {
         $converter = new ArrayAccessToArrayConverter($this->metadata);
+
         return $converter->toArray();
     }
 }
