@@ -54,7 +54,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     }
 
     /**
-     * 
+     *
      * @see \MetaborStd\CallbackInterface::__invoke()
      */
     public function __invoke()
@@ -65,7 +65,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     }
 
     /**
-     * 
+     *
      * @see \MetaborStd\NamedInterface::getName()
      */
     public function getName()
@@ -111,6 +111,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     public function getMetaData()
     {
         $converter = new ArrayAccessToArrayConverter($this->metadata);
+
         return $converter->toArray();
     }
 }
