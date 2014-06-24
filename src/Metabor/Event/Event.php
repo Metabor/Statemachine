@@ -4,7 +4,6 @@ namespace Metabor\Event;
 use Metabor\KeyValue\Nullable;
 use Metabor\Observer\Subject;
 use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
-use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\MetadataInterface;
 
@@ -13,8 +12,7 @@ use MetaborStd\MetadataInterface;
  * @author Oliver Tischlinger
  *
  */
-class Event extends Subject implements EventInterface, \ArrayAccess,
-        MetadataInterface
+class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInterface
 {
 
     /**

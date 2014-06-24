@@ -1,7 +1,6 @@
 <?php
 namespace Metabor\Statemachine;
 
-use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\MetadataInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -16,8 +15,7 @@ use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
  * @author Oliver Tischlinger
  *
  */
-class State extends Named implements StateInterface, \ArrayAccess,
-        MetadataInterface
+class State extends Named implements StateInterface, \ArrayAccess, MetadataInterface
 {
 
     /**
