@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "b87a745bd343cae4782929a4ff2f1222e27ca234"
+                "reference": "a4a8c33bdf2e959077e6be81dcefa635f0bda8f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/b87a745bd343cae4782929a4ff2f1222e27ca234",
-                "reference": "b87a745bd343cae4782929a4ff2f1222e27ca234",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/a4a8c33bdf2e959077e6be81dcefa635f0bda8f1",
+                "reference": "a4a8c33bdf2e959077e6be81dcefa635f0bda8f1",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-06-23 23:06:24"
+            "time": "2014-06-25 20:55:31"
         }
     ],
     "packages-dev": [
@@ -855,11 +855,17 @@
             "time": "2014-05-16 14:25:18"
         }
     ],
-    "aliases": [],
+    "aliases": [
+
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }
