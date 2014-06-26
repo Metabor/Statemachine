@@ -2,7 +2,6 @@
 namespace Metabor\Callback;
 
 use MetaborStd\CallbackInterface;
-use SplObjectStorage;
 
 /**
  *
@@ -19,10 +18,11 @@ class Composite implements CallbackInterface
     private $callbacks;
 
     /**
+     * 
      */
     public function __construct()
     {
-        $this->callbacks = new SplObjectStorage();
+        $this->callbacks = new \SplObjectStorage();
     }
 
     /**

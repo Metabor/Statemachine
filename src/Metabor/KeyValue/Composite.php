@@ -1,13 +1,11 @@
 <?php
 namespace Metabor\KeyValue;
-use ArrayAccess;
-use SplObjectStorage;
 
 /**
  * @author otischlinger
  *
  */
-class Composite implements ArrayAccess
+class Composite implements \ArrayAccess
 {
     /**
      * @var \SplObjectStorage
@@ -19,7 +17,7 @@ class Composite implements ArrayAccess
      */
     public function __construct()
     {
-        $this->container = new SplObjectStorage();
+        $this->container = new \SplObjectStorage();
     }
 
     /**
@@ -69,12 +67,12 @@ class Composite implements ArrayAccess
         $values = array_unique($values, SORT_REGULAR);
 
         switch (count($values)) {
-        case 0:
-            return null;
-        case 1:
-            return reset($values);
-        default:
-            throw new \RuntimeException('Offset "' . $offset . '" is not unique!');
+            case 0:
+                return null;
+            case 1:
+                return reset($values);
+            default:
+                throw new \RuntimeException('Offset "' . $offset . '" is not unique!');
         }
     }
 
