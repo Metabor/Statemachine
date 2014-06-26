@@ -1,8 +1,8 @@
 <?php
 namespace Metabor\Statemachine\Factory\TransitionSelector;
-use MetaborStd\Statemachine\TransitionInterface;
-use Traversable;
+
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger
@@ -31,7 +31,7 @@ class ScoreTransition implements TransitionSelectorInterface
     /**
      * @see \MetaborStd\Statemachine\Factory\TransitionSelectorInterface::selectTransition()
      */
-    public function selectTransition(Traversable $transitions)
+    public function selectTransition(\Traversable $transitions)
     {
         $bestTransitions = array();
         $bestScore = -1;
