@@ -96,7 +96,7 @@ class StateCollectionMerger implements MergeableInterface
         if ($source instanceof \ArrayAccess) {
             if ($target instanceof \ArrayAccess) {
                 if ($source instanceof MetadataInterface) {
-                    $metadata = $source->getMetaData();
+                    $metadata = $source->getMetadata();
                     foreach ($metadata as $offset => $value) {
                         $target->offsetSet($offset, $value);
                     }

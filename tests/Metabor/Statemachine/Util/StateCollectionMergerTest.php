@@ -86,11 +86,11 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
                 $targetEvent = $targetState->getEvent($eventName);
 
                 $this->assertNotSame($sourceEvent, $targetEvent);
-                $this->assertEquals($sourceEvent->getMetaData(), $targetEvent->getMetaData());
+                $this->assertEquals($sourceEvent->getMetadata(), $targetEvent->getMetadata());
                 $this->assertEquals($sourceEvent->getObservers(), $targetEvent->getObservers());
             }
 
-            $this->assertEquals($sourceState->getMetaData(), $targetState->getMetaData());
+            $this->assertEquals($sourceState->getMetadata(), $targetState->getMetadata());
         }
     }
 }

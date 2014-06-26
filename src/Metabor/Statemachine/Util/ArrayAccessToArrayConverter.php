@@ -30,7 +30,7 @@ class ArrayAccessToArrayConverter implements ArrayConvertableInterface
     public function toArray()
     {
         if ($this->object instanceof MetadataInterface) {
-            return $this->object->getMetaData();
+            return $this->object->getMetadata();
         } elseif ($this->object instanceof ArrayConvertableInterface) {
             return $this->object->toArray();
         } elseif ($this->object instanceof \ArrayIterator) {
