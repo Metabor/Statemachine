@@ -4,7 +4,6 @@ namespace Metabor\Event;
 use MetaborStd\CallbackInterface;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Event\DispatcherInterface;
-use RuntimeException;
 
 /**
  *
@@ -31,6 +30,8 @@ class Dispatcher implements DispatcherInterface
     /**
      * @param callable $command
      * @param array    $arguments
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * 
      */
     protected function addCommand($command, array $arguments)
     {
@@ -48,6 +49,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * @param callable $command
      * @param array    $arguments
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function removeCommand($command, array $arguments)
     {
@@ -69,15 +71,18 @@ class Dispatcher implements DispatcherInterface
     /**
      * @see \MetaborStd\Event\DispatcherInterface::dispatch()
      */
-    public function dispatch(EventInterface $event, array $arguments = array(), CallbackInterface $onReadyCallback = null)
-    {
+    public function dispatch(
+    	EventInterface $event, 
+    	array $arguments = array(),
+        CallbackInterface $onReadyCallback = null
+    ) {
         if (!$this->isReady) {
             $this->addEvent($event, $arguments);
             if ($onReadyCallback) {
                 $this->onReadyCallbacks[] = $onReadyCallback;
             }
         } else {
-            throw new RuntimeException('Was already invoked!');
+            throw new \RuntimeException('Was already invoked!');
         }
     }
 
@@ -87,7 +92,7 @@ class Dispatcher implements DispatcherInterface
     public function __invoke()
     {
         if ($this->isReady) {
-            throw new RuntimeException('Was already invoked!');
+            throw new \RuntimeException('Was already invoked!');
         } else {
             foreach ($this->getCommands() as $list) {
                 list($command, $arguments) = $list;
