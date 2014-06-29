@@ -18,7 +18,7 @@ class Composite implements CallbackInterface
     private $callbacks;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {

@@ -31,7 +31,7 @@ class Dispatcher implements DispatcherInterface
      * @param callable $command
      * @param array    $arguments
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * 
+     *
      */
     protected function addCommand($command, array $arguments)
     {
@@ -72,8 +72,8 @@ class Dispatcher implements DispatcherInterface
      * @see \MetaborStd\Event\DispatcherInterface::dispatch()
      */
     public function dispatch(
-    	EventInterface $event, 
-    	array $arguments = array(),
+        EventInterface $event,
+        array $arguments = array(),
         CallbackInterface $onReadyCallback = null
     ) {
         if (!$this->isReady) {
