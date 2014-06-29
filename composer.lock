@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "ebc334781df46ea76407f3ea1cfe09cc54be1ec5"
+                "reference": "a2ae4075f49351fd90b8070f1fe26213c9e4f395"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/ebc334781df46ea76407f3ea1cfe09cc54be1ec5",
-                "reference": "ebc334781df46ea76407f3ea1cfe09cc54be1ec5",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/a2ae4075f49351fd90b8070f1fe26213c9e4f395",
+                "reference": "a2ae4075f49351fd90b8070f1fe26213c9e4f395",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-06-28 20:14:10"
+            "time": "2014-06-28 21:34:34"
         }
     ],
     "packages-dev": [
@@ -111,16 +111,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.8",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "58401826c8cfc8fd689b60026e91c337df374bca"
+                "reference": "ed8ac99ce38c3fd134128c898f7ca74665abef7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/58401826c8cfc8fd689b60026e91c337df374bca",
-                "reference": "58401826c8cfc8fd689b60026e91c337df374bca",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ed8ac99ce38c3fd134128c898f7ca74665abef7f",
+                "reference": "ed8ac99ce38c3fd134128c898f7ca74665abef7f",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-26 14:55:24"
+            "time": "2014-06-29 08:14:40"
         },
         {
             "name": "phpunit/php-file-iterator",
