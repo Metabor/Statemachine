@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\Statemachine\Util;
+
 use Metabor\Observer\Callback;
 use Metabor\Statemachine\Condition\Tautology;
 use Metabor\Statemachine\State;
@@ -12,6 +13,8 @@ use Metabor\Statemachine\Transition;
  */
 class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 {
+    const FLAG_FOR_TEST = 'Flag for Test';
+    const FLAG_FOR_TEST_VALUE = 'Metabor';
 
     public function __invoke()
     {
@@ -27,6 +30,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 
         $stateNew = new State('new');
         $stateNew['test'] = true;
+        $stateNew[self::FLAG_FOR_TEST] = self::FLAG_FOR_TEST_VALUE;
         $sourceCollection->addState($stateNew);
         $stateInProcess = new State('in progress');
         $sourceCollection->addState($stateInProcess);
@@ -39,6 +43,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $event = $stateNew->getEvent('start');
         $event->attach($observer);
         $event['event flag'] = 'has command';
+        $event[self::FLAG_FOR_TEST] = self::FLAG_FOR_TEST_VALUE;
 
         $stateInProcess->addTransition(new Transition($stateDone, null, new Tautology('is finished')));
 
@@ -92,5 +97,22 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 
             $this->assertEquals($sourceState->getMetadata(), $targetState->getMetadata());
         }
+    }
+
+    public function testCopiesAllFlags()
+    {
+        $targetCollection = new StateCollection();
+        $merger = new StateCollectionMerger($targetCollection);
+
+        $sourceCollection = $this->createSourceCollection();
+        $merger->merge($sourceCollection);
+
+        $state = $targetCollection->getState('new');
+        $this->assertArrayHasKey(self::FLAG_FOR_TEST, $state);
+        $this->assertEquals(self::FLAG_FOR_TEST_VALUE, $state[self::FLAG_FOR_TEST]);
+
+        $event = $state->getEvent('start');
+        $this->assertArrayHasKey(self::FLAG_FOR_TEST, $event);
+        $this->assertEquals(self::FLAG_FOR_TEST_VALUE, $event[self::FLAG_FOR_TEST]);
     }
 }
