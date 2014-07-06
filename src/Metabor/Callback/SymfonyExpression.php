@@ -61,8 +61,12 @@ class SymfonyExpression extends Expression implements CallbackInterface
      */
     public function __invoke()
     {
-        $args = func_get_args();
-        $values = array_combine($this->keys, $args);
+    	if(empty($this->keys)) {
+    		$values = array();
+    	} else {
+    		$args = func_get_args();
+    		$values = array_combine($this->keys, $args);
+    	}
 
         return $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }

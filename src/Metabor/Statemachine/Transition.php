@@ -1,10 +1,10 @@
 <?php
 namespace Metabor\Statemachine;
+
 use MetaborStd\Statemachine\ConditionInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Event\EventInterface;
-use ArrayAccess;
 
 /**
  *
@@ -78,7 +78,7 @@ class Transition implements TransitionInterface
      *
      * @see MetaborStd\Statemachine.TransitionInterface::isActive()
      */
-    public function isActive($subject, ArrayAccess $context, EventInterface $event = null)
+    public function isActive($subject, \ArrayAccess $context, EventInterface $event = null)
     {
         if ($event) {
             $result = ($event->getName() == $this->eventName);
