@@ -1,20 +1,15 @@
 <?php
 namespace Metabor\Observer;
-use SplSubject;
-use SplObserver;
-use SplObjectStorage;
-
 /**
  *
  * @author Oliver Tischlinger
  *
  */
-class Subject implements SplSubject
+class Subject implements \SplSubject
 {
-
     /**
      *
-     * @var SplObjectStorage
+     * @var \SplObjectStorage
      */
     private $observers;
 
@@ -22,34 +17,34 @@ class Subject implements SplSubject
      */
     public function __construct()
     {
-        $this->observers = new SplObjectStorage();
+        $this->observers = new \SplObjectStorage();
     }
 
     /**
      *
-     * @see SplSubject::attach()
+     * @see \SplSubject::attach()
      */
-    public function attach(SplObserver $observer)
+    public function attach(\SplObserver $observer)
     {
         $this->observers->attach($observer);
     }
 
     /**
      *
-     * @see SplSubject::detach()
+     * @see \SplSubject::detach()
      */
-    public function detach(SplObserver $observer)
+    public function detach(\SplObserver $observer)
     {
         $this->observers->detach($observer);
     }
 
     /**
      *
-     * @see SplSubject::notify()
+     * @see \SplSubject::notify()
      */
     public function notify()
     {
-        /* @var $observer SplObserver */
+        /* @var $observer \SplObserver */
         foreach ($this->observers as $observer) {
             $observer->update($this);
         }
