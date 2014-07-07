@@ -12,10 +12,10 @@ class FilterStateByTransition extends \FilterIterator
      */
     public function accept()
     {
-        /* @var $state StateInterface */
+        /* @var $state \MetaborStd\Statemachine\StateInterface */
         $state = $this->current();
 
-        /* @var $transition TransitionInterface */
+        /* @var $transition \MetaborStd\Statemachine\TransitionInterface */
         foreach ($state->getTransitions() as $transition) {
             if (!$transition->getEventName()) {
                 return true;
