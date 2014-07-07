@@ -148,7 +148,7 @@ class StateCollectionMerger implements MergeableInterface
         $targetState = $this->findOrCreateState($name);
         $this->mergeMetadata($sourceState, $targetState);
 
-        /* @var $transition TransitionInterface*/
+        /* @var $transition TransitionInterface */
         foreach ($sourceState->getTransitions() as $sourceTransition) {
             $targetTransition = $this->createTransition($sourceTransition);
             $this->addTransition($targetState, $targetTransition);
