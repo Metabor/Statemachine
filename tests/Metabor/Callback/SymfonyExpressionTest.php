@@ -27,6 +27,8 @@ class SymfonyExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = 'a < b';
         $keys = array('a', 'b');
         $callback = new SymfonyExpression($expression, $keys);
+        $this->assertEquals($keys, $callback->getKeys());
+        
         $result = $callback->__invoke(2, 3);
         $this->assertTrue($result);
     }
