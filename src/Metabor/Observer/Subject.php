@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\Observer;
+
 /**
  *
  * @author Oliver Tischlinger

@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\Statemachine;
+
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
@@ -12,9 +13,6 @@ use MetaborStd\Statemachine\StatemachineInterface;
 use MetaborStd\Statemachine\ProcessInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
-use ArrayAccess;
-use ArrayIterator;
-use RuntimeException;
 
 /**
  *
@@ -53,7 +51,7 @@ class Statemachine extends Subject implements StatemachineInterface
     private $currentEvent;
 
     /**
-     * @var \ArrayAccess
+     * @var \\ArrayAccess
      */
     private $currentContext;
 
@@ -101,10 +99,10 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param ArrayAccess    $context
+     * @param \ArrayAccess    $context
      * @param EventInterface $event
      */
-    protected function doCheckTransitions(ArrayAccess $context, EventInterface $event = null)
+    protected function doCheckTransitions(\ArrayAccess $context, EventInterface $event = null)
     {
         $transitions = $this->currentState->getTransitions();
         $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
@@ -143,13 +141,13 @@ class Statemachine extends Subject implements StatemachineInterface
     /**
      * @param  DispatcherInterface $dispatcher
      * @param  string              $name
-     * @param  ArrayAccess         $context
-     * @throws RuntimeException
+     * @param  \ArrayAccess         $context
+     * @throws \RuntimeException
      */
-    public function dispatchEvent(DispatcherInterface $dispatcher, $name, ArrayAccess $context = null)
+    public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
     {
         if ($this->dispatcher) {
-            throw new RuntimeException('Event dispatching is still running!');
+            throw new \RuntimeException('Event dispatching is still running!');
         } else {
             if ($this->currentState->hasEvent($name)) {
                 $this->dispatcher = $dispatcher;
@@ -157,13 +155,13 @@ class Statemachine extends Subject implements StatemachineInterface
                 if ($context) {
                     $this->currentContext = $context;
                 } else {
-                    $this->currentContext = new ArrayIterator(array());
+                    $this->currentContext = new \ArrayIterator(array());
                 }
                 $this->currentEvent = $this->currentState->getEvent($name);
 
                 $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
             } else {
-                throw new RuntimeException('Current State did not have event "' . $name . '"');
+                throw new \RuntimeException('Current State did not have event "' . $name . '"');
             }
         }
     }
@@ -172,7 +170,7 @@ class Statemachine extends Subject implements StatemachineInterface
      *
      * @see MetaborStd\Statemachine.StatemachineInterface::triggerEvent()
      */
-    public function triggerEvent($name, ArrayAccess $context = null)
+    public function triggerEvent($name, \ArrayAccess $context = null)
     {
         $dispatcher = new Dispatcher();
         $this->dispatchEvent($dispatcher, $name, $context);
@@ -185,7 +183,7 @@ class Statemachine extends Subject implements StatemachineInterface
      */
     public function checkTransitions()
     {
-        $context = new ArrayIterator(array());
+        $context = new \ArrayIterator(array());
         $this->doCheckTransitions($context);
     }
 

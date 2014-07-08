@@ -1,16 +1,15 @@
 <?php
 namespace Metabor;
+
 use MetaborStd\NamedInterface;
 use MetaborStd\NamedCollectionInterface;
-use IteratorAggregate;
-use ArrayIterator;
 
 /**
  *
  * @author Oliver Tischlinger
  *
  */
-class NamedCollection implements IteratorAggregate, NamedCollectionInterface
+class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
 {
 
     /**
@@ -57,10 +56,10 @@ class NamedCollection implements IteratorAggregate, NamedCollectionInterface
 
     /**
      *
-     * @see IteratorAggregate::getIterator()
+     * @see \IteratorAggregate::getIterator()
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->collection);
+        return new \ArrayIterator($this->collection);
     }
 }

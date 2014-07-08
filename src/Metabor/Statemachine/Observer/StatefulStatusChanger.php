@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\Statemachine\Observer;
+
 use MetaborStd\Statemachine\StatefulInterface;
 use MetaborStd\Statemachine\StatemachineInterface;
 

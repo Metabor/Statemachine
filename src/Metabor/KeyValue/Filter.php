@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\KeyValue;
+
 /**
  * @author otischlinger
  *

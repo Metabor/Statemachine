@@ -1,5 +1,6 @@
 <?php
 namespace Metabor;
+
 use MetaborStd\NamedInterface;
 
 /**
