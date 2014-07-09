@@ -1,7 +1,7 @@
 <?php
 namespace Metabor\Statemachine\Graph;
 
-use Fhaculty\Graph\Graph as GraphLib;
+use Fhaculty\Graph\Graph;
 use Metabor\Callback\Callback;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -11,7 +11,7 @@ use MetaborStd\Statemachine\TransitionInterface;
  * @author otischlinger
  *
  */
-class Graph extends GraphLib
+class GraphBuilder
 {
     /**
      * @var array
@@ -29,12 +29,17 @@ class Graph extends GraphLib
     private $layoutCallback;
 
     /**
+     * @var Graph
+     */
+    private $graph;
+
+    /**
      *
      */
-    public function __construct()
+    public function __construct(Graph $graph)
     {
-        parent::__construct();
         $this->layoutCallback = new \SplObjectStorage();
+        $this->graph = $graph;
     }
 
     /**
@@ -113,7 +118,7 @@ class Graph extends GraphLib
     public function createStatusVertex(StateInterface $state)
     {
         $stateName = $state->getName();
-        $vertex = $this->createVertex($stateName, true);
+        $vertex = $this->graph->createVertex($stateName, true);
         if ($state instanceof \ArrayAccess) {
             $layout = $this->getLayoutOptions($state, $this->stateLayout);
             $vertex->setLayout($layout);
