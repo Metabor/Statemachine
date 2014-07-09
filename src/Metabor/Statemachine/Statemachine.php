@@ -99,7 +99,7 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      *
-     * @param \ArrayAccess    $context
+     * @param \ArrayAccess   $context
      * @param EventInterface $event
      */
     protected function doCheckTransitions(\ArrayAccess $context, EventInterface $event = null)
@@ -141,7 +141,7 @@ class Statemachine extends Subject implements StatemachineInterface
     /**
      * @param  DispatcherInterface $dispatcher
      * @param  string              $name
-     * @param  \ArrayAccess         $context
+     * @param  \ArrayAccess        $context
      * @throws \RuntimeException
      */
     public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
