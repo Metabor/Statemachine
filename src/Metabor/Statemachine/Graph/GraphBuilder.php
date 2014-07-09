@@ -210,4 +210,12 @@ class GraphBuilder
     {
         $this->addStates($stateCollection->getStates());
     }
+    
+	/**
+	 * @return \Fhaculty\Graph\Graph
+	 */
+	public function getGraph()
+	{
+		return $this->graph;
+	}
 }
