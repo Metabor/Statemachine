@@ -51,7 +51,7 @@ class Statemachine extends Subject implements StatemachineInterface
     private $currentEvent;
 
     /**
-     * @var \\ArrayAccess
+     * @var \ArrayAccess
      */
     private $currentContext;
 
