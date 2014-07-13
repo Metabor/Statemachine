@@ -15,10 +15,10 @@ use MetaborStd\Statemachine\Factory\FactoryInterfaceTest;
  */
 class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * 
-	 * @return multitype:\Metabor\Statemachine\Transition
-	 */
+    /**
+     * 
+     * @return multitype:\Metabor\Statemachine\Transition
+     */
     public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis()
     {
         $targetState = new State('TargetState');
@@ -103,5 +103,22 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
         $result = $selector->selectTransition(new \ArrayIterator($transitions));
 
         $this->assertEquals($transitionWithEventAndConditon, $result);
+    }
+
+    /**
+     * 
+     */
+    public function testThrowsAnExceptionIfMoreThanOneTransitionIsInTheHighestLevel()
+    {
+        $targetState = new State('TargetState');
+
+        $transitions = array();
+        $transitions[] = new Transition($targetState);
+        $transitions[] = new Transition($targetState);
+
+        $selector = new ScoreTransition();
+
+        $this->setExpectedException('\RuntimeException');
+        $selector->selectTransition(new \ArrayIterator($transitions));
     }
 }
