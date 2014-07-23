@@ -2,6 +2,11 @@
 
 Statemachine in PHP 5.3
 
+### Support
+
+#### Gitter
+[![Gitter chat](https://badges.gitter.im/Metabor/Statemachine.png)](https://gitter.im/Metabor/Statemachine)
+
 ### Continous Integration/Deployment
 
 #### TravisCI
