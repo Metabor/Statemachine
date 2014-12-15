@@ -3,6 +3,7 @@ namespace Metabor\Statemachine\Graph;
 
 use Fhaculty\Graph\Graph;
 use Metabor\Callback\Callback;
+use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
@@ -128,6 +129,30 @@ class GraphBuilder
     }
 
     /**
+     * @param EventInterface $event
+     * @return string
+     */
+    protected function convertObserverToString(EventInterface $event)
+    {
+        $observers = array();
+        foreach ($event->getObservers() as $observer) {
+            if (is_object($observer)) {
+                if ( method_exists($observer, '__toString')) {
+                    $observers[] = $observer;
+                } else {
+                    $observers[] = get_class($observer);
+                }
+            } elseif (is_scalar($observer)) {
+                $observers[] = $observer;
+            } else {
+                $observers[] = gettype($observer);
+            }
+        }
+
+        return implode(', ', $observers);
+    }
+
+    /**
      * @param  TransitionInterface $transition
      * @return string
      */
@@ -138,8 +163,7 @@ class GraphBuilder
         if ($eventName) {
             $labelParts[] = 'E: ' . $eventName;
             $event = $state->getEvent($eventName);
-            $observers = $event->getObservers();
-            $observerName = implode(', ', iterator_to_array($observers, false));
+            $observerName = $this->convertObserverToString($event);
             if ($observerName) {
                 $labelParts[] = 'C: ' . $observerName;
             }
