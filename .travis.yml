@@ -13,6 +13,7 @@ env:
     - PREFER_LOWEST=""
 
 before_script:
+  - composer selfupdate
   - composer update --dev --prefer-source --no-interaction $PREFER_LOWEST
 
 script:
