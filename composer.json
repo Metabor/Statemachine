@@ -21,6 +21,7 @@
     "suggest": {
         "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine",
         "symfony/expression-language": "To use symfony expressions as conditions",
+        "graphp/graphviz": "For displaying process graph",
         "clue/graph": "For displaying process graph"
     },
     "autoload": {
