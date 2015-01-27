@@ -122,7 +122,13 @@ class GraphBuilder
         $vertex = $this->graph->createVertex($stateName, true);
         if ($state instanceof \ArrayAccess) {
             $layout = $this->getLayoutOptions($state, $this->stateLayout);
-            $vertex->setLayout($layout);
+            if (method_exists($vertex, 'setLayout')) {
+            	$vertex->setLayout($layout);
+            } else {
+            	foreach ($layout as $name => $value) {
+            		$vertex->setAttribute($name, $value);
+            	}
+            }
         }
 
         return $vertex;
@@ -190,7 +196,11 @@ class GraphBuilder
         $edge = $sourceStateVertex->createEdgeTo($targetStateVertex);
         $label = $this->getTransitionLabel($state, $transition);
         if ($label) {
-            $edge->setLayoutAttribute('label', $label);
+        	if (method_exists($edge, 'setLayoutAttribute')) {
+        		$edge->setLayoutAttribute('label', $label);
+        	} else {
+        		$edge->setAttribute('label', $label);
+        	}
         }
 
         $eventName = $transition->getEventName();
@@ -198,7 +208,13 @@ class GraphBuilder
             $event = $state->getEvent($eventName);
             if ($event instanceof \ArrayAccess) {
                 $layout = $this->getLayoutOptions($event, $this->eventLayout);
-                $edge->setLayout($layout);
+                if (method_exists($edge, 'setLayout')) {
+                	$edge->setLayout($layout);
+                } else {
+                	foreach ($layout as $name => $value) {
+                		$edge->setAttribute($name, $value);
+                	}
+                }
             }
         }
     }
