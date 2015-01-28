@@ -126,7 +126,7 @@ class GraphBuilder
             	$vertex->setLayout($layout);
             } else {
             	foreach ($layout as $name => $value) {
-            		$vertex->setAttribute($name, $value);
+            		$vertex->setAttribute('graphviz.' . $name, $value);
             	}
             }
         }
@@ -199,7 +199,7 @@ class GraphBuilder
         	if (method_exists($edge, 'setLayoutAttribute')) {
         		$edge->setLayoutAttribute('label', $label);
         	} else {
-        		$edge->setAttribute('label', $label);
+        		$edge->setAttribute('graphviz.label', $label);
         	}
         }
 
@@ -212,7 +212,7 @@ class GraphBuilder
                 	$edge->setLayout($layout);
                 } else {
                 	foreach ($layout as $name => $value) {
-                		$edge->setAttribute($name, $value);
+                		$edge->setAttribute('graphviz.' . $name, $value);
                 	}
                 }
             }
