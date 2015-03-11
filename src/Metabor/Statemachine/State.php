@@ -54,7 +54,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
      */
     public function getTransitions()
     {
-        return $this->transitions;
+        return clone $this->transitions;
     }
 
     /**
