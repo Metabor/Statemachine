@@ -20,11 +20,6 @@ use MetaborStd\Statemachine\TransitionInterface;
 class Statemachine extends Subject implements StatemachineInterface
 {
     /**
-     * @var ProcessInterface
-     */
-    private $process;
-
-    /**
      * @var object
      */
     private $subject;
@@ -68,7 +63,6 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         parent::__construct();
         $this->subject = $subject;
-        $this->process = $process;
         if ($stateName) {
             $this->currentState = $process->getState($stateName);
         } else {
