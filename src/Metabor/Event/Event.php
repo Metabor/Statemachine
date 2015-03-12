@@ -8,33 +8,26 @@ use MetaborStd\Event\EventInterface;
 use MetaborStd\MetadataInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInterface
 {
-
     /**
-     *
      * @var string
      */
     private $name;
 
     /**
-     *
      * @var array
      */
     private $invokeArgs = array();
 
     /**
-     *
      * @var \ArrayAccess
      */
     private $metadata;
 
     /**
-     *
      * @param string $name
      */
     public function __construct($name)
@@ -45,7 +38,6 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     }
 
     /**
-     *
      * @see MetaborStd\Event.EventInterface::getInvokeArgs()
      */
     public function getInvokeArgs()
@@ -54,7 +46,6 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     }
 
     /**
-     *
      * @see \MetaborStd\CallbackInterface::__invoke()
      */
     public function __invoke()
@@ -65,7 +56,6 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     }
 
     /**
-     *
      * @see \MetaborStd\NamedInterface::getName()
      */
     public function getName()

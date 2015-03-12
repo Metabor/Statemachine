@@ -15,27 +15,21 @@ use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Statemachine extends Subject implements StatemachineInterface
 {
-
     /**
-     *
      * @var ProcessInterface
      */
     private $process;
 
     /**
-     *
      * @var object
      */
     private $subject;
 
     /**
-     *
      * @var StateInterface
      */
     private $currentState;
@@ -66,7 +60,6 @@ class Statemachine extends Subject implements StatemachineInterface
     private $selectedTransition;
 
     /**
-     *
      * @param object           $subject
      * @param ProcessInterface $process
      * @param string           $stateName
@@ -89,7 +82,6 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StatemachineInterface::getCurrentState()
      */
     public function getCurrentState()
@@ -98,7 +90,6 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     *
      * @param \ArrayAccess   $context
      * @param EventInterface $event
      */
@@ -124,7 +115,7 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * is called after dispatcher was executed
+     * is called after dispatcher was executed.
      */
     public function onDispatcherReady()
     {
@@ -139,9 +130,10 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * @param  DispatcherInterface $dispatcher
-     * @param  string              $name
-     * @param  \ArrayAccess        $context
+     * @param DispatcherInterface $dispatcher
+     * @param string              $name
+     * @param \ArrayAccess        $context
+     *
      * @throws \RuntimeException
      */
     public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
@@ -161,13 +153,12 @@ class Statemachine extends Subject implements StatemachineInterface
 
                 $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
             } else {
-                throw new \RuntimeException('Current State did not have event "' . $name . '"');
+                throw new \RuntimeException('Current State did not have event "'.$name.'"');
             }
         }
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StatemachineInterface::triggerEvent()
      */
     public function triggerEvent($name, \ArrayAccess $context = null)
@@ -178,7 +169,6 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StatemachineInterface::checkTransitions()
      */
     public function checkTransitions()
@@ -188,7 +178,6 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     *
      * @see \MetaborStd\Statemachine\StatemachineInterface::getSubject()
      */
     public function getSubject()

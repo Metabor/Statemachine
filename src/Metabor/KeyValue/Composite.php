@@ -3,7 +3,6 @@ namespace Metabor\KeyValue;
 
 /**
  * @author otischlinger
- *
  */
 class Composite implements \ArrayAccess
 {
@@ -68,11 +67,11 @@ class Composite implements \ArrayAccess
 
         switch (count($values)) {
             case 0:
-                return null;
+                return;
             case 1:
                 return reset($values);
             default:
-                throw new \RuntimeException('Offset "' . $offset . '" is not unique!');
+                throw new \RuntimeException('Offset "'.$offset.'" is not unique!');
         }
     }
 

@@ -4,10 +4,9 @@ namespace Metabor\Statemachine\Observer;
 use MetaborStd\Statemachine\StatemachineInterface;
 
 /**
- * Triggers automatically an event if the status changes and the new status has it
- * 
- * @author otischlinger
+ * Triggers automatically an event if the status changes and the new status has it.
  *
+ * @author otischlinger
  */
 class OnEnterObserver implements \SplObserver
 {

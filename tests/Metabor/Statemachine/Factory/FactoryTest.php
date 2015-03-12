@@ -6,9 +6,7 @@ use Metabor\Statemachine\State;
 use MetaborStd\Statemachine\Factory\FactoryInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class FactoryTest extends FactoryInterfaceTest
 {
@@ -23,6 +21,7 @@ class FactoryTest extends FactoryInterfaceTest
         $process = new Process($name, $initialState);
         $processDetector->expects($this->atLeastOnce())->method('detectProcess')->willReturn($process);
         $factory = new Factory($processDetector);
+
         return $factory;
     }
 

@@ -6,13 +6,12 @@ use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger
- *
  */
 class ScoreTransition implements TransitionSelectorInterface
 {
-
     /**
-     * @param  TransitionInterface $transition
+     * @param TransitionInterface $transition
+     *
      * @return integer
      */
     protected function calculcateScore(TransitionInterface $transition)

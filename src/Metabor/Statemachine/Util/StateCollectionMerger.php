@@ -11,9 +11,7 @@ use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class StateCollectionMerger implements MergeableInterface
 {
@@ -23,7 +21,6 @@ class StateCollectionMerger implements MergeableInterface
     private $targetCollection;
 
     /**
-     *
      * @param StateCollectionInterface $targetCollection
      */
     public function __construct(StateCollectionInterface $targetCollection)
@@ -40,7 +37,8 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  string                                  $name
+     * @param string $name
+     *
      * @return \MetaborStd\Statemachine\StateInterface
      */
     protected function createState($name)
@@ -49,8 +47,9 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  StateInterface            $sourceState
-     * @param  TransitionInterface       $sourceTransition
+     * @param StateInterface      $sourceState
+     * @param TransitionInterface $sourceTransition
+     *
      * @throws \InvalidArgumentException
      */
     protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition)
@@ -63,8 +62,10 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  TransitionInterface              $sourceTransition
+     * @param TransitionInterface $sourceTransition
+     *
      * @throws \InvalidArgumentException
+     *
      * @return \Metabor\Statemachine\Transition
      */
     protected function createTransition(TransitionInterface $sourceTransition)
@@ -88,8 +89,9 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  object            $source
-     * @param  object            $target
+     * @param object $source
+     * @param object $target
+     *
      * @throws \RuntimeException
      */
     protected function mergeMetadata($source, $target)
@@ -111,7 +113,8 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  StateInterface            $state
+     * @param StateInterface $state
+     *
      * @throws \InvalidArgumentException
      */
     protected function addState(StateInterface $state)
@@ -124,7 +127,8 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  string                                  $name
+     * @param string $name
+     *
      * @return \MetaborStd\Statemachine\StateInterface
      */
     protected function findOrCreateState($name)
@@ -140,7 +144,8 @@ class StateCollectionMerger implements MergeableInterface
     }
 
     /**
-     * @param  StateInterface            $sourceState
+     * @param StateInterface $sourceState
+     *
      * @throws \InvalidArgumentException
      */
     protected function mergeState(StateInterface $sourceState)

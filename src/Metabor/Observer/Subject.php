@@ -2,14 +2,11 @@
 namespace Metabor\Observer;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Subject implements \SplSubject
 {
     /**
-     *
      * @var \SplObjectStorage
      */
     private $observers;
@@ -22,7 +19,6 @@ class Subject implements \SplSubject
     }
 
     /**
-     *
      * @see \SplSubject::attach()
      */
     public function attach(\SplObserver $observer)
@@ -31,7 +27,6 @@ class Subject implements \SplSubject
     }
 
     /**
-     *
      * @see \SplSubject::detach()
      */
     public function detach(\SplObserver $observer)
@@ -40,7 +35,6 @@ class Subject implements \SplSubject
     }
 
     /**
-     *
      * @see \SplSubject::notify()
      */
     public function notify()

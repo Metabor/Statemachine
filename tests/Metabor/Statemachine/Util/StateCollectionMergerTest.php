@@ -9,7 +9,6 @@ use Metabor\Statemachine\Transition;
 
 /**
  * @author Oliver Tischlinger
- *
  */
 class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,6 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
 
     public function __invoke()
     {
-
     }
 
     /**

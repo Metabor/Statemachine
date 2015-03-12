@@ -5,9 +5,7 @@ use MetaborStd\ArrayConvertableInterface;
 use MetaborStd\MetadataInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class ArrayAccessToArrayConverter implements ArrayConvertableInterface
 {

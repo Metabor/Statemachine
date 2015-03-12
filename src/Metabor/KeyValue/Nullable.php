@@ -6,12 +6,10 @@ use MetaborStd\ArrayConvertableInterface;
 
 /**
  * @author otischlinger
- *
  */
 class Nullable implements ArrayAccess, ArrayConvertableInterface
 {
     /**
-     *
      * @var array
      */
     private $keyValue = array();

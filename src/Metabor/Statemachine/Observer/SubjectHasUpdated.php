@@ -3,7 +3,6 @@ namespace Metabor\Statemachine\Observer;
 
 /**
  * @author otischlinger
- *
  */
 class SubjectHasUpdated extends \SplObjectStorage implements \SplObserver
 {

@@ -10,7 +10,6 @@ use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger
- *
  */
 class GraphBuilder
 {
@@ -70,7 +69,6 @@ class GraphBuilder
     }
 
     /**
-     *
      * @param Callback $callback
      */
     public function attachLayoutCallback(Callback $callback)
@@ -79,7 +77,6 @@ class GraphBuilder
     }
 
     /**
-     *
      * @param Callback $callback
      */
     public function detachLayoutCallback(Callback $callback)
@@ -88,8 +85,9 @@ class GraphBuilder
     }
 
     /**
-     * @param  \ArrayAccess $flagedObject
-     * @param  array        $layout
+     * @param \ArrayAccess $flagedObject
+     * @param array        $layout
+     *
      * @return array
      */
     protected function getLayoutOptions(\ArrayAccess $flagedObject, array $layout)
@@ -113,7 +111,8 @@ class GraphBuilder
     }
 
     /**
-     * @param  StateInterface         $state
+     * @param StateInterface $state
+     *
      * @return \Fhaculty\Graph\Vertex
      */
     public function createStatusVertex(StateInterface $state)
@@ -123,11 +122,11 @@ class GraphBuilder
         if ($state instanceof \ArrayAccess) {
             $layout = $this->getLayoutOptions($state, $this->stateLayout);
             if (method_exists($vertex, 'setLayout')) {
-            	$vertex->setLayout($layout);
+                $vertex->setLayout($layout);
             } else {
-            	foreach ($layout as $name => $value) {
-            		$vertex->setAttribute('graphviz.' . $name, $value);
-            	}
+                foreach ($layout as $name => $value) {
+                    $vertex->setAttribute('graphviz.'.$name, $value);
+                }
             }
         }
 
@@ -136,6 +135,7 @@ class GraphBuilder
 
     /**
      * @param EventInterface $event
+     *
      * @return string
      */
     protected function convertObserverToString(EventInterface $event)
@@ -143,7 +143,7 @@ class GraphBuilder
         $observers = array();
         foreach ($event->getObservers() as $observer) {
             if (is_object($observer)) {
-                if ( method_exists($observer, '__toString')) {
+                if (method_exists($observer, '__toString')) {
                     $observers[] = $observer;
                 } else {
                     $observers[] = get_class($observer);
@@ -159,7 +159,8 @@ class GraphBuilder
     }
 
     /**
-     * @param  TransitionInterface $transition
+     * @param TransitionInterface $transition
+     *
      * @return string
      */
     protected function getTransitionLabel(StateInterface $state, TransitionInterface $transition)
@@ -167,16 +168,16 @@ class GraphBuilder
         $labelParts = array();
         $eventName = $transition->getEventName();
         if ($eventName) {
-            $labelParts[] = 'E: ' . $eventName;
+            $labelParts[] = 'E: '.$eventName;
             $event = $state->getEvent($eventName);
             $observerName = $this->convertObserverToString($event);
             if ($observerName) {
-                $labelParts[] = 'C: ' . $observerName;
+                $labelParts[] = 'C: '.$observerName;
             }
         }
         $conditionName = $transition->getConditionName();
         if ($conditionName) {
-            $labelParts[] = 'IF: ' . $conditionName;
+            $labelParts[] = 'IF: '.$conditionName;
         }
 
         $label = implode(PHP_EOL, $labelParts);
@@ -185,7 +186,6 @@ class GraphBuilder
     }
 
     /**
-     *
      * @param StateInterface      $state
      * @param TransitionInterface $transition
      */
@@ -196,11 +196,11 @@ class GraphBuilder
         $edge = $sourceStateVertex->createEdgeTo($targetStateVertex);
         $label = $this->getTransitionLabel($state, $transition);
         if ($label) {
-        	if (method_exists($edge, 'setLayoutAttribute')) {
-        		$edge->setLayoutAttribute('label', $label);
-        	} else {
-        		$edge->setAttribute('graphviz.label', $label);
-        	}
+            if (method_exists($edge, 'setLayoutAttribute')) {
+                $edge->setLayoutAttribute('label', $label);
+            } else {
+                $edge->setAttribute('graphviz.label', $label);
+            }
         }
 
         $eventName = $transition->getEventName();
@@ -209,18 +209,17 @@ class GraphBuilder
             if ($event instanceof \ArrayAccess) {
                 $layout = $this->getLayoutOptions($event, $this->eventLayout);
                 if (method_exists($edge, 'setLayout')) {
-                	$edge->setLayout($layout);
+                    $edge->setLayout($layout);
                 } else {
-                	foreach ($layout as $name => $value) {
-                		$edge->setAttribute('graphviz.' . $name, $value);
-                	}
+                    foreach ($layout as $name => $value) {
+                        $edge->setAttribute('graphviz.'.$name, $value);
+                    }
                 }
             }
         }
     }
 
     /**
-     *
      * @param StateInterface $state
      */
     public function addState(StateInterface $state)
@@ -240,7 +239,6 @@ class GraphBuilder
         foreach ($states as $state) {
             $this->addState($state);
         }
-
     }
 
     /**

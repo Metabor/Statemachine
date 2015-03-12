@@ -2,9 +2,7 @@
 namespace Metabor\KeyValue;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class FilterTest extends \PHPUnit_Framework_TestCase
 {

@@ -9,12 +9,10 @@ use ArrayAccess;
 
 /**
  * @author otischlinger
- *
  */
 class SymfonyExpression extends Named implements ConditionInterface
 {
     /**
-     *
      * @var ExpressionLanguage
      */
     private $expressionLanguage;
@@ -30,7 +28,6 @@ class SymfonyExpression extends Named implements ConditionInterface
     private $values;
 
     /**
-     *
      * @param string             $name
      * @param array              $values
      * @param ExpressionLanguage $expressionLanguage
@@ -62,7 +59,6 @@ class SymfonyExpression extends Named implements ConditionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
      */
     public function checkCondition($subject, ArrayAccess $context)

@@ -3,7 +3,6 @@ namespace Metabor\KeyValue;
 
 /**
  * @author otischlinger
- *
  */
 class Filter extends \FilterIterator
 {

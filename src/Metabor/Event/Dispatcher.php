@@ -6,9 +6,7 @@ use MetaborStd\Event\EventInterface;
 use MetaborStd\Event\DispatcherInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Dispatcher implements DispatcherInterface
 {
@@ -31,7 +29,6 @@ class Dispatcher implements DispatcherInterface
      * @param callable $command
      * @param array    $arguments
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     *
      */
     protected function addCommand($command, array $arguments)
     {

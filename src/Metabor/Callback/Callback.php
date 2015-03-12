@@ -5,21 +5,16 @@ use MetaborStd\CallbackInterface;
 use InvalidArgumentException;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Callback implements CallbackInterface
 {
-
     /**
-     *
      * @var callable
      */
     private $callable;
 
     /**
-     *
      * @param callable $callable
      */
     public function __construct($callable)
@@ -31,7 +26,6 @@ class Callback implements CallbackInterface
     }
 
     /**
-     *
      * @see MetaborStd.CallbackInterface::__invoke()
      */
     public function __invoke()

@@ -8,15 +8,11 @@ use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class StateCollection implements StateCollectionInterface, MergeableInterface
 {
-
     /**
-     *
      * @var NamedCollection
      */
     private $states;
@@ -29,7 +25,6 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateCollectionInterface::getState()
      */
     public function getState($name)
@@ -38,7 +33,6 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateCollectionInterface::getStates()
      */
     public function getStates()
@@ -47,7 +41,6 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateCollectionInterface::hasState()
      */
     public function hasState($name)
@@ -56,7 +49,6 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     }
 
     /**
-     *
      * @param StateInterface $state
      */
     public function addState(StateInterface $state)

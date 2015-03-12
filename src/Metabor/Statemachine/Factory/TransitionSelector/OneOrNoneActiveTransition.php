@@ -5,7 +5,6 @@ use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 
 /**
  * @author otischlinger
- *
  */
 class OneOrNoneActiveTransition implements TransitionSelectorInterface
 {
@@ -18,7 +17,7 @@ class OneOrNoneActiveTransition implements TransitionSelectorInterface
 
         switch (count($transitions)) {
             case 0:
-                return null;
+                return;
             case 1:
                 return reset($transitions);
             default:

@@ -7,33 +7,26 @@ use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Event\EventInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Transition implements TransitionInterface
 {
-
     /**
-     *
      * @var StateInterface
      */
     private $targetState;
 
     /**
-     *
      * @var string
      */
     private $eventName;
 
     /**
-     *
      * @var ConditionInterface
      */
     private $condition;
 
     /**
-     *
      * @param StateInterface     $targetState
      * @param string             $eventName
      * @param ConditionInterface $condition
@@ -46,7 +39,6 @@ class Transition implements TransitionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.TransitionInterface::getTargetState()
      */
     public function getTargetState()
@@ -55,7 +47,6 @@ class Transition implements TransitionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.TransitionInterface::getEventName()
      */
     public function getEventName()
@@ -64,7 +55,6 @@ class Transition implements TransitionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.TransitionInterface::getConditionName()
      */
     public function getConditionName()
@@ -75,7 +65,6 @@ class Transition implements TransitionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.TransitionInterface::isActive()
      */
     public function isActive($subject, \ArrayAccess $context, EventInterface $event = null)

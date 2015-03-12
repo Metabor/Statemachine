@@ -1,15 +1,15 @@
 <?php
 namespace Metabor\Callback;
+
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class CompositeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @param \PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
-     * @param mixed $parameter
+     * @param mixed                                            $parameter
+     *
      * @return \MetaborStd\CallbackInterface
      */
     protected function createCallbackMock(\PHPUnit_Framework_MockObject_Matcher_Invocation $matcher, $parameter = null)
@@ -21,6 +21,7 @@ class CompositeTest extends \PHPUnit_Framework_TestCase
         } else {
             $method->withAnyParameters();
         }
+
         return $mock;
     }
 

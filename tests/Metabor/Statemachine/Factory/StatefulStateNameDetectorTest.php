@@ -1,14 +1,9 @@
 <?php
 namespace Metabor\Statemachine\Factory;
 
-use Metabor\Statemachine\Process;
-use Metabor\Statemachine\State;
-use MetaborStd\Statemachine\Factory\FactoryInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class StatefulStateNameDetectorTest extends \PHPUnit_Framework_TestCase
 {

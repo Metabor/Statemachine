@@ -2,14 +2,12 @@
 namespace Metabor\Observer;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * 
+     *
      */
     public function testConvertsACallbackIntoAnObserver()
     {

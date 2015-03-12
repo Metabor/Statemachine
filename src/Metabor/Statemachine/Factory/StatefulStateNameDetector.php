@@ -6,7 +6,6 @@ use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
 
 /**
  * @author otischlinger
- *
  */
 class StatefulStateNameDetector implements StateNameDetectorInterface
 {

@@ -3,21 +3,16 @@ namespace Metabor\Statemachine\Factory;
 
 use Metabor\Statemachine\Condition\Tautology;
 use Metabor\Statemachine\Factory\TransitionSelector\ScoreTransition;
-use Metabor\Statemachine\Process;
 use Metabor\Statemachine\State;
 use Metabor\Statemachine\Transition;
-use MetaborStd\Statemachine\Factory\FactoryInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * 
-     * @return multitype:\Metabor\Statemachine\Transition
+     * @return \Metabor\Statemachine\Transition[]
      */
     public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis()
     {
@@ -39,7 +34,9 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis
+     *
      * @param array $transitions
+     *
      * @return \Metabor\Statemachine\Transition
      */
     public function testPrefereTransitionWithCondition(array $transitions)
@@ -62,7 +59,9 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis
+     *
      * @param array $transitions
+     *
      * @return \Metabor\Statemachine\Transition
      */
     public function testPrefereTransitionWithEvent(array $transitions)
@@ -85,7 +84,9 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testPrefereTransitionWithEvent
+     *
      * @param array $transitions
+     *
      * @return \Metabor\Statemachine\Transition
      */
     public function testPrefereTransitionWithEventAndCondition(array $transitions)
@@ -106,7 +107,7 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * 
+     *
      */
     public function testThrowsAnExceptionIfMoreThanOneTransitionIsInTheHighestLevel()
     {

@@ -6,7 +6,6 @@ use MetaborStd\Statemachine\StatemachineInterface;
 
 /**
  * @author otischlinger
- *
  */
 class StatefulStatusChanger implements \SplObserver
 {

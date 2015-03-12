@@ -1,11 +1,10 @@
 <?php
 namespace Metabor\Event;
+
 use MetaborStd\Event\EventInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class EventTest extends EventInterfaceTest
 {

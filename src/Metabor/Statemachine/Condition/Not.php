@@ -6,14 +6,11 @@ use ArrayAccess;
 
 class Not implements ConditionInterface
 {
-
     /**
-     *
      * @var ConditionInterface
      */
     private $condition;
     /**
-     *
      * @param ConditionInterface $condition
      */
     public function __construct(ConditionInterface $condition)
@@ -22,7 +19,6 @@ class Not implements ConditionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
      */
     public function checkCondition($subject, ArrayAccess $context)
@@ -31,11 +27,10 @@ class Not implements ConditionInterface
     }
 
     /**
-     *
      * @see MetaborStd.NamedInterface::getName()
      */
     public function getName()
     {
-        return 'not ( ' . $this->condition->getName() . ' )';
+        return 'not ( '.$this->condition->getName().' )';
     }
 }

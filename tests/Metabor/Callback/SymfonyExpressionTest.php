@@ -2,9 +2,7 @@
 namespace Metabor\Callback;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class SymfonyExpressionTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,7 +26,7 @@ class SymfonyExpressionTest extends \PHPUnit_Framework_TestCase
         $keys = array('a', 'b');
         $callback = new SymfonyExpression($expression, $keys);
         $this->assertEquals($keys, $callback->getKeys());
-        
+
         $result = $callback->__invoke(2, 3);
         $this->assertTrue($result);
     }

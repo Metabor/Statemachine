@@ -4,15 +4,11 @@ namespace Metabor\Callback;
 use MetaborStd\CallbackInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Composite implements CallbackInterface
 {
-
     /**
-     *
      * @var \SplObjectStorage
      */
     private $callbacks;
@@ -26,12 +22,12 @@ class Composite implements CallbackInterface
     }
 
     /**
-     *
      * @see MetaborStd.CallbackInterface::__invoke()
      */
     public function __invoke()
     {
         $args = func_get_args();
+        /* @var $callback callable */
         foreach ($this->callbacks as $callback) {
             if (empty($args)) {
                 $callback();
@@ -42,7 +38,6 @@ class Composite implements CallbackInterface
     }
 
     /**
-     *
      * @param CallbackInterface $callback
      */
     public function attach(CallbackInterface $callback)
@@ -51,7 +46,6 @@ class Composite implements CallbackInterface
     }
 
     /**
-     *
      * @param CallbackInterface $callback
      */
     public function detach(CallbackInterface $callback)

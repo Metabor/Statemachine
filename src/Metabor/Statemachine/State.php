@@ -11,33 +11,26 @@ use Metabor\NamedCollection;
 use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class State extends Named implements StateInterface, \ArrayAccess, MetadataInterface
 {
-
     /**
-     *
      * @var \SplObjectStorage
      */
     private $transitions;
 
     /**
-     *
      * @var NamedCollection
      */
     private $events;
 
     /**
-     *
      * @var \ArrayAccess
      */
     private $metadata;
 
     /**
-     *
      * @param string $name
      */
     public function __construct($name)
@@ -49,7 +42,6 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     }
 
     /**
-     *
      * @return \Traversable
      */
     public function getTransitions()
@@ -58,7 +50,6 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     }
 
     /**
-     *
      * @param TransitionInterface $transition
      */
     public function addTransition(TransitionInterface $transition)
@@ -71,7 +62,6 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateInterface::getEventNames()
      */
     public function getEventNames()
@@ -80,7 +70,6 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateInterface::hasEvent()
      */
     public function hasEvent($name)
@@ -89,7 +78,6 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.StateInterface::getEvent()
      */
     public function getEvent($name)

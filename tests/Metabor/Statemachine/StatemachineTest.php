@@ -1,13 +1,11 @@
 <?php
 namespace Metabor\Statemachine;
+
 use Metabor\Statemachine\Condition\SymfonyExpression;
-use MetaborStd\Statemachine\StateInterfaceTest;
 use MetaborStd\Statemachine\StatemachineInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class StatemachineTest extends StatemachineInterfaceTest
 {
@@ -39,6 +37,7 @@ class StatemachineTest extends StatemachineInterfaceTest
     protected function getTransitionForTriggerTest()
     {
         $secondState = new State(self::SECOND_STATE);
+
         return new Transition($secondState, self::TEST_EVENT);
     }
 
@@ -61,6 +60,7 @@ class StatemachineTest extends StatemachineInterfaceTest
     {
         $endState = new State(self::END_STATE);
         $condition = new SymfonyExpression('subject.canBeClosed');
+
         return new Transition($endState, null, $condition);
     }
 }

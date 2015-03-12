@@ -1,11 +1,10 @@
 <?php
 namespace Metabor\Statemachine;
+
 use MetaborStd\Statemachine\StateInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class StateTest extends StateInterfaceTest
 {
@@ -18,7 +17,7 @@ class StateTest extends StateInterfaceTest
     }
 
     /**
-     * 
+     *
      */
     public function testUsesMetadataForFlags()
     {

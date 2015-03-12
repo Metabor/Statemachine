@@ -2,9 +2,7 @@
 namespace Metabor\Callback;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,5 +44,4 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $callback($this->parameter);
         $this->assertTrue($this->wasCalled);
     }
-
 }

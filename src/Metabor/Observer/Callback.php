@@ -4,20 +4,16 @@ namespace Metabor\Observer;
 use MetaborStd\CallbackInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Callback implements \SplObserver
 {
     /**
-     *
      * @var CallbackInterface
      */
     private $callback;
 
     /**
-     *
      * @param CallbackInterface $callback
      */
     public function __construct(CallbackInterface $callback)
@@ -26,7 +22,6 @@ class Callback implements \SplObserver
     }
 
     /**
-     *
      * @see \SplObserver::update()
      */
     public function update(\SplSubject $subject)

@@ -2,14 +2,12 @@
 namespace Metabor\Observer;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class SubjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * 
+     *
      */
     public function testImplementsSubjectPartOfObserverPattern()
     {

@@ -9,10 +9,11 @@ use MetaborStd\Event\EventInterface;
 class ActiveTransitionFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param boolean $active
-     * @param object $subject
-     * @param \ArrayAccess $context
+     * @param boolean        $active
+     * @param object         $subject
+     * @param \ArrayAccess   $context
      * @param EventInterface $event
+     *
      * @return \MetaborStd\Statemachine\TransitionInterface
      */
     protected function createTransition($active, $subject, \ArrayAccess $context, EventInterface $event = null)
@@ -20,11 +21,12 @@ class ActiveTransitionFilterTest extends \PHPUnit_Framework_TestCase
         $transition = $this->getMockForAbstractClass('\MetaborStd\Statemachine\TransitionInterface');
         $transition->expects($this->atLeastOnce())->method('isActive')->with($subject, $context, $event)
                 ->willReturn($active);
+
         return $transition;
     }
 
     /**
-     * 
+     *
      */
     public function testFiltersAllNotActiveTransitions()
     {

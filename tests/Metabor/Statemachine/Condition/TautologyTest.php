@@ -4,15 +4,11 @@ namespace Metabor\Statemachine\Condition;
 use MetaborStd\NamedInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class TautologyTest extends NamedInterfaceTest
 {
-
     /**
-     * 
      * @see \MetaborStd\NamedInterfaceTest::createTestInstance()
      */
     protected function createTestInstance()
@@ -21,7 +17,7 @@ class TautologyTest extends NamedInterfaceTest
     }
 
     /**
-     * 
+     *
      */
     public function testIsAllwaysTrue()
     {

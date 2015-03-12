@@ -3,7 +3,6 @@ namespace Metabor\Statemachine\Filter;
 
 /**
  * @author otischlinger
- *
  */
 class FilterStateByTransition extends \FilterIterator
 {

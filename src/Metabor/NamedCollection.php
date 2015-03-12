@@ -5,21 +5,16 @@ use MetaborStd\NamedInterface;
 use MetaborStd\NamedCollectionInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
 {
-
     /**
-     *
      * @var array
      */
     private $collection = array();
 
     /**
-     *
      * @see MetaborStd.NamedCollectionInterface::add()
      */
     public function add(NamedInterface $object)
@@ -28,7 +23,6 @@ class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
     }
 
     /**
-     *
      * @see MetaborStd.NamedCollectionInterface::get()
      */
     public function get($name)
@@ -37,7 +31,6 @@ class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
     }
 
     /**
-     *
      * @see MetaborStd.NamedCollectionInterface::getNames()
      */
     public function getNames()
@@ -46,7 +39,6 @@ class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
     }
 
     /**
-     *
      * @see MetaborStd.NamedCollectionInterface::has()
      */
     public function has($name)
@@ -55,7 +47,6 @@ class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
     }
 
     /**
-     *
      * @see \IteratorAggregate::getIterator()
      */
     public function getIterator()

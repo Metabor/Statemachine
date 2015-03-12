@@ -8,9 +8,7 @@ use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
 use MetaborStd\Statemachine\Factory\ProcessDetectorInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Factory implements FactoryInterface
 {
@@ -78,8 +76,8 @@ class Factory implements FactoryInterface
     }
 
     /**
+     * @param object $subject
      *
-     * @param  object                                         $subject
      * @return \MetaborStd\Statemachine\StatemachineInterface
      */
     public function createStatemachine($subject)

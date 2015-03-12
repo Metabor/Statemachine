@@ -8,18 +8,15 @@ use InvalidArgumentException;
 
 /**
  * @author otischlinger
- *
  */
 class Callback extends Named implements ConditionInterface
 {
     /**
-     *
      * @var callable
      */
     private $callable;
 
     /**
-     *
      * @param string   $name
      * @param callable $callable
      */
@@ -33,7 +30,6 @@ class Callback extends Named implements ConditionInterface
     }
 
     /**
-     *
      * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
      */
     public function checkCondition($subject, ArrayAccess $context)

@@ -4,21 +4,16 @@ namespace Metabor;
 use MetaborStd\NamedInterface;
 
 /**
- *
  * @author Oliver Tischlinger
- *
  */
 class Named implements NamedInterface
 {
-
     /**
-     *
      * @var string
      */
     private $name;
 
     /**
-     *
      * @param string $name
      */
     public function __construct($name)
@@ -27,7 +22,6 @@ class Named implements NamedInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getName()
@@ -36,7 +30,6 @@ class Named implements NamedInterface
     }
 
     /**
-     *
      * @param string $name
      */
     protected function setName($name)

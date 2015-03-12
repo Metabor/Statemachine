@@ -4,9 +4,7 @@ namespace Metabor\Statemachine\Condition;
 use MetaborStd\NamedInterfaceTest;
 
 /**
- * 
  * @author Oliver Tischlinger
- *
  */
 class CallbackTest extends NamedInterfaceTest
 {
@@ -16,7 +14,6 @@ class CallbackTest extends NamedInterfaceTest
     private $wasCalled = false;
 
     /**
-     * 
      * @see \MetaborStd\NamedInterfaceTest::createTestInstance()
      */
     protected function createTestInstance()
@@ -25,7 +22,7 @@ class CallbackTest extends NamedInterfaceTest
     }
 
     /**
-     * 
+     *
      */
     public function testConvertsCallableToCondition()
     {

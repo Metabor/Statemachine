@@ -8,12 +8,10 @@ use Symfony\Component\ExpressionLanguage\ParsedExpression;
 
 /**
  * @author otischlinger
- *
  */
 class SymfonyExpression extends Expression implements CallbackInterface
 {
     /**
-     *
      * @var ExpressionLanguage
      */
     private $expressionLanguage;

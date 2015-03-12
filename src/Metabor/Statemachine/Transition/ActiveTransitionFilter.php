@@ -5,7 +5,6 @@ use MetaborStd\Event\EventInterface;
 
 /**
  * @author otischlinger
- *
  */
 class ActiveTransitionFilter extends \FilterIterator
 {
@@ -40,7 +39,6 @@ class ActiveTransitionFilter extends \FilterIterator
 
     /**
      * @see FilterIterator::accept()
-     *
      */
     public function accept()
     {

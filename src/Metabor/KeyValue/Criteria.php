@@ -3,12 +3,12 @@ namespace Metabor\KeyValue;
 
 /**
  * @author otischlinger
- *
  */
 class Criteria extends \ArrayObject
 {
     /**
-     * @param  \ArrayAccess $keyvalue
+     * @param \ArrayAccess $keyvalue
+     *
      * @return boolean
      */
     public function check(\ArrayAccess $keyvalue)
