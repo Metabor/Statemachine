@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cf25b2cbf167ed3f87005f1e5d75b7f",
+    "hash": "89a36a8cc8dc94e6045503f9c6fce237",
     "packages": [
         {
             "name": "metabor/metabor-std",
