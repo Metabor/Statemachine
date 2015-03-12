@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "metabor/metabor-std",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "ede41ecf8e704e5f6fcb3653d8014b1059a13bcb"
+                "reference": "e8b60548ed94419779508ddc7b41f53dbc3cacf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/ede41ecf8e704e5f6fcb3653d8014b1059a13bcb",
-                "reference": "ede41ecf8e704e5f6fcb3653d8014b1059a13bcb",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/e8b60548ed94419779508ddc7b41f53dbc3cacf6",
+                "reference": "e8b60548ed94419779508ddc7b41f53dbc3cacf6",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2014-07-05 19:13:35"
+            "time": "2015-03-12 09:40:03"
         }
     ],
     "packages-dev": [
