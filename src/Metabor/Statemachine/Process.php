@@ -6,6 +6,7 @@ use Metabor\Statemachine\Util\StateCollectionMerger;
 use MetaborStd\MergeableInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\ProcessInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author Oliver Tischlinger
@@ -21,6 +22,11 @@ class Process extends Named implements ProcessInterface, MergeableInterface
      * @var StateInterface
      */
     private $initialState;
+
+    /**
+     * @var StateCollectionMerger
+     */
+    private $stateCollectionMerger;
 
     /**
      * @param string         $name
@@ -96,11 +102,23 @@ class Process extends Named implements ProcessInterface, MergeableInterface
     }
 
     /**
+     * @return StateCollectionMerger
+     */
+    public function getStateCollectionMerger()
+    {
+        if (!$this->stateCollectionMerger) {
+            $this->stateCollectionMerger = new StateCollectionMerger($this->states);
+        }
+
+        return $this->stateCollectionMerger;
+    }
+
+    /**
      * @see \MetaborStd\MergeableInterface::merge()
      */
     public function merge($source)
     {
-        $merger = new StateCollectionMerger($this->states);
+        $merger = $this->getStateCollectionMerger();
         $merger->merge($source);
     }
 }

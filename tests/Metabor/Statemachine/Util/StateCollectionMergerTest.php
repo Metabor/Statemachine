@@ -20,6 +20,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+
      * @return \Metabor\Statemachine\StateCollection
      */
     protected function createSourceCollection()

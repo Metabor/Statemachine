@@ -18,6 +18,11 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     private $states;
 
     /**
+     * @var StateCollectionMerger
+     */
+    private $stateCollectionMerger;
+
+    /**
      */
     public function __construct()
     {
@@ -57,11 +62,23 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
     }
 
     /**
+     * @return StateCollectionMerger
+     */
+    public function getStateCollectionMerger()
+    {
+        if (!$this->stateCollectionMerger) {
+            $this->stateCollectionMerger = new StateCollectionMerger($this);
+        }
+
+        return $this->stateCollectionMerger;
+    }
+
+    /**
      * @see \MetaborStd\MergeableInterface::merge()
      */
     public function merge($source)
     {
-        $merger = new StateCollectionMerger($this);
+        $merger = $this->getStateCollectionMerger();
         $merger->merge($source);
     }
 }

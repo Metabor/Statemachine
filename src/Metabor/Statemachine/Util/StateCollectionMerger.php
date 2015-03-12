@@ -21,11 +21,32 @@ class StateCollectionMerger implements MergeableInterface
     private $targetCollection;
 
     /**
+     * @var string
+     */
+    private $stateNamePrefix;
+
+    /**
      * @param StateCollectionInterface $targetCollection
      */
     public function __construct(StateCollectionInterface $targetCollection)
     {
         $this->targetCollection = $targetCollection;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStateNamePrefix()
+    {
+        return $this->stateNamePrefix;
+    }
+
+    /**
+     * @param string $stateNamePrefix
+     */
+    public function setStateNamePrefix($stateNamePrefix)
+    {
+        $this->stateNamePrefix = $stateNamePrefix;
     }
 
     /**
@@ -150,7 +171,7 @@ class StateCollectionMerger implements MergeableInterface
      */
     protected function mergeState(StateInterface $sourceState)
     {
-        $name = $sourceState->getName();
+        $name = $this->stateNamePrefix.$sourceState->getName();
         $targetState = $this->findOrCreateState($name);
         $this->mergeMetadata($sourceState, $targetState);
 

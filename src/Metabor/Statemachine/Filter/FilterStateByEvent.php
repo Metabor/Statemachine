@@ -1,5 +1,6 @@
 <?php
 namespace Metabor\Statemachine\Filter;
+
 use MetaborStd\Statemachine\StateInterface;
 
 /**
