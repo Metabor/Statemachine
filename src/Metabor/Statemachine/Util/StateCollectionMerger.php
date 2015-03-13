@@ -154,6 +154,7 @@ class StateCollectionMerger implements MergeableInterface
      */
     protected function findOrCreateState($name)
     {
+        $name = $this->stateNamePrefix . $name;
         if ($this->targetCollection->hasState($name)) {
             $targetState = $this->targetCollection->getState($name);
         } else {
@@ -171,7 +172,7 @@ class StateCollectionMerger implements MergeableInterface
      */
     protected function mergeState(StateInterface $sourceState)
     {
-        $name = $this->stateNamePrefix.$sourceState->getName();
+        $name = $sourceState->getName();
         $targetState = $this->findOrCreateState($name);
         $this->mergeMetadata($sourceState, $targetState);
 
