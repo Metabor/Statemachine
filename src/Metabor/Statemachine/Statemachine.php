@@ -93,9 +93,12 @@ class Statemachine extends Subject implements StatemachineInterface
         $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
         $this->selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
         if ($this->selectedTransition) {
-            $this->currentState = $this->selectedTransition->getTargetState();
-            $this->notify();
-            $this->selectedTransition = null;
+            $targetState = $this->selectedTransition->getTargetState();
+            if ($this->currentState != $targetState) {
+                $this->currentState = $targetState;
+                $this->notify();
+                $this->selectedTransition = null;
+            }
             $this->checkTransitions();
         }
     }
