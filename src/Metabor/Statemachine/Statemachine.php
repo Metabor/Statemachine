@@ -1,6 +1,7 @@
 <?php
 namespace Metabor\Statemachine;
 
+use MetaborStd\NamedInterface;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
@@ -89,17 +90,25 @@ class Statemachine extends Subject implements StatemachineInterface
      */
     protected function doCheckTransitions(\ArrayAccess $context, EventInterface $event = null)
     {
-        $transitions = $this->currentState->getTransitions();
-        $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
-        $this->selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
-        if ($this->selectedTransition) {
-            $targetState = $this->selectedTransition->getTargetState();
-            if ($this->currentState != $targetState) {
-                $this->currentState = $targetState;
-                $this->notify();
-                $this->selectedTransition = null;
+        try {
+            $transitions = $this->currentState->getTransitions();
+            $activeTransitions = new ActiveTransitionFilter($transitions, $this->getSubject(), $context, $event);
+            $this->selectedTransition = $this->transitonSelector->selectTransition($activeTransitions);
+            if ($this->selectedTransition) {
+                $targetState = $this->selectedTransition->getTargetState();
+                if ($this->currentState != $targetState) {
+                    $this->currentState = $targetState;
+                    $this->notify();
+                    $this->selectedTransition = null;
+                }
+                $this->checkTransitions();
             }
-            $this->checkTransitions();
+        } catch (\Exception $exception) {
+            $message = 'Exception was thrown when doing a transition from current state "' . $this->currentState->getName() . '"';
+            if ($this->currentEvent instanceof NamedInterface) {
+                $message .= ' with event "' . $this->currentEvent->getName() . '"';
+            }
+            throw new \RuntimeException($message, 0, $exception);
         }
     }
 
@@ -150,7 +159,7 @@ class Statemachine extends Subject implements StatemachineInterface
 
                 $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
             } else {
-                throw new \RuntimeException('Current State did not have event "'.$name.'"');
+                throw new \RuntimeException('Current state "' . $this->currentState->getName() . '" did not have event "'.$name.'"');
             }
         }
     }
