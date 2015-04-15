@@ -6,7 +6,7 @@ use MetaborStd\CallbackInterface;
 /**
  * @author Oliver Tischlinger
  */
-class Composite implements CallbackInterface
+class Composite implements CallbackInterface, \Countable, \IteratorAggregate
 {
     /**
      * @var \SplObjectStorage
@@ -51,5 +51,21 @@ class Composite implements CallbackInterface
     public function detach(CallbackInterface $callback)
     {
         $this->callbacks->detach($callback);
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return $this->callbacks;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return $this->callbacks->count();
     }
 }
