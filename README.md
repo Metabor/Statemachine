@@ -60,7 +60,7 @@ Statemachine in PHP 5.3
 
 Once [installed](#install), let's use a sample statemachine:
 
-````php
+````phpex
 <?php
 require_once 'vendor/autoload.php';
 
@@ -165,6 +165,7 @@ To use this feature you also have to add this to your composer.json:
     }
 }
 ```
+An [example how to draw and display the graph](https://github.com/Metabor/Statemachine-Example/blob/master/graph.php), can be found in [metabor/statemachine-example](https://github.com/Metabor/Statemachine-Example).
 
 ## Tests
 
