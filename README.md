@@ -155,6 +155,16 @@ install GraphViz (`dot` executable). Users of Debian/Ubuntu-based distributions 
 invoke `sudo apt-get install graphviz`, Windows users have to
 [download GraphViZ for Windows](http://www.graphviz.org/Download_windows.php) and remaining
 users should install from [GraphViz homepage](http://www.graphviz.org/Download.php).
+To use this feature you also have to add this to your composer.json:
+```JSON
+{
+    "require": {
+        "graphp/graphviz": "*",
+        "clue/graph": "*",
+        "metabor/statemachine": "~1.1"
+    }
+}
+```
 
 ## Tests
 
