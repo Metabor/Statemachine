@@ -108,6 +108,8 @@ class SetupHelper
     }
 
     /**
+     * If there is no Transition from the SourceState with this Event use addCommandAndSelfTransition()
+     *
      * @param $sourceStateName
      * @param string  $eventName
      * @param Command $command
@@ -116,5 +118,16 @@ class SetupHelper
     {
         $sourceState = $this->findOrCreateState($sourceStateName);
         $sourceState->getEvent($eventName)->attach($command);
+    }
+
+    /**
+     * @param $sourceStateName
+     * @param string  $eventName
+     * @param Command $command
+     */
+    public function addCommandAndSelfTransition($sourceStateName, $eventName, Command $command)
+    {
+        $this->addCommand($sourceStateName, $eventName, $command);
+        $this->findOrCreateTransition($sourceStateName, $sourceStateName, $eventName);
     }
 }
