@@ -31,6 +31,11 @@ class Statemachine extends Subject implements StatemachineInterface
     private $currentState;
 
     /**
+     * @var StateInterface
+     */
+    private $lastState;
+
+    /**
      * @var DispatcherInterface
      */
     private $dispatcher;
@@ -85,6 +90,14 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
+     * @return StateInterface
+     */
+    public function getLastState()
+    {
+        return $this->lastState;
+    }
+
+    /**
      * @param \ArrayAccess   $context
      * @param EventInterface $event
      */
@@ -97,9 +110,11 @@ class Statemachine extends Subject implements StatemachineInterface
             if ($this->selectedTransition) {
                 $targetState = $this->selectedTransition->getTargetState();
                 if ($this->currentState != $targetState) {
+                    $this->lastState = $this->currentState;
                     $this->currentState = $targetState;
                     $this->notify();
                     $this->selectedTransition = null;
+                    $this->lastState = null;
                 }
                 $this->checkTransitions();
             }

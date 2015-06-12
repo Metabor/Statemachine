@@ -14,9 +14,10 @@
     	"metabor/metabor-std": "~1.1.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.1",
-        "symfony/expression-language": "~2.5",
-        "clue/graph": ">=0.7"
+        "phpunit/phpunit": "*",
+        "psr/log": "*",
+        "symfony/expression-language": "*",
+        "clue/graph": "*"
     },
     "suggest": {
         "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine",

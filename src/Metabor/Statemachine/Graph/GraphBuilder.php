@@ -3,10 +3,12 @@ namespace Metabor\Statemachine\Graph;
 
 use Fhaculty\Graph\Graph;
 use Metabor\Callback\Callback;
+use Metabor\StringConverter;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\StringConverterInterface;
 
 /**
  * @author otischlinger
@@ -34,12 +36,23 @@ class GraphBuilder
     private $graph;
 
     /**
-     *
+     * @var StringConverterInterface
      */
-    public function __construct(Graph $graph)
+    private $stringConverter;
+
+    /**
+     * @param Graph $graph
+     * @param StringConverterInterface $stringConverter
+     */
+    public function __construct(Graph $graph, StringConverterInterface $stringConverter = null)
     {
         $this->layoutCallback = new \SplObjectStorage();
         $this->graph = $graph;
+        if ($stringConverter) {
+            $this->stringConverter = $stringConverter;
+        } else {
+            $this->stringConverter = new StringConverter();
+        }
     }
 
     /**
@@ -85,17 +98,17 @@ class GraphBuilder
     }
 
     /**
-     * @param \ArrayAccess $flagedObject
+     * @param \ArrayAccess $flaggedObject
      * @param array        $layout
      *
      * @return array
      */
-    protected function getLayoutOptions(\ArrayAccess $flagedObject, array $layout)
+    protected function getLayoutOptions(\ArrayAccess $flaggedObject, array $layout)
     {
         $result = array();
         foreach ($layout as $flag => $options) {
-            if ($flagedObject->offsetExists($flag)) {
-                $value = $flagedObject->offsetGet($flag);
+            if ($flaggedObject->offsetExists($flag)) {
+                $value = $flaggedObject->offsetGet($flag);
                 $value = (string) $value;
                 if (isset($options[$value])) {
                     $result += $options[$value];
@@ -103,8 +116,9 @@ class GraphBuilder
             }
         }
 
+        /* @var $callback callable */
         foreach ($this->layoutCallback as $callback) {
-            $result = $callback($flagedObject, $result);
+            $result = $callback($flaggedObject, $result);
         }
 
         return $result;
@@ -142,17 +156,7 @@ class GraphBuilder
     {
         $observers = array();
         foreach ($event->getObservers() as $observer) {
-            if (is_object($observer)) {
-                if (method_exists($observer, '__toString')) {
-                    $observers[] = $observer;
-                } else {
-                    $observers[] = get_class($observer);
-                }
-            } elseif (is_scalar($observer)) {
-                $observers[] = $observer;
-            } else {
-                $observers[] = gettype($observer);
-            }
+            $observers[] = $this->stringConverter->convertToString($observer);
         }
 
         return implode(', ', $observers);
