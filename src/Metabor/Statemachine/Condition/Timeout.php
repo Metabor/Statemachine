@@ -61,6 +61,6 @@ class Timeout implements ConditionInterface
         $date = clone $this->getLastStateHasChangedDate($subject, $context);
         $date->add($this->getDateInterval());
 
-        return ($date >= new \DateTime());
+        return ($date <= new \DateTime());
     }
 }
