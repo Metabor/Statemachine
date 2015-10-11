@@ -7,7 +7,7 @@ Statemachine in PHP 5.3
 #### Gitter
 [![Gitter chat](https://badges.gitter.im/Metabor/Statemachine.png)](https://gitter.im/Metabor/Statemachine)
 
-### Continous Integration/Deployment
+### Continuous Integration/Deployment
 
 #### TravisCI
 [![Build Status](http://img.shields.io/travis/Metabor/Statemachine.svg)](https://travis-ci.org/Metabor/Statemachine)
