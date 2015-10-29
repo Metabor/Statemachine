@@ -205,4 +205,12 @@ class Statemachine extends Subject implements StatemachineInterface
     {
         return $this->subject;
     }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getCurrentContext()
+    {
+        return $this->currentContext;
+    }
 }
