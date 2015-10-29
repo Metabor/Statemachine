@@ -112,7 +112,11 @@ class Statemachine extends Subject implements StatemachineInterface
                 if ($this->currentState != $targetState) {
                     $this->lastState = $this->currentState;
                     $this->currentState = $targetState;
+                    $this->currentContext = $context;
+                    $this->currentEvent = $event;
                     $this->notify();
+                    $this->currentContext = null;
+                    $this->currentEvent = null;
                     $this->selectedTransition = null;
                     $this->lastState = null;
                 }
