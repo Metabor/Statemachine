@@ -203,7 +203,7 @@ class Statemachine extends Subject implements StatemachineInterface
      * @param string $name
      * @param \ArrayAccess $context
      *
-     * @throws \RuntimeException
+     * @throws \WrongEventForStateException sometimes we want to catch only this exception in order to gracefully handle the missing event case
      */
     public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
     {

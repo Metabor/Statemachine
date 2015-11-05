@@ -14,7 +14,7 @@ abstract class InvokableCommand extends Subject implements \SplObserver, NamedIn
      * @param array $args
      * @return mixed|null|void
      */
-    abstract protected function __invoke(array $args = null);
+    abstract public function __invoke(array $args = null);
 
     /**
      * @param \SplSubject $subject
