@@ -2,6 +2,7 @@
 namespace Metabor\Statemachine;
 
 use MetaborStd\NamedInterface;
+use Metabor\Statemachine\Exception\WrongEventForStateException;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
@@ -61,12 +62,21 @@ class Statemachine extends Subject implements StatemachineInterface
     private $selectedTransition;
 
     /**
+     * @var ProcessInterface
+     */
+    private $process;
+
+    /**
      * @param object           $subject
      * @param ProcessInterface $process
      * @param string           $stateName
      */
-    public function __construct($subject, ProcessInterface $process, $stateName = null, TransitionSelectorInterface $transitonSelector = null)
-    {
+    public function __construct(
+        $subject,
+        ProcessInterface $process,
+        $stateName = null,
+        TransitionSelectorInterface $transitonSelector = null
+    ) {
         parent::__construct();
         $this->subject = $subject;
         if ($stateName) {
@@ -79,6 +89,15 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
+        $this->process = $process;
+    }
+
+    /**
+     * @return ProcessInterface
+     */
+    public function getProcess()
+    {
+        return $this->process;
     }
 
     /**
@@ -178,7 +197,7 @@ class Statemachine extends Subject implements StatemachineInterface
 
                 $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
             } else {
-                throw new \RuntimeException('Current state "' . $this->currentState->getName() . '" did not have event "'.$name.'"');
+                throw new WrongEventForStateException($this->currentState->getName(), $name);
             }
         }
     }

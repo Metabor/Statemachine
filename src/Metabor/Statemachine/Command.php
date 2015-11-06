@@ -10,7 +10,6 @@ abstract class Command implements \SplObserver
 {
     /**
      * @param \SplSubject $subject
-     *
      * @throws \InvalidArgumentException
      */
     public function update(\SplSubject $subject)
@@ -18,7 +17,11 @@ abstract class Command implements \SplObserver
         if (!$subject instanceof EventInterface) {
             throw new \InvalidArgumentException('Command can only be attached to an event!');
         }
-        call_user_func_array($this, $subject->getInvokeArgs());
+        if (method_exists($this, '__invoke')) {
+            call_user_func_array($this, $subject->getInvokeArgs());
+        } else {
+            throw new \Exception('Command should have at least one __invoke method');
+        }
     }
 
     /**
