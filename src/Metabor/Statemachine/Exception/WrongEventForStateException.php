@@ -1,4 +1,5 @@
 <?php
+namespace Metabor\Statemachine\Exception;
 
 class WrongEventForStateException extends \RuntimeException
 {

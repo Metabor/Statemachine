@@ -1,8 +1,8 @@
 <?php
 namespace Metabor\Statemachine;
 
-use Metabor\Event\Event;
 use MetaborStd\NamedInterface;
+use Metabor\Statemachine\Exception\WrongEventForStateException;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
@@ -67,25 +67,9 @@ class Statemachine extends Subject implements StatemachineInterface
     private $process;
 
     /**
-     * @var \SplObjectStorage
-     */
-    private $commandExecutionObservers;
-
-    /**
-     * @var \SplObjectStorage
-     */
-    private $stateChangeObservers;
-
-    /**
-     * @var \SplObjectStorage
-     */
-    private $eventExecutionObservers;
-
-
-    /**
-     * @param object $subject
+     * @param object           $subject
      * @param ProcessInterface $process
-     * @param string $stateName
+     * @param string           $stateName
      */
     public function __construct(
         $subject,
@@ -106,10 +90,6 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
         $this->process = $process;
-
-        $this->commandExecutionObservers = new \SplObjectStorage();
-        $this->stateChangeObservers = new \SplObjectStorage();
-        $this->eventExecutionObservers = new \SplObjectStorage();
     }
 
     /**
@@ -118,14 +98,6 @@ class Statemachine extends Subject implements StatemachineInterface
     public function getProcess()
     {
         return $this->process;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->process->getName();
     }
 
     /**
@@ -145,7 +117,7 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * @param \ArrayAccess $context
+     * @param \ArrayAccess   $context
      * @param EventInterface $event
      */
     protected function doCheckTransitions(\ArrayAccess $context, EventInterface $event = null)
@@ -164,7 +136,6 @@ class Statemachine extends Subject implements StatemachineInterface
                     $this->notify();
                     $this->currentContext = null;
                     $this->currentEvent = null;
-                    $this->notifyObservers($this->stateChangeObservers);
                     $this->selectedTransition = null;
                     $this->lastState = null;
                 }
@@ -204,33 +175,31 @@ class Statemachine extends Subject implements StatemachineInterface
 
     /**
      * @param DispatcherInterface $dispatcher
-     * @param string $name
-     * @param \ArrayAccess $context
+     * @param string              $name
+     * @param \ArrayAccess        $context
      *
-     * @throws \WrongEventForStateException sometimes we want to catch only this exception in order to gracefully handle the missing event case
+     * @throws \RuntimeException
      */
     public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
     {
         if ($this->dispatcher) {
             throw new \RuntimeException('Event dispatching is still running!');
-        }
-
-        if ($this->currentState->hasEvent($name)) {
-            $this->dispatcher = $dispatcher;
-
-            if ($context) {
-                $this->currentContext = $context;
-            } else {
-                $this->currentContext = new \ArrayIterator(array());
-            }
-            $this->currentEvent = $this->currentState->getEvent($name);
-            $this->registerCommandObservers($this->currentEvent);
-            $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext),
-                new Callback(array($this, 'onDispatcherReady')));
         } else {
-            throw new \WrongEventForStateException($this->currentState->getName(), $name);
-        }
+            if ($this->currentState->hasEvent($name)) {
+                $this->dispatcher = $dispatcher;
 
+                if ($context) {
+                    $this->currentContext = $context;
+                } else {
+                    $this->currentContext = new \ArrayIterator(array());
+                }
+                $this->currentEvent = $this->currentState->getEvent($name);
+
+                $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
+            } else {
+                throw new WrongEventForStateException($this->currentState->getName(), $name);
+            }
+        }
     }
 
     /**
@@ -241,7 +210,6 @@ class Statemachine extends Subject implements StatemachineInterface
         $dispatcher = new Dispatcher();
         $this->dispatchEvent($dispatcher, $name, $context);
         $dispatcher();
-        $this->notifyObservers($this->eventExecutionObservers);
     }
 
     /**
@@ -267,58 +235,5 @@ class Statemachine extends Subject implements StatemachineInterface
     public function getCurrentContext()
     {
         return $this->currentContext;
-    }
-
-    /**
-     * @param \SplObserver $observer
-     */
-    public function attachStateChangeObserver(\SplObserver $observer)
-    {
-        $this->stateChangeObservers->attach($observer);
-    }
-
-    /**
-     * @param \SplObserver $observer
-     */
-    public function attachEventExecutionObserver(\SplObserver $observer)
-    {
-        $this->eventExecutionObservers->attach($observer);
-    }
-
-    /**
-     * @param \SplObserver $observer
-     */
-    public function attachCommandExecutionObserver(\SplObserver $observer)
-    {
-        $this->commandExecutionObservers->attach($observer);
-    }
-
-    /**
-     * @param \SplObjectStorage $observerStorage
-     */
-    private function notifyObservers(\SplObjectStorage $observerStorage)
-    {
-        foreach ($observerStorage as $observer){
-            $observer->update($this);
-        }
-    }
-
-    /**
-     * @param EventInterface $event
-     */
-    private function registerCommandObservers($event)
-    {
-        if(!$event instanceof Event || !$this->commandExecutionObservers->count()){
-            return;
-        }
-        foreach ($event->getObservers() as $eventObservers)
-        {
-            if($eventObservers instanceof InvokableCommand)
-            {
-                foreach ($this->commandExecutionObservers as $commandObserver){
-                    $eventObservers->attach($commandObserver);
-                }
-            }
-        }
     }
 }

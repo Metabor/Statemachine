@@ -1,37 +1,34 @@
 <?php
 namespace Metabor\Statemachine\Condition;
 
+use Metabor\NamedCollection;
 use MetaborStd\Statemachine\ConditionInterface;
 
 class AndCompositeCondition implements ConditionInterface
 {
     /**
-     * @var ConditionInterface[]
+     * @var NamedCollection|ConditionInterface[]
      */
-    private $conditions = [];
-
-    /**
-     * @var array
-     */
-    private $conditionNames = [];
+    private $conditions;
 
     /**
      * @param ConditionInterface $condition
      */
     public function __construct(ConditionInterface $condition)
     {
-        $this->conditions[] = $condition;
-        $this->conditionNames[] = $condition->getName();
+        $this->conditions = new NamedCollection();
+        $this->conditions->add($condition);
     }
 
     /**
      * @param ConditionInterface $condition
+     *
      * @return $this
      */
     public function addAnd(ConditionInterface $condition)
     {
-        $this->conditions[] = $condition;
-        $this->conditionNames[] = $condition->getName();
+        $this->conditions->add($condition);
+
         return $this;
     }
 
@@ -53,6 +50,6 @@ class AndCompositeCondition implements ConditionInterface
      */
     public function getName()
     {
-        return implode(' and ', $this->conditionNames);
+        return '(' . implode(' and ', $this->conditions->getNames()) . ')';
     }
 }
