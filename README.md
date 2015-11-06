@@ -7,7 +7,7 @@ Statemachine in PHP 5.3
 #### Gitter
 [![Gitter chat](https://badges.gitter.im/Metabor/Statemachine.png)](https://gitter.im/Metabor/Statemachine)
 
-### Continous Integration/Deployment
+### Continuous Integration/Deployment
 
 #### TravisCI
 [![Build Status](http://img.shields.io/travis/Metabor/Statemachine.svg)](https://travis-ci.org/Metabor/Statemachine)
@@ -60,7 +60,7 @@ Statemachine in PHP 5.3
 
 Once [installed](#install), let's use a sample statemachine:
 
-````phpex
+```PHP
 <?php
 require_once 'vendor/autoload.php';
 
@@ -121,7 +121,7 @@ echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
 echo 'Event:' . $eventClose . PHP_EOL;
 $statemachine->triggerEvent($eventClose);
 echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
-````
+```
 
 ## Features
 
@@ -176,7 +176,7 @@ This sets up the developer environment, so that you
 can now run it from the project root directory:
 
 ```bash
-$ php vendor/bin/phpunit`
+$ php vendor/bin/phpunit
 ```
 
 ## Contributing
