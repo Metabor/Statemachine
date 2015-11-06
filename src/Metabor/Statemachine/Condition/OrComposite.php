@@ -4,7 +4,7 @@ namespace Metabor\Statemachine\Condition;
 use Metabor\NamedCollection;
 use MetaborStd\Statemachine\ConditionInterface;
 
-class AndCompositeCondition implements ConditionInterface
+class OrComposite implements ConditionInterface
 {
     /**
      * @var NamedCollection|ConditionInterface[]
@@ -25,7 +25,7 @@ class AndCompositeCondition implements ConditionInterface
      *
      * @return $this
      */
-    public function addAnd(ConditionInterface $condition)
+    public function addOr(ConditionInterface $condition)
     {
         $this->conditions->add($condition);
 
@@ -38,11 +38,12 @@ class AndCompositeCondition implements ConditionInterface
     public function checkCondition($subject, \ArrayAccess $context)
     {
         foreach ($this->conditions as $condition) {
-            if (!$condition->checkCondition($subject, $context)) {
-                return false;
+            if ($condition->checkCondition($subject, $context)) {
+                return true;
             }
         }
-        return true;
+
+        return false;
     }
 
     /**
@@ -50,6 +51,6 @@ class AndCompositeCondition implements ConditionInterface
      */
     public function getName()
     {
-        return '(' . implode(' and ', $this->conditions->getNames()) . ')';
+        return '(' . implode(' or ', $this->conditions->getNames()) . ')';
     }
 }
