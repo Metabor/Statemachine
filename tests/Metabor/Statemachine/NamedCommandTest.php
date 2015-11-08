@@ -2,9 +2,6 @@
 
 namespace Metabor\Statemachine;
 
-use Metabor\Event\Event;
-use Metabor\Observer\Subject;
-
 /**
  * @author Oliver Tischlinger
  */
