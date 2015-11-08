@@ -67,6 +67,6 @@ class SymfonyExpression extends Named implements ConditionInterface
         $values['subject'] = $subject;
         $values['context'] = $context;
 
-        return $this->expressionLanguage->evaluate($this->getExpression(), $values);
+        return (bool) $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }
 }
