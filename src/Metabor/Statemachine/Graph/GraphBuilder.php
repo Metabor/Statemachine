@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Graph;
 
 use Fhaculty\Graph\Graph;
@@ -41,7 +42,7 @@ class GraphBuilder
     private $stringConverter;
 
     /**
-     * @param Graph $graph
+     * @param Graph                    $graph
      * @param StringConverterInterface $stringConverter
      */
     public function __construct(Graph $graph, StringConverterInterface $stringConverter = null)
@@ -139,7 +140,7 @@ class GraphBuilder
                 $vertex->setLayout($layout);
             } else {
                 foreach ($layout as $name => $value) {
-                    $vertex->setAttribute('graphviz.'.$name, $value);
+                    $vertex->setAttribute('graphviz.' . $name, $value);
                 }
             }
         }
@@ -172,16 +173,16 @@ class GraphBuilder
         $labelParts = array();
         $eventName = $transition->getEventName();
         if ($eventName) {
-            $labelParts[] = 'E: '.$eventName;
+            $labelParts[] = 'E: ' . $eventName;
             $event = $state->getEvent($eventName);
             $observerName = $this->convertObserverToString($event);
             if ($observerName) {
-                $labelParts[] = 'C: '.$observerName;
+                $labelParts[] = 'C: ' . $observerName;
             }
         }
         $conditionName = $transition->getConditionName();
         if ($conditionName) {
-            $labelParts[] = 'IF: '.$conditionName;
+            $labelParts[] = 'IF: ' . $conditionName;
         }
 
         $label = implode(PHP_EOL, $labelParts);
@@ -216,7 +217,7 @@ class GraphBuilder
                     $edge->setLayout($layout);
                 } else {
                     foreach ($layout as $name => $value) {
-                        $edge->setAttribute('graphviz.'.$name, $value);
+                        $edge->setAttribute('graphviz.' . $name, $value);
                     }
                 }
             }

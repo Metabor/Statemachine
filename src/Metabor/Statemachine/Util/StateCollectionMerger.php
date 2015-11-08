@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Util;
 
 use Metabor\Statemachine\State;

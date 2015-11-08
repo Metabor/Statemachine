@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine;
 
 use MetaborStd\Event\EventInterface;
@@ -10,6 +11,7 @@ abstract class Command implements \SplObserver
 {
     /**
      * @param \SplSubject $subject
+     *
      * @throws \InvalidArgumentException
      */
     public function update(\SplSubject $subject)

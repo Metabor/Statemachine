@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Condition;
 
 use MetaborStd\Statemachine\ConditionInterface;
@@ -39,8 +40,9 @@ class Timeout implements ConditionInterface
     }
 
     /**
-     * @param object $subject
+     * @param object       $subject
      * @param \ArrayAccess $context
+     *
      * @return \DateTime
      */
     protected function getLastStateHasChangedDate($subject, \ArrayAccess $context)

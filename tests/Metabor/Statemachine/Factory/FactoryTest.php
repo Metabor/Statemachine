@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Factory;
 
 use Metabor\Statemachine\Process;

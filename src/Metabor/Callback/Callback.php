@@ -1,8 +1,9 @@
 <?php
+
 namespace Metabor\Callback;
 
-use MetaborStd\CallbackInterface;
 use InvalidArgumentException;
+use MetaborStd\CallbackInterface;
 
 /**
  * @author Oliver Tischlinger

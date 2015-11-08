@@ -1,6 +1,6 @@
 <?php
-namespace Metabor\Statemachine\Factory;
 
+namespace Metabor\Statemachine\Factory;
 
 /**
  * @author Oliver Tischlinger

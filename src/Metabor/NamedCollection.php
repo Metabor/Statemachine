@@ -1,8 +1,9 @@
 <?php
+
 namespace Metabor;
 
-use MetaborStd\NamedInterface;
 use MetaborStd\NamedCollectionInterface;
+use MetaborStd\NamedInterface;
 
 /**
  * @author Oliver Tischlinger

@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor;
 
 use MetaborStd\NamedInterfaceTest;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\KeyValue;
 
 use ArrayAccess;

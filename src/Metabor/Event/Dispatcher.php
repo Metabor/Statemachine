@@ -1,9 +1,10 @@
 <?php
+
 namespace Metabor\Event;
 
 use MetaborStd\CallbackInterface;
-use MetaborStd\Event\EventInterface;
 use MetaborStd\Event\DispatcherInterface;
+use MetaborStd\Event\EventInterface;
 
 /**
  * @author Oliver Tischlinger
@@ -21,18 +22,17 @@ class Dispatcher implements DispatcherInterface
     private $onReadyCallbacks = array();
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $isReady = false;
 
     /**
      * @param callable $command
      * @param array    $arguments
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function addCommand($command, array $arguments)
     {
-        $this->commands[] = func_get_args();
+        $this->commands[] = array($command, $arguments);
     }
 
     /**
@@ -46,11 +46,10 @@ class Dispatcher implements DispatcherInterface
     /**
      * @param callable $command
      * @param array    $arguments
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function removeCommand($command, array $arguments)
     {
-        $key = array_search(func_get_args(), $this->commands);
+        $key = array_search(array($command, $arguments), $this->commands);
         if ($key !== false) {
             unset($this->commands[$key]);
         }
@@ -103,7 +102,7 @@ class Dispatcher implements DispatcherInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isReady()
     {

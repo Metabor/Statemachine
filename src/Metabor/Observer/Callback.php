@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Observer;
 
 use MetaborStd\CallbackInterface;

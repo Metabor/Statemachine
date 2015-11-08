@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Transition;
 
 use MetaborStd\Event\EventInterface;
@@ -9,7 +10,7 @@ use MetaborStd\Event\EventInterface;
 class ActiveTransitionFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param boolean        $active
+     * @param bool           $active
      * @param object         $subject
      * @param \ArrayAccess   $context
      * @param EventInterface $event

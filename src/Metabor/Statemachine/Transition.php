@@ -1,10 +1,11 @@
 <?php
+
 namespace Metabor\Statemachine;
 
-use MetaborStd\Statemachine\ConditionInterface;
-use MetaborStd\Statemachine\TransitionInterface;
-use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Event\EventInterface;
+use MetaborStd\Statemachine\ConditionInterface;
+use MetaborStd\Statemachine\StateInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author Oliver Tischlinger

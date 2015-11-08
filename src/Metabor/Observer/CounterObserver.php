@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Observer;
 
 /**
@@ -16,7 +17,7 @@ class CounterObserver implements \SplObserver
      */
     public function update(\SplSubject $subject)
     {
-        $this->count++;
+        ++$this->count;
     }
 
     /**

@@ -1,10 +1,11 @@
 <?php
+
 namespace Metabor\Statemachine\Condition;
 
-use Metabor\Named;
-use MetaborStd\Statemachine\ConditionInterface;
 use ArrayAccess;
 use InvalidArgumentException;
+use Metabor\Named;
+use MetaborStd\Statemachine\ConditionInterface;
 
 /**
  * @author otischlinger

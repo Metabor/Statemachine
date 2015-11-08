@@ -1,11 +1,11 @@
 <?php
+
 namespace Metabor\Statemachine\Condition;
 
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Symfony\Component\ExpressionLanguage\Expression;
 use Metabor\Named;
 use MetaborStd\Statemachine\ConditionInterface;
-use ArrayAccess;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * @author otischlinger
@@ -61,7 +61,7 @@ class SymfonyExpression extends Named implements ConditionInterface
     /**
      * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
      */
-    public function checkCondition($subject, ArrayAccess $context)
+    public function checkCondition($subject, \ArrayAccess $context)
     {
         $values = $this->values;
         $values['subject'] = $subject;

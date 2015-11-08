@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Event;
 
 use Metabor\KeyValue\Nullable;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine;
 
 use Metabor\NamedCollection;

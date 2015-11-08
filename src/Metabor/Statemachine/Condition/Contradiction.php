@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Condition;
 
 use Metabor\Named;

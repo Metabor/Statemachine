@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Condition;
 
 use MetaborStd\NamedInterfaceTest;
@@ -9,7 +10,7 @@ use MetaborStd\NamedInterfaceTest;
 class CallbackTest extends NamedInterfaceTest
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $wasCalled = false;
 
@@ -36,7 +37,7 @@ class CallbackTest extends NamedInterfaceTest
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function __invoke()
     {

@@ -1,9 +1,10 @@
 <?php
+
 namespace Metabor\Callback;
 
 use MetaborStd\CallbackInterface;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\ParsedExpression;
 
 /**

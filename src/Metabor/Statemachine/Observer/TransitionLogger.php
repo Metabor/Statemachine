@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Observer;
 
 use Metabor\Statemachine\Statemachine;
@@ -35,8 +36,8 @@ class TransitionLogger implements \SplObserver
     private $stringConverter;
 
     /**
-     * @param LoggerInterface $logger
-     * @param string $loggerLevel
+     * @param LoggerInterface          $logger
+     * @param string                   $loggerLevel
      * @param StringConverterInterface $stringConverter
      */
     public function __construct(LoggerInterface $logger, $loggerLevel = LogLevel::INFO, StringConverterInterface $stringConverter = null)
@@ -78,15 +79,15 @@ class TransitionLogger implements \SplObserver
         $message = 'Transition';
 
         if (isset($context[self::CONTEXT_SUBJECT])) {
-            $message.= ' for "' . $this->stringConverter->convertToString($context[self::CONTEXT_SUBJECT]) . '"';
+            $message .= ' for "' . $this->stringConverter->convertToString($context[self::CONTEXT_SUBJECT]) . '"';
         }
 
         if (isset($context[self::CONTEXT_LAST_STATE])) {
-            $message.= ' from "' . $this->stringConverter->convertToString($context[self::CONTEXT_LAST_STATE]) . '"';
+            $message .= ' from "' . $this->stringConverter->convertToString($context[self::CONTEXT_LAST_STATE]) . '"';
         }
 
         if (isset($context[self::CONTEXT_CURRENT_STATE])) {
-            $message.= ' to "' . $this->stringConverter->convertToString($context[self::CONTEXT_CURRENT_STATE]) . '"';
+            $message .= ' to "' . $this->stringConverter->convertToString($context[self::CONTEXT_CURRENT_STATE]) . '"';
         }
 
         if (isset($context[self::CONTEXT_TRANSITION])) {
@@ -96,12 +97,12 @@ class TransitionLogger implements \SplObserver
             $condition = $transition->getConditionName();
 
             if ($eventName || $condition) {
-                $message.= ' with';
+                $message .= ' with';
                 if ($eventName) {
-                    $message.= ' event "' . $eventName . '"';
+                    $message .= ' event "' . $eventName . '"';
                 }
                 if ($eventName) {
-                    $message.= ' condition "' . $condition . '"';
+                    $message .= ' condition "' . $condition . '"';
                 }
             }
         }

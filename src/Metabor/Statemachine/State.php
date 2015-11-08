@@ -1,14 +1,15 @@
 <?php
+
 namespace Metabor\Statemachine;
 
-use MetaborStd\MetadataInterface;
-use MetaborStd\Statemachine\TransitionInterface;
-use MetaborStd\Statemachine\StateInterface;
 use Metabor\Event\Event;
 use Metabor\KeyValue\Nullable;
 use Metabor\Named;
 use Metabor\NamedCollection;
 use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
+use MetaborStd\MetadataInterface;
+use MetaborStd\Statemachine\StateInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author Oliver Tischlinger

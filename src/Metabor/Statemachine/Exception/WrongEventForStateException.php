@@ -1,12 +1,13 @@
 <?php
+
 namespace Metabor\Statemachine\Exception;
 
 class WrongEventForStateException extends \RuntimeException
 {
     /**
-     * @param string $stateName
-     * @param string $eventName
-     * @param int $code
+     * @param string     $stateName
+     * @param string     $eventName
+     * @param int        $code
      * @param \Exception $previous
      */
     public function __construct($stateName, $eventName, $code = 0, \Exception $previous = null)

@@ -1,8 +1,9 @@
 <?php
+
 namespace Metabor\Statemachine\Factory;
 
-use MetaborStd\Statemachine\StatefulInterface;
 use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
+use MetaborStd\Statemachine\StatefulInterface;
 
 /**
  * @author otischlinger

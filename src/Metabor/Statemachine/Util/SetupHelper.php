@@ -108,7 +108,7 @@ class SetupHelper
     }
 
     /**
-     * If there is no Transition from the SourceState with this Event use addCommandAndSelfTransition()
+     * If there is no Transition from the SourceState with this Event use addCommandAndSelfTransition().
      *
      * @param $sourceStateName
      * @param string  $eventName

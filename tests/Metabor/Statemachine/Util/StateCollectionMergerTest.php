@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Util;
 
 use Metabor\Observer\Callback;
@@ -20,7 +21,6 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-
      * @return \Metabor\Statemachine\StateCollection
      */
     protected function createSourceCollection()

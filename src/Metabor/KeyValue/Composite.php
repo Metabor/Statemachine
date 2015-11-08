@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\KeyValue;
 
 /**
@@ -71,7 +72,7 @@ class Composite implements \ArrayAccess
             case 1:
                 return reset($values);
             default:
-                throw new \RuntimeException('Offset "'.$offset.'" is not unique!');
+                throw new \RuntimeException('Offset "' . $offset . '" is not unique!');
         }
     }
 

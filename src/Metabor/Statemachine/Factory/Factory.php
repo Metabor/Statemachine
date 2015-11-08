@@ -1,11 +1,12 @@
 <?php
+
 namespace Metabor\Statemachine\Factory;
 
-use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use Metabor\Statemachine\Statemachine;
 use MetaborStd\Statemachine\Factory\FactoryInterface;
-use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
 use MetaborStd\Statemachine\Factory\ProcessDetectorInterface;
+use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
+use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 
 /**
  * @author Oliver Tischlinger

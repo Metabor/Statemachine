@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Observer;
 
 use Metabor\Observer\Subject;

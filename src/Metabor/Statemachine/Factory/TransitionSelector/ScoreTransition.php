@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Factory\TransitionSelector;
 
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
@@ -12,7 +13,7 @@ class ScoreTransition implements TransitionSelectorInterface
     /**
      * @param TransitionInterface $transition
      *
-     * @return integer
+     * @return int
      */
     protected function calculcateScore(TransitionInterface $transition)
     {
@@ -21,7 +22,7 @@ class ScoreTransition implements TransitionSelectorInterface
             $score += 2;
         }
         if ($transition->getConditionName()) {
-            $score++;
+            ++$score;
         }
 
         return $score;

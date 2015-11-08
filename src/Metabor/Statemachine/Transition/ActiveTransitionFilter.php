@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\Statemachine\Transition;
 
 use MetaborStd\Event\EventInterface;

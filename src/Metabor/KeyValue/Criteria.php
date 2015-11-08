@@ -1,4 +1,5 @@
 <?php
+
 namespace Metabor\KeyValue;
 
 /**
@@ -9,7 +10,7 @@ class Criteria extends \ArrayObject
     /**
      * @param \ArrayAccess $keyvalue
      *
-     * @return boolean
+     * @return bool
      */
     public function check(\ArrayAccess $keyvalue)
     {

@@ -1,19 +1,20 @@
 <?php
+
 namespace Metabor\Statemachine;
 
-use MetaborStd\NamedInterface;
-use Metabor\Statemachine\Exception\WrongEventForStateException;
-use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
-use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
-use Metabor\Statemachine\Transition\ActiveTransitionFilter;
 use Metabor\Callback\Callback;
 use Metabor\Event\Dispatcher;
-use MetaborStd\Event\DispatcherInterface;
 use Metabor\Observer\Subject;
+use Metabor\Statemachine\Exception\WrongEventForStateException;
+use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
+use Metabor\Statemachine\Transition\ActiveTransitionFilter;
+use MetaborStd\Event\DispatcherInterface;
 use MetaborStd\Event\EventInterface;
-use MetaborStd\Statemachine\StatemachineInterface;
+use MetaborStd\NamedInterface;
+use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use MetaborStd\Statemachine\ProcessInterface;
 use MetaborStd\Statemachine\StateInterface;
+use MetaborStd\Statemachine\StatemachineInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 
 /**
