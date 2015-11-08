@@ -15,6 +15,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
+        "codacy/coverage": "*",
         "psr/log": "*",
         "symfony/expression-language": "*",
         "clue/graph": "*"
