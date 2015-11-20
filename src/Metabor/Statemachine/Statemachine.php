@@ -5,12 +5,14 @@ namespace Metabor\Statemachine;
 use Metabor\Callback\Callback;
 use Metabor\Event\Dispatcher;
 use Metabor\Observer\Subject;
+use Metabor\Semaphore\NullMutex;
 use Metabor\Statemachine\Exception\WrongEventForStateException;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
 use MetaborStd\Event\DispatcherInterface;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\NamedInterface;
+use MetaborStd\Semaphore\MutexInterface;
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use MetaborStd\Statemachine\ProcessInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -68,15 +70,23 @@ class Statemachine extends Subject implements StatemachineInterface
     private $process;
 
     /**
-     * @param object           $subject
-     * @param ProcessInterface $process
-     * @param string           $stateName
+     * @var MutexInterface
+     */
+    private $mutex;
+
+    /**
+     * @param object                      $subject
+     * @param ProcessInterface            $process
+     * @param string                      $stateName
+     * @param TransitionSelectorInterface $transitonSelector
+     * @param MutexInterface              $mutex
      */
     public function __construct(
         $subject,
         ProcessInterface $process,
         $stateName = null,
-        TransitionSelectorInterface $transitonSelector = null
+        TransitionSelectorInterface $transitonSelector = null,
+        MutexInterface $mutex = null
     ) {
         parent::__construct();
         $this->subject = $subject;
@@ -91,6 +101,11 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->transitonSelector = new OneOrNoneActiveTransition();
         }
         $this->process = $process;
+        if ($mutex) {
+            $this->mutex = $mutex;
+        } else {
+            $this->mutex = new NullMutex();
+        }
     }
 
     /**
