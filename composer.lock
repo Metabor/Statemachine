@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "metabor/metabor-std",
-            "version": "dev-master",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Metabor/MetaborStd.git",
-                "reference": "cda2446cde1cfb8f0c168ccee9dc3cbb61edca22"
+                "reference": "8a5c4a49382f38759831dc574be4a8cc64100148"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/cda2446cde1cfb8f0c168ccee9dc3cbb61edca22",
-                "reference": "cda2446cde1cfb8f0c168ccee9dc3cbb61edca22",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/8a5c4a49382f38759831dc574be4a8cc64100148",
+                "reference": "8a5c4a49382f38759831dc574be4a8cc64100148",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "interfaces",
                 "standard"
             ],
-            "time": "2015-11-08 18:23:04"
+            "time": "2015-11-20 21:00:32"
         }
     ],
     "packages-dev": [
@@ -608,16 +608,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.16",
+            "version": "4.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e"
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/625f8c345606ed0f3a141dfb88f4116f0e22978e",
-                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
+                "reference": "fa33d4ad96481b91df343d83e8c8aabed6b1dfd3",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-23 06:48:33"
+            "time": "2015-11-11 11:32:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
