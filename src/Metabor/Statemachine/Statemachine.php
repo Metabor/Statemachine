@@ -6,6 +6,7 @@ use Metabor\Callback\Callback;
 use Metabor\Event\Dispatcher;
 use Metabor\Observer\Subject;
 use Metabor\Semaphore\NullMutex;
+use Metabor\Statemachine\Exception\LockCanNotBeAcquiredException;
 use Metabor\Statemachine\Exception\WrongEventForStateException;
 use Metabor\Statemachine\Factory\TransitionSelector\OneOrNoneActiveTransition;
 use Metabor\Statemachine\Transition\ActiveTransitionFilter;
@@ -186,6 +187,7 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->currentContext = null;
             $this->currentEvent = null;
             $this->doCheckTransitions($context, $event);
+            $this->mutex->releaseLock();
         }
     }
 
@@ -202,6 +204,7 @@ class Statemachine extends Subject implements StatemachineInterface
             throw new \RuntimeException('Event dispatching is still running!');
         } else {
             if ($this->currentState->hasEvent($name)) {
+                $this->acquireLockOrThrowException();
                 $this->dispatcher = $dispatcher;
 
                 if ($context) {
@@ -233,8 +236,10 @@ class Statemachine extends Subject implements StatemachineInterface
      */
     public function checkTransitions()
     {
+        $this->acquireLockOrThrowException();
         $context = new \ArrayIterator(array());
         $this->doCheckTransitions($context);
+        $this->mutex->releaseLock();
     }
 
     /**
@@ -251,5 +256,30 @@ class Statemachine extends Subject implements StatemachineInterface
     public function getCurrentContext()
     {
         return $this->currentContext;
+    }
+
+    /**
+     * @throws LockCanNotBeAcquiredException
+     */
+    protected function acquireLockOrThrowException()
+    {
+        if (!$this->acquireLock()) {
+            throw new LockCanNotBeAcquiredException('Lock can not be acquired!');
+        }
+    }
+
+    /**
+     * Use this function if you want to aquire lock before calling triggerEvent or checkTransitions.
+     * Lock is aquired automatically when calling dispatchEvent or checkTransitions.
+     *
+     * @return bool
+     */
+    public function acquireLock()
+    {
+        if ($this->mutex->isAcquired()) {
+            return true;
+        } else {
+            return $this->mutex->acquireLock();
+        }
     }
 }

@@ -76,4 +76,12 @@ class LockAdapterMutex implements MutexInterface
     {
         return $this->lockAdapter->isLocked($this->resourceName);
     }
+
+    /**
+     * release lock if mutex instance is destroyed.
+     */
+    public function __destruct()
+    {
+        $this->releaseLock();
+    }
 }
