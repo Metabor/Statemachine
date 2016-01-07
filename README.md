@@ -39,6 +39,9 @@ Statemachine in PHP 5.3
 
 ### Code Quality
 
+#### Codeship
+[ ![Codeship Status](https://codeship.com/projects/63d9a3e0-95d6-0133-dd6b-4e4e4a8e2117/status?branch=master)](https://codeship.com/projects/125285)
+
 #### Codacy
 [![Codacy](https://www.codacy.com/project/badge/c83d65fc6188425d92c6b7de57f201eb)](https://www.codacy.com/public/Metabor/Statemachine.git)
 
