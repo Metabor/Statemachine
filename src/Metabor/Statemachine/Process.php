@@ -3,6 +3,7 @@
 namespace Metabor\Statemachine;
 
 use Metabor\Named;
+use Metabor\Statemachine\Util\SetupHelper;
 use Metabor\Statemachine\Util\StateCollectionMerger;
 use MetaborStd\MergeableInterface;
 use MetaborStd\Statemachine\ProcessInterface;
@@ -38,6 +39,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
         parent::__construct($name);
         $this->initialState = $initialState;
         $this->createCollection();
+        $this->initProcess(new SetupHelper($this->states));
     }
 
     /**
@@ -58,6 +60,14 @@ class Process extends Named implements ProcessInterface, MergeableInterface
                 $this->addState($targetState);
             }
         }
+    }
+
+    /**
+     * @param SetupHelper $setupHelper
+     */
+    protected function initProcess(SetupHelper $setupHelper)
+    {
+        // overwrite to use SetupHelper
     }
 
     /**
