@@ -11,6 +11,8 @@ use MetaborStd\Statemachine\StatemachineInterface;
  */
 class OnEnterObserver implements \SplObserver
 {
+    const DEFAULT_EVENT_NAME = 'onEnter';
+
     /**
      * @var string
      */
@@ -19,7 +21,7 @@ class OnEnterObserver implements \SplObserver
     /**
      * @param string $eventName
      */
-    public function __construct($eventName = 'onEnter')
+    public function __construct($eventName = self::DEFAULT_EVENT_NAME)
     {
         $this->eventName = $eventName;
     }
