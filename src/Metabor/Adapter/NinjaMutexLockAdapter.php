@@ -1,6 +1,6 @@
 <?php
 
-namespace Metabor;
+namespace Metabor\Adapter;
 
 use MetaborStd\Semaphore\LockAdapterInterface;
 use NinjaMutex\Lock\LockInterface;
