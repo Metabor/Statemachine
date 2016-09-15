@@ -53,7 +53,7 @@ class Factory implements FactoryInterface
     /**
      * @param MutexFactoryInterface $mutexFactory
      */
-    public function setMutexFactory($mutexFactory)
+    public function setMutexFactory(MutexFactoryInterface $mutexFactory = null)
     {
         $this->mutexFactory = $mutexFactory;
     }
