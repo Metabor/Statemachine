@@ -3,6 +3,7 @@
 namespace Metabor\Statemachine\Factory;
 
 use Metabor\Statemachine\Statemachine;
+use MetaborStd\Semaphore\MutexFactoryInterface;
 use MetaborStd\Statemachine\Factory\FactoryInterface;
 use MetaborStd\Statemachine\Factory\ProcessDetectorInterface;
 use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
@@ -24,7 +25,7 @@ class Factory implements FactoryInterface
     private $stateNameDetector;
 
     /**
-     * @var \SplObjectStorage
+     * @var \SplObjectStorage|\SplObserver[]
      */
     private $statemachineObserver;
 
@@ -32,6 +33,11 @@ class Factory implements FactoryInterface
      * @var TransitionSelectorInterface
      */
     private $transitonSelector;
+
+    /**
+     * @var MutexFactoryInterface
+     */
+    private $mutexFactory;
 
     /**
      * @param ProcessDetectorInterface   $processDetector
@@ -42,6 +48,14 @@ class Factory implements FactoryInterface
         $this->processDetector = $processDetector;
         $this->stateNameDetector = $stateNameDetector;
         $this->statemachineObserver = new \SplObjectStorage();
+    }
+
+    /**
+     * @param MutexFactoryInterface $mutexFactory
+     */
+    public function setMutexFactory($mutexFactory)
+    {
+        $this->mutexFactory = $mutexFactory;
     }
 
     /**
@@ -86,10 +100,16 @@ class Factory implements FactoryInterface
         $process = $this->processDetector->detectProcess($subject);
         if ($this->stateNameDetector) {
             $stateName = $this->stateNameDetector->detectCurrentStateName($subject);
-            $statemachine = new Statemachine($subject, $process, $stateName, $this->transitonSelector);
         } else {
-            $statemachine = new Statemachine($subject, $process, null, $this->transitonSelector);
+            $stateName = null;
         }
+        if ($this->mutexFactory) {
+            $mutex = $this->mutexFactory->createMutex($subject);
+        } else {
+            $mutex = null;
+        }
+
+        $statemachine = new Statemachine($subject, $process, $stateName, $this->transitonSelector, $mutex);
 
         foreach ($this->statemachineObserver as $observer) {
             $statemachine->attach($observer);
