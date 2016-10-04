@@ -6,11 +6,12 @@ use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\ConditionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\WeightedInterface;
 
 /**
  * @author Oliver Tischlinger
  */
-class Transition implements TransitionInterface
+class Transition implements TransitionInterface, WeightedInterface
 {
     /**
      * @var StateInterface
@@ -26,6 +27,11 @@ class Transition implements TransitionInterface
      * @var ConditionInterface
      */
     private $condition;
+
+    /**
+     * @var float
+     */
+    private $weight = 1;
 
     /**
      * @param StateInterface     $targetState
@@ -88,5 +94,21 @@ class Transition implements TransitionInterface
     public function getCondition()
     {
         return $this->condition;
+    }
+
+    /**
+     * @return float
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param float $weight
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
     }
 }

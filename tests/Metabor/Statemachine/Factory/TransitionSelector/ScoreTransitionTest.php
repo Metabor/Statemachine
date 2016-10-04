@@ -20,15 +20,15 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
         $targetState = new State('TargetState');
 
         $transitions = array();
-        $transitionAllwaysActive = new Transition($targetState);
-        $transitions[] = $transitionAllwaysActive;
+        $transitionAlwaysActive = new Transition($targetState);
+        $transitions[] = $transitionAlwaysActive;
 
         array_rand($transitions);
 
         $selector = new ScoreTransition();
         $result = $selector->selectTransition(new \ArrayIterator($transitions));
 
-        $this->assertEquals($transitionAllwaysActive, $result);
+        $this->assertEquals($transitionAlwaysActive, $result);
 
         return $transitions;
     }
@@ -38,22 +38,22 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
      *
      * @param array $transitions
      *
-     * @return \Metabor\Statemachine\Transition
+     * @return \Metabor\Statemachine\Transition[]
      */
-    public function testPrefereTransitionWithCondition(array $transitions)
+    public function testPreferTransitionWithCondition(array $transitions)
     {
         $targetState = new State('TargetState');
-        $condition = new Tautology('Allways True');
+        $condition = new Tautology('Always True');
 
-        $transitionWithConditon = new Transition($targetState, null, $condition);
-        $transitions[] = $transitionWithConditon;
+        $transitionWithCondition = new Transition($targetState, null, $condition);
+        $transitions[] = $transitionWithCondition;
 
         array_rand($transitions);
 
         $selector = new ScoreTransition();
         $result = $selector->selectTransition(new \ArrayIterator($transitions));
 
-        $this->assertEquals($transitionWithConditon, $result);
+        $this->assertEquals($transitionWithCondition, $result);
 
         return $transitions;
     }
@@ -63,9 +63,9 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
      *
      * @param array $transitions
      *
-     * @return \Metabor\Statemachine\Transition
+     * @return \Metabor\Statemachine\Transition[]
      */
-    public function testPrefereTransitionWithEvent(array $transitions)
+    public function testPreferTransitionWithEvent(array $transitions)
     {
         $targetState = new State('TargetState');
         $eventName = 'testEvent';
@@ -84,27 +84,25 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @depends testPrefereTransitionWithEvent
+     * @depends testPreferTransitionWithCondition
      *
      * @param array $transitions
-     *
-     * @return \Metabor\Statemachine\Transition
      */
     public function testPrefereTransitionWithEventAndCondition(array $transitions)
     {
         $targetState = new State('TargetState');
         $eventName = 'testEvent';
-        $condition = new Tautology('Allways True');
+        $condition = new Tautology('Always True');
 
-        $transitionWithEventAndConditon = new Transition($targetState, $eventName, $condition);
-        $transitions[] = $transitionWithEventAndConditon;
+        $transitionWithEventAndCondition = new Transition($targetState, $eventName, $condition);
+        $transitions[] = $transitionWithEventAndCondition;
 
         array_rand($transitions);
 
         $selector = new ScoreTransition();
         $result = $selector->selectTransition(new \ArrayIterator($transitions));
 
-        $this->assertEquals($transitionWithEventAndConditon, $result);
+        $this->assertEquals($transitionWithEventAndCondition, $result);
     }
 
     /**
