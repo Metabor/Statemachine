@@ -3,12 +3,12 @@
 namespace Metabor\Statemachine\Factory\TransitionSelector;
 
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
-use MetaborStd\Statemachine\TransitionInterface;
+use MetaborStd\WeightedInterface;
 
 /**
  * @author otischlinger
  */
-class ScoreTransition implements TransitionSelectorInterface
+class WeightTransition implements TransitionSelectorInterface
 {
     /**
      * @var TransitionSelectorInterface
@@ -16,33 +16,22 @@ class ScoreTransition implements TransitionSelectorInterface
     protected $innerSelector;
 
     /**
-     * @param TransitionSelectorInterface|null $innerSelector
+     * @var float
      */
-    public function __construct(TransitionSelectorInterface $innerSelector = null)
+    protected $epsilon;
+
+    /**
+     * @param TransitionSelectorInterface|null $innerSelector
+     * @param float $epsilon
+     */
+    public function __construct(TransitionSelectorInterface $innerSelector = null, $epsilon = 0.001)
     {
         if ($innerSelector) {
             $this->innerSelector = $innerSelector;
         } else {
             $this->innerSelector = new OneOrNoneActiveTransition();
         }
-    }
-
-    /**
-     * @param TransitionInterface $transition
-     *
-     * @return int
-     */
-    protected function calculcateScore(TransitionInterface $transition)
-    {
-        $score = 0;
-        if ($transition->getEventName()) {
-            $score += 2;
-        }
-        if ($transition->getConditionName()) {
-            ++$score;
-        }
-
-        return $score;
+        $this->epsilon = $epsilon;
     }
 
     /**
@@ -51,14 +40,17 @@ class ScoreTransition implements TransitionSelectorInterface
     public function selectTransition(\Traversable $transitions)
     {
         $bestTransitions = array();
-        $bestScore = -1;
+        $bestWeight = null;
         foreach ($transitions as $transition) {
-            $score = $this->calculcateScore($transition);
-            if ($score > $bestScore) {
-                $bestScore = $score;
-                $bestTransitions = array($transition);
-            } elseif ($score == $bestScore) {
-                $bestTransitions[] = $transition;
+            if ($transition instanceof WeightedInterface) {
+                $weight = $transition->getWeight();
+                $diff = ($weight - $bestWeight);
+                if (($bestWeight === null) || ($diff >= $this->epsilon)) {
+                    $bestWeight = $weight;
+                    $bestTransitions = array($transition);
+                } elseif (abs($diff) < $this->epsilon) {
+                    $bestTransitions[] = $transition;
+                }
             }
         }
 
