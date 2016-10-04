@@ -18,7 +18,7 @@ env:
 
 before_script:
   - composer selfupdate
-  - composer update --dev --prefer-source --no-interaction $PREFER_LOWEST
+  - composer update --prefer-source --no-interaction $PREFER_LOWEST
 
 script:
   - phpunit --coverage-clover=coverage.clover
