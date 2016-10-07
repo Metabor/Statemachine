@@ -22,7 +22,9 @@ class NinjaMutexLockAdapter implements LockAdapterInterface
 
     /**
      * @param LockInterface $ninjaMutexLock
-     * @param null|int $timeout
+     * @param  null|int $timeout 1. null if you want blocking lock
+     *                           2. 0 if you want just lock and go
+     *                           3. $timeout > 0 if you want to wait for lock some time (in milliseconds)
      */
     public function __construct(LockInterface $ninjaMutexLock, $timeout = null)
     {
