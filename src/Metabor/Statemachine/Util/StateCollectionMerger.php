@@ -108,11 +108,12 @@ class StateCollectionMerger implements MergeableInterface
             $condition = null;
         }
         
+        $transition = new Transition($targetState, $eventName, $condition);
         if ($sourceTransition instanceof WeightedInterface) {
             $transition->setWeight($sourceTransition->getWeight());
         }
 
-        return new Transition($targetState, $eventName, $condition);
+        return $transition;
     }
 
     /**
