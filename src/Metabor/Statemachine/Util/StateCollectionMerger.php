@@ -7,6 +7,7 @@ use Metabor\Statemachine\StateCollection;
 use Metabor\Statemachine\Transition;
 use MetaborStd\MergeableInterface;
 use MetaborStd\MetadataInterface;
+use MetaborStd\WeightedInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
@@ -105,6 +106,10 @@ class StateCollectionMerger implements MergeableInterface
             }
         } else {
             $condition = null;
+        }
+        
+        if ($sourceTransition instanceof WeightedInterface) {
+            $transition->setWeight($sourceTransition->getWeight());
         }
 
         return new Transition($targetState, $eventName, $condition);
