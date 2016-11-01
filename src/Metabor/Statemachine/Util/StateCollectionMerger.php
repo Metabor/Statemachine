@@ -86,6 +86,25 @@ class StateCollectionMerger implements MergeableInterface
 
     /**
      * @param TransitionInterface $sourceTransition
+     * @return ConditionInterface
+     */
+    protected function createCondition(TransitionInterface $sourceTransition)
+    {
+        if ($sourceTransition->getConditionName()) {
+            if ($sourceTransition instanceof Transition) {
+                $condition = $sourceTransition->getCondition();
+            } else {
+                throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
+            }
+        } else {
+            $condition = null;
+        }
+
+        return $condition;
+    }
+
+    /**
+     * @param TransitionInterface $sourceTransition
      *
      * @throws \InvalidArgumentException
      *
@@ -98,15 +117,7 @@ class StateCollectionMerger implements MergeableInterface
         $this->mergeMetadata($sourceTransition->getTargetState(), $targetState);
         $eventName = $sourceTransition->getEventName();
 
-        if ($sourceTransition->getConditionName()) {
-            if ($sourceTransition instanceof Transition) {
-                $condition = $sourceTransition->getCondition();
-            } else {
-                throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
-            }
-        } else {
-            $condition = null;
-        }
+        $condition = $this->createCondition($sourceTransition);
         
         $transition = new Transition($targetState, $eventName, $condition);
         if ($sourceTransition instanceof WeightedInterface) {
