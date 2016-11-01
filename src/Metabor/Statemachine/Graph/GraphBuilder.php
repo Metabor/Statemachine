@@ -10,6 +10,7 @@ use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\StringConverterInterface;
+use MetaborStd\WeightedInterface;
 
 /**
  * @author otischlinger
@@ -183,6 +184,9 @@ class GraphBuilder
         $conditionName = $transition->getConditionName();
         if ($conditionName) {
             $labelParts[] = 'IF: ' . $conditionName;
+        }
+        if ($transition instanceof WeightedInterface) {
+            $labelParts[] = 'W: ' . $transition->getWeight();
         }
 
         $label = implode(PHP_EOL, $labelParts);
