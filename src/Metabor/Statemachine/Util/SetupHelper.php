@@ -2,7 +2,6 @@
 
 namespace Metabor\Statemachine\Util;
 
-use Metabor\Statemachine\Command;
 use Metabor\Statemachine\State;
 use Metabor\Statemachine\StateCollection;
 use Metabor\Statemachine\Transition;
@@ -112,9 +111,9 @@ class SetupHelper
      *
      * @param $sourceStateName
      * @param string  $eventName
-     * @param Command $command
+     * @param \SplObserver $command
      */
-    public function addCommand($sourceStateName, $eventName, Command $command)
+    public function addCommand($sourceStateName, $eventName, \SplObserver $command)
     {
         $sourceState = $this->findOrCreateState($sourceStateName);
         $sourceState->getEvent($eventName)->attach($command);
@@ -123,9 +122,9 @@ class SetupHelper
     /**
      * @param $sourceStateName
      * @param string  $eventName
-     * @param Command $command
+     * @param \SplObserver $command
      */
-    public function addCommandAndSelfTransition($sourceStateName, $eventName, Command $command)
+    public function addCommandAndSelfTransition($sourceStateName, $eventName, \SplObserver $command)
     {
         $this->addCommand($sourceStateName, $eventName, $command);
         $this->findOrCreateTransition($sourceStateName, $sourceStateName, $eventName);
