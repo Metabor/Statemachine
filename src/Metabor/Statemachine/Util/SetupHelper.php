@@ -5,6 +5,7 @@ namespace Metabor\Statemachine\Util;
 use Metabor\Statemachine\State;
 use Metabor\Statemachine\StateCollection;
 use Metabor\Statemachine\Transition;
+use MetaborStd\Event\EventInterface;
 use MetaborStd\Statemachine\ConditionInterface;
 use MetaborStd\Statemachine\StateCollectionInterface;
 use MetaborStd\Statemachine\StateInterface;
@@ -29,6 +30,15 @@ class SetupHelper
     }
 
     /**
+     * @param string $name
+     * @return StateInterface
+     */
+    protected function createNewState($name)
+    {
+        return new State($name);
+    }
+
+    /**
      * @param $name
      *
      * @return \MetaborStd\Statemachine\StateInterface
@@ -39,7 +49,7 @@ class SetupHelper
     {
         if (!$this->stateCollection->hasState($name)) {
             if ($this->stateCollection instanceof StateCollection) {
-                $this->stateCollection->addState(new State($name));
+                $this->stateCollection->addState($this->createNewState($name));
             } else {
                 throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
             }
@@ -86,6 +96,19 @@ class SetupHelper
     }
 
     /**
+     * @param StateInterface     $sourceState
+     * @param StateInterface     $targetState
+     * @param string             $eventName
+     * @param ConditionInterface $condition
+     *
+     * @return TransitionInterface
+     */
+    public function createNewTransition(StateInterface $sourceState, StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
+    {
+        return new Transition($targetState, $eventName, $condition);
+    }
+
+    /**
      * @param string             $sourceStateName
      * @param string             $targetStateName
      * @param string             $eventName
@@ -99,11 +122,41 @@ class SetupHelper
         $targetState = $this->findOrCreateState($targetStateName);
         $transition = $this->findTransition($sourceState, $targetState, $eventName, $condition);
         if (!$transition) {
-            $transition = new Transition($targetState, $eventName, $condition);
+            $transition = $this->createNewTransition($sourceState, $targetState, $eventName, $condition);
             $this->addTransition($sourceState, $transition);
         }
 
         return $transition;
+    }
+
+    /**
+     * @param StateInterface     $sourceState
+     * @param string             $eventName
+     *
+     * @return EventInterface
+     */
+    public function createNewEvent(StateInterface $sourceState, $eventName)
+    {
+        if ($sourceState instanceof State) {
+            return $sourceState->getEvent($eventName);
+        } else {
+            throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
+        }
+    }
+
+    /**
+     * @param string $sourceStateName
+     * @param string $eventName
+     * @return EventInterface
+     */
+    public function findOrCreateEvent($sourceStateName, $eventName)
+    {
+        $sourceState = $this->findOrCreateState($sourceStateName);
+        if ($sourceState->hasEvent($eventName)) {
+            return $sourceState->getEvent($eventName);
+        } else {
+            return $this->createNewEvent($sourceState, $eventName);
+        }
     }
 
     /**
@@ -115,8 +168,7 @@ class SetupHelper
      */
     public function addCommand($sourceStateName, $eventName, \SplObserver $command)
     {
-        $sourceState = $this->findOrCreateState($sourceStateName);
-        $sourceState->getEvent($eventName)->attach($command);
+        $this->findOrCreateEvent($sourceStateName, $eventName)->attach($command);
     }
 
     /**
