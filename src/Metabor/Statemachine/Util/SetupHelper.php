@@ -33,7 +33,7 @@ class SetupHelper
      * @param string $name
      * @return StateInterface
      */
-    protected function createNewState($name)
+    protected function createState($name)
     {
         return new State($name);
     }
@@ -49,7 +49,7 @@ class SetupHelper
     {
         if (!$this->stateCollection->hasState($name)) {
             if ($this->stateCollection instanceof StateCollection) {
-                $this->stateCollection->addState($this->createNewState($name));
+                $this->stateCollection->addState($this->createState($name));
             } else {
                 throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
             }
@@ -103,7 +103,7 @@ class SetupHelper
      *
      * @return TransitionInterface
      */
-    public function createNewTransition(StateInterface $sourceState, StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
+    public function createTransition(StateInterface $sourceState, StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
     {
         return new Transition($targetState, $eventName, $condition);
     }
@@ -122,7 +122,7 @@ class SetupHelper
         $targetState = $this->findOrCreateState($targetStateName);
         $transition = $this->findTransition($sourceState, $targetState, $eventName, $condition);
         if (!$transition) {
-            $transition = $this->createNewTransition($sourceState, $targetState, $eventName, $condition);
+            $transition = $this->createTransition($sourceState, $targetState, $eventName, $condition);
             $this->addTransition($sourceState, $transition);
         }
 
@@ -135,7 +135,7 @@ class SetupHelper
      *
      * @return EventInterface
      */
-    public function createNewEvent(StateInterface $sourceState, $eventName)
+    public function createEvent(StateInterface $sourceState, $eventName)
     {
         if ($sourceState instanceof State) {
             return $sourceState->getEvent($eventName);
@@ -155,7 +155,7 @@ class SetupHelper
         if ($sourceState->hasEvent($eventName)) {
             return $sourceState->getEvent($eventName);
         } else {
-            return $this->createNewEvent($sourceState, $eventName);
+            return $this->createEvent($sourceState, $eventName);
         }
     }
 
