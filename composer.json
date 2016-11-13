@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.3",
-    	"metabor/metabor-std": "~1.1.4"
+    	"metabor/metabor-std": "~1.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
@@ -35,7 +35,7 @@
     "minimum-stability":"dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1.x-dev"
+            "dev-master": "1.2.x-dev"
         }
     }
 }

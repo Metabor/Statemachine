@@ -222,7 +222,8 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * @see MetaborStd\Statemachine.StatemachineInterface::triggerEvent()
+     * @param string $name
+     * @param \ArrayAccess|null $context
      */
     public function triggerEvent($name, \ArrayAccess $context = null)
     {
@@ -232,12 +233,14 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * @see MetaborStd\Statemachine.StatemachineInterface::checkTransitions()
+     * @param \ArrayAccess|null $context
      */
-    public function checkTransitions()
+    public function checkTransitions(\ArrayAccess $context = null)
     {
         $this->acquireLockOrThrowException();
-        $context = new \ArrayIterator(array());
+        if (!$context) {
+            $context = new \ArrayIterator(array());
+        }
         $this->doCheckTransitions($context);
         $this->mutex->releaseLock();
     }

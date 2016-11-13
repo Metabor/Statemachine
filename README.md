@@ -24,7 +24,7 @@ Statemachine in PHP 5.3
 [![Packagist](http://img.shields.io/packagist/dd/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 
 #### Compatibility
-[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.1-green.svg)](https://github.com/Metabor/MetaborStd)
+[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.2-green.svg)](https://github.com/Metabor/MetaborStd)
 [![HHVM Status](http://hhvm.h4cc.de/badge/metabor/statemachine.png)](http://hhvm.h4cc.de/package/metabor/statemachine)
 
 ### Dependency Status
@@ -147,7 +147,7 @@ The recommended way to install this library is [through composer](http://getcomp
 ```JSON
 {
     "require": {
-        "metabor/statemachine": "~1.1"
+        "metabor/statemachine": "~1.2"
     }
 }
 ```
@@ -164,7 +164,7 @@ To use this feature you also have to add this to your composer.json:
     "require": {
         "graphp/graphviz": "*",
         "clue/graph": "*",
-        "metabor/statemachine": "~1.1"
+        "metabor/statemachine": "~1.2"
     }
 }
 ```
