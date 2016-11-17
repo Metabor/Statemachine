@@ -39,7 +39,7 @@ class OnEnterObserverTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testContextIsPassedToOnEnterEvent() {
-        $context = new \ArrayObject(array('someContext');
+        $context = new \ArrayObject(array('someContext'));
 
         $onEnterObserver = new OnEnterObserver('someEvent');
 
