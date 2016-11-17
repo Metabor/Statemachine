@@ -156,7 +156,7 @@ class Statemachine extends Subject implements StatemachineInterface
                     $this->selectedTransition = null;
                     $this->lastState = null;
                 }
-                $this->checkTransitions();
+                $this->checkTransitions($context);
             }
         } catch (\Exception $exception) {
             $message = 'Exception was thrown when doing a transition from current state "' . $this->currentState->getName() . '"';
