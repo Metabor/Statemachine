@@ -39,14 +39,17 @@ class OnEnterObserverTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testContextIsPassedToOnEnterEvent() {
-        $context = new \ArrayObject(['someContext']);
+        $context = new \ArrayObject(array('someContext');
 
         $onEnterObserver = new OnEnterObserver('someEvent');
 
-        $state = $this->createMock(State::class);
+        $state = $this->getMockForAbstractClass('\MetaborStd\Statemachine\StateInterface');
         $state->method('hasEvent')->with($this->equalTo('someEvent'))->willReturn(true);
 
-        $stateMachine = $this->createMock(Statemachine::class);
+        $stateMachine = $this->getMockBuilder('Metabor\Statemachine\Statemachine')
+                     ->disableOriginalConstructor()
+                     ->setMethods(array('getCurrentState', 'getCurrentContext'))
+                     ->getMock();
         $stateMachine->method('getCurrentState')->willReturn($state);
         $stateMachine->method('getCurrentContext')->willReturn($context);
         $stateMachine->expects($this->once())
