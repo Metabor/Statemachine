@@ -2,6 +2,7 @@
 
 namespace Metabor\Statemachine\Observer;
 
+use Metabor\Statemachine\Statemachine;
 use MetaborStd\Statemachine\StatemachineInterface;
 
 /**
@@ -31,10 +32,22 @@ class OnEnterObserver implements \SplObserver
      */
     public function update(\SplSubject $stateMachine)
     {
-        if ($stateMachine instanceof StatemachineInterface) {
-            if ($stateMachine->getCurrentState()->hasEvent($this->eventName)) {
-                $stateMachine->triggerEvent($this->eventName);
-            }
+        if ($stateMachine instanceof StatemachineInterface && $stateMachine->getCurrentState()->hasEvent($this->eventName)) {
+            $stateMachine->triggerEvent($this->eventName, $this->getStateMachineContext($stateMachine));
         }
+    }
+
+    /**
+     * @param \SplSubject|StatemachineInterface|Statemachine $stateMachine
+     * @return \ArrayAccess|null
+     */
+    private function getStateMachineContext($stateMachine)
+    {
+        $context = null;
+        if ($stateMachine instanceof Statemachine) {
+            $context = $stateMachine->getCurrentContext();
+        }
+
+        return $context;
     }
 }
