@@ -48,7 +48,7 @@ class OnEnterObserverTest extends \PHPUnit_Framework_TestCase
 
         $stateMachine = $this->getMockBuilder('Metabor\Statemachine\Statemachine')
                      ->disableOriginalConstructor()
-                     ->setMethods(array('getCurrentState', 'getCurrentContext'))
+                     ->setMethods(array('getCurrentState', 'getCurrentContext', 'triggerEvent'))
                      ->getMock();
         $stateMachine->method('getCurrentState')->willReturn($state);
         $stateMachine->method('getCurrentContext')->willReturn($context);
