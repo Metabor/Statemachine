@@ -1,3 +1,11 @@
+# Upgrade to 2.0 (formal 1.2)
+
+## checkTransition now use external Context
+
+External Context can now optionaly provided.
+This feature was first planded to be version 1.2.0 / 1.2.1, but because of BC breaks (if Statemachine class was overwritten) it needs to be moved to 2.0. Except this change 2.0 is full compatible to 1.1. version.
+
+
 # Upgrade to 1.1
 
 ## optional visualizing of the process graph by using clue/graph 
