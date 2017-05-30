@@ -21,7 +21,7 @@ class FilterTransitionByEvent extends \FilterIterator
      */
     public function __construct(\Traversable $transitions, $eventName)
     {
-        parent::__construct(new \IteratorIterator($states));
+        parent::__construct(new \IteratorIterator($transitions));
         $this->eventName = $eventName;
     }
 
