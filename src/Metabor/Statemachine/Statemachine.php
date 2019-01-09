@@ -163,6 +163,9 @@ class Statemachine extends Subject implements StatemachineInterface
             if ($this->currentEvent instanceof NamedInterface) {
                 $message .= ' with event "' . $this->currentEvent->getName() . '"';
             }
+            if ($this->subject instanceof NamedInterface) {
+                $message .= ' for "' . $this->subject->getName() . '"';
+            }
             throw new \RuntimeException($message, 0, $exception);
         }
     }
