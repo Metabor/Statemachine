@@ -39,7 +39,7 @@ class SetupHelper
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return \MetaborStd\Statemachine\StateInterface
      *
