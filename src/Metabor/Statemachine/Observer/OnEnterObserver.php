@@ -33,21 +33,14 @@ class OnEnterObserver implements \SplObserver
     public function update(\SplSubject $stateMachine)
     {
         if ($stateMachine instanceof StatemachineInterface && $stateMachine->getCurrentState()->hasEvent($this->eventName)) {
-            $stateMachine->triggerEvent($this->eventName, $this->getStateMachineContext($stateMachine));
+            if ($stateMachine instanceof Statemachine) {
+                $autoreleaseLock = $stateMachine->isAutoreleaseLock();
+                $stateMachine->setAutoreleaseLock(false);
+                $stateMachine->triggerEvent($this->eventName, $stateMachine->getCurrentContext());
+                $stateMachine->setAutoreleaseLock($autoreleaseLock);
+            } else {
+                $stateMachine->triggerEvent($this->eventName);
+            }
         }
-    }
-
-    /**
-     * @param \SplSubject|StatemachineInterface|Statemachine $stateMachine
-     * @return \ArrayAccess|null
-     */
-    private function getStateMachineContext($stateMachine)
-    {
-        $context = null;
-        if ($stateMachine instanceof Statemachine) {
-            $context = $stateMachine->getCurrentContext();
-        }
-
-        return $context;
     }
 }

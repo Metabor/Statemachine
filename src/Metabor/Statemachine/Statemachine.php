@@ -76,6 +76,11 @@ class Statemachine extends Subject implements StatemachineInterface
     private $mutex;
 
     /**
+     * @var bool
+     */
+    private $autoreleaseLock = true;
+
+    /**
      * @param object                      $subject
      * @param ProcessInterface            $process
      * @param string                      $stateName
@@ -156,7 +161,7 @@ class Statemachine extends Subject implements StatemachineInterface
                     $this->selectedTransition = null;
                     $this->lastState = null;
                 }
-                $this->checkTransitions($context);
+                $this->doCheckTransitions($context);
             }
         } catch (\Exception $exception) {
             $message = 'Exception was thrown when doing a transition from current state "' . $this->currentState->getName() . '"';
@@ -190,7 +195,9 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->currentContext = null;
             $this->currentEvent = null;
             $this->doCheckTransitions($context, $event);
-            $this->mutex->releaseLock();
+            if ($this->autoreleaseLock) {
+                $this->mutex->releaseLock();
+            }
         }
     }
 
@@ -245,7 +252,9 @@ class Statemachine extends Subject implements StatemachineInterface
             $context = new \ArrayIterator(array());
         }
         $this->doCheckTransitions($context);
-        $this->mutex->releaseLock();
+        if ($this->autoreleaseLock) {
+            $this->mutex->releaseLock();
+        }
     }
 
     /**
@@ -272,6 +281,22 @@ class Statemachine extends Subject implements StatemachineInterface
         if (!$this->acquireLock()) {
             throw new LockCanNotBeAcquiredException('Lock can not be acquired!');
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoreleaseLock()
+    {
+        return $this->autoreleaseLock;
+    }
+
+    /**
+     * @param bool $autoreleaseLock
+     */
+    public function setAutoreleaseLock($autoreleaseLock)
+    {
+        $this->autoreleaseLock = $autoreleaseLock;
     }
 
     /**
