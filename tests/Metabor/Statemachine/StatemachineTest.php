@@ -71,4 +71,15 @@ class StatemachineTest extends StatemachineInterfaceTest
         $this->setExpectedException('Metabor\Statemachine\Exception\WrongEventForStateException');
         $statemachine->triggerEvent('foo');
     }
+
+    public function testAllowLockToBeManagedFromOutside()
+    {
+        $statemachine = $this->createTestInstance();
+        $isAquired = $statemachine->acquireLock();
+        $this->assertTrue($isAquired);
+        $this->assertTrue($statemachine->isLockAcquired());
+
+        $statemachine->releaseLock();
+        $this->assertFalse($statemachine->isLockAcquired());
+    }
 }

@@ -196,7 +196,7 @@ class Statemachine extends Subject implements StatemachineInterface
             $this->currentEvent = null;
             $this->doCheckTransitions($context, $event);
             if ($this->autoreleaseLock) {
-                $this->mutex->releaseLock();
+                $this->releaseLock();
             }
         }
     }
@@ -253,7 +253,7 @@ class Statemachine extends Subject implements StatemachineInterface
         }
         $this->doCheckTransitions($context);
         if ($this->autoreleaseLock) {
-            $this->mutex->releaseLock();
+            $this->releaseLock();
         }
     }
 
@@ -312,5 +312,22 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             return $this->mutex->acquireLock();
         }
+    }
+
+    /**
+     * Manuall release of the lock.
+     * Can be used for example if you disable autorelase of locks
+     */
+    public function releaseLock()
+    {
+        $this->mutex->releaseLock();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLockAcquired()
+    {
+        return $this->mutex->isAcquired();
     }
 }
