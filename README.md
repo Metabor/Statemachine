@@ -1,6 +1,6 @@
 # metabor/statemachine
 
-Statemachine in PHP 5.3
+Statemachine in PHP 5.6 / PHP 7
 
 ### Support
 
