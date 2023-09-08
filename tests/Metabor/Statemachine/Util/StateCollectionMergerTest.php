@@ -11,7 +11,7 @@ use Metabor\Statemachine\Transition;
 /**
  * @author Oliver Tischlinger
  */
-class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
+class StateCollectionMergerTest extends \PHPUnit\Framework\TestCase
 {
     const FLAG_FOR_TEST = 'Flag for Test';
     const FLAG_FOR_TEST_VALUE = 'Metabor';

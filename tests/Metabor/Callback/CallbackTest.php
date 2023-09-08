@@ -2,10 +2,12 @@
 
 namespace Metabor\Callback;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Oliver Tischlinger
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     private $wasCalled;
 

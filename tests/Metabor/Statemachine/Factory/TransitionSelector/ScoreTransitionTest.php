@@ -10,7 +10,7 @@ use Metabor\Statemachine\Transition;
 /**
  * @author Oliver Tischlinger
  */
-class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
+class ScoreTransitionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @return \Metabor\Statemachine\Transition[]
@@ -118,7 +118,7 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 
         $selector = new ScoreTransition();
 
-        $this->setExpectedException('\RuntimeException');
+        $this->expectException('\RuntimeException');
         $selector->selectTransition(new \ArrayIterator($transitions));
     }
 }

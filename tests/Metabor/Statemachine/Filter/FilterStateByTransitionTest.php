@@ -9,7 +9,7 @@ use Metabor\Statemachine\Util\SetupHelper;
 /**
  * @author otischlinger
  */
-class FilterStateByTransitionTest extends \PHPUnit_Framework_TestCase
+class FilterStateByTransitionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

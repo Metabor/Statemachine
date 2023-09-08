@@ -68,7 +68,7 @@ class StatemachineTest extends StatemachineInterfaceTest
     public function testThrowsExcpetionIfCurrentStateDidNotHaveTriggeredEvent()
     {
         $statemachine = $this->createTestInstance();
-        $this->setExpectedException('Metabor\Statemachine\Exception\WrongEventForStateException');
+        $this->expectException('Metabor\Statemachine\Exception\WrongEventForStateException');
         $statemachine->triggerEvent('foo');
     }
 

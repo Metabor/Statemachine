@@ -8,7 +8,7 @@ use Metabor\Statemachine\State;
 /**
  * @author Oliver Tischlinger
  */
-class AbstractProcessDetectorTest extends \PHPUnit_Framework_TestCase
+class AbstractProcessDetectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param \stdClass $subject

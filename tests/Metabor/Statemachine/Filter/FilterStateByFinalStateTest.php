@@ -8,7 +8,7 @@ use Metabor\Statemachine\Util\SetupHelper;
 /**
  * @author otischlinger
  */
-class FilterStateByFinalStateTest extends \PHPUnit_Framework_TestCase
+class FilterStateByFinalStateTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

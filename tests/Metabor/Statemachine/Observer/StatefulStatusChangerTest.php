@@ -10,7 +10,7 @@ use MetaborStd\Statemachine\StatefulInterface;
 /**
  * @author otischlinger
  */
-class StatefulStatusChangerTest extends \PHPUnit_Framework_TestCase implements StatefulInterface
+class StatefulStatusChangerTest extends \PHPUnit\Framework\TestCase implements StatefulInterface
 {
     /**
      * @var string

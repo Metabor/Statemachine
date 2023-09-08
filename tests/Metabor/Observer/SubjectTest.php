@@ -5,7 +5,7 @@ namespace Metabor\Observer;
 /**
  * @author Oliver Tischlinger
  */
-class SubjectTest extends \PHPUnit_Framework_TestCase
+class SubjectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

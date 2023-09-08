@@ -11,7 +11,7 @@ use Metabor\Statemachine\Util\SetupHelper;
 /**
  * @author otischlinger
  */
-class OnEnterObserverTest extends \PHPUnit_Framework_TestCase
+class OnEnterObserverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

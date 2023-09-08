@@ -5,7 +5,7 @@ namespace Metabor\Observer;
 /**
  * @author Oliver Tischlinger
  */
-class CounterOberserverTest extends \PHPUnit_Framework_TestCase
+class CounterOberserverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

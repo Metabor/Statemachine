@@ -7,7 +7,7 @@ use Metabor\Observer\Subject;
 /**
  * @author otischlinger
  */
-class SubjectHasUpdatedTest extends \PHPUnit_Framework_TestCase
+class SubjectHasUpdatedTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
