@@ -26,7 +26,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
     /**
      * @see ArrayAccess::offsetExists()
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->keyValue[$offset]);
     }
@@ -34,7 +34,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
     /**
      * @see ArrayAccess::offsetGet()
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (isset($this->keyValue[$offset])) {
             return $this->keyValue[$offset];
@@ -44,7 +44,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
     /**
      * @see ArrayAccess::offsetSet()
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->keyValue[$offset] = $value;
     }
@@ -52,7 +52,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
     /**
      * @see ArrayAccess::offsetUnset()
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->keyValue[$offset]);
     }

@@ -22,7 +22,7 @@ class Subject implements \SplSubject
     /**
      * @see \SplSubject::attach()
      */
-    public function attach(\SplObserver $observer)
+    public function attach(\SplObserver $observer): void
     {
         $this->observers->attach($observer);
     }
@@ -30,15 +30,15 @@ class Subject implements \SplSubject
     /**
      * @see \SplSubject::detach()
      */
-    public function detach(\SplObserver $observer)
+    public function detach(\SplObserver $observer): void
     {
         $this->observers->detach($observer);
     }
 
     /**
-     * @see \SplSubject::notify()
+     * @return void
      */
-    public function notify()
+    public function notify(): void
     {
         /* @var $observer \SplObserver */
         foreach ($this->observers as $observer) {

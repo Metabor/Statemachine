@@ -41,7 +41,7 @@ class Composite implements CallbackInterface, \Countable, \IteratorAggregate
     /**
      * @param CallbackInterface $callback
      */
-    public function attach(CallbackInterface $callback)
+    public function attach(CallbackInterface $callback): void
     {
         $this->callbacks->attach($callback);
     }
@@ -49,7 +49,7 @@ class Composite implements CallbackInterface, \Countable, \IteratorAggregate
     /**
      * @param CallbackInterface $callback
      */
-    public function detach(CallbackInterface $callback)
+    public function detach(CallbackInterface $callback): void
     {
         $this->callbacks->detach($callback);
     }
@@ -57,7 +57,7 @@ class Composite implements CallbackInterface, \Countable, \IteratorAggregate
     /**
      * @return \Iterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return $this->callbacks;
     }
@@ -65,7 +65,7 @@ class Composite implements CallbackInterface, \Countable, \IteratorAggregate
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->callbacks->count();
     }
