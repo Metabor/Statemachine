@@ -39,6 +39,7 @@ class Nullable implements ArrayAccess, ArrayConvertableInterface
         if (isset($this->keyValue[$offset])) {
             return $this->keyValue[$offset];
         }
+        return null;
     }
 
     /**
