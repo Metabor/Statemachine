@@ -28,7 +28,7 @@ class FilterTransitionByEvent extends \FilterIterator
     /**
      * @see FilterIterator::accept()
      */
-    public function accept()
+    public function accept(): bool
     {
         /* @var $transition TransitionInterface */
         $transition = $this->current();
