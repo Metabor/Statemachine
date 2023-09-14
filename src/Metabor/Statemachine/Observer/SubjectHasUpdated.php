@@ -10,7 +10,7 @@ class SubjectHasUpdated extends \SplObjectStorage implements \SplObserver
     /**
      * @see SplObserver::update()
      */
-    public function update(\SplSubject $subject)
+    public function update(\SplSubject $subject): void
     {
         $this->attach($subject);
     }

@@ -24,7 +24,7 @@ class Filter extends \FilterIterator
     /**
      * @see FilterIterator::accept()
      */
-    public function accept()
+    public function accept(): bool
     {
         $current = $this->current();
 

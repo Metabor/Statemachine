@@ -5,7 +5,7 @@ namespace Metabor\Callback;
 /**
  * @author Oliver Tischlinger
  */
-class SymfonyExpressionTest extends \PHPUnit_Framework_TestCase
+class SymfonyExpressionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

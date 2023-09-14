@@ -41,7 +41,7 @@ class ActiveTransitionFilter extends \FilterIterator
     /**
      * @see FilterIterator::accept()
      */
-    public function accept()
+    public function accept(): bool
     {
         $transition = $this->current();
 

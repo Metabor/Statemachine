@@ -14,7 +14,7 @@ abstract class Command implements \SplObserver
      *
      * @throws \InvalidArgumentException
      */
-    public function update(\SplSubject $subject)
+    public function update(\SplSubject $subject): void
     {
         if (!$subject instanceof EventInterface) {
             throw new \InvalidArgumentException('Command can only be attached to an event!');

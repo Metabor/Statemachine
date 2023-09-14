@@ -2,18 +2,21 @@
 
 namespace Metabor\Callback;
 
+use PHPUnit\Framework\MockObject\Invocation;
+use PHPUnit\Framework\MockObject\Rule\InvocationOrder;
+
 /**
  * @author Oliver Tischlinger
  */
-class CompositeTest extends \PHPUnit_Framework_TestCase
+class CompositeTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @param \PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+     * @param Invocation $matcher
      * @param mixed                                            $parameter
      *
      * @return \MetaborStd\CallbackInterface
      */
-    protected function createCallbackMock(\PHPUnit_Framework_MockObject_Matcher_Invocation $matcher, $parameter = null)
+    protected function createCallbackMock(InvocationOrder $matcher, $parameter = null)
     {
         $mock = $this->getMockForAbstractClass('\MetaborStd\CallbackInterface');
         $method = $mock->expects($matcher)->method('__invoke');

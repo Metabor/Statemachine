@@ -11,7 +11,7 @@ use Psr\Log\LogLevel;
 /**
  * @author otischlinger
  */
-class TransitionLoggerTest extends \PHPUnit_Framework_TestCase
+class TransitionLoggerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

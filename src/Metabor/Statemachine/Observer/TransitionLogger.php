@@ -113,7 +113,7 @@ class TransitionLogger implements \SplObserver
     /**
      * @see SplObserver::update()
      */
-    public function update(\SplSubject $stateMachine)
+    public function update(\SplSubject $stateMachine): void
     {
         if ($stateMachine instanceof StatemachineInterface) {
             $context = $this->createLoggerContext($stateMachine);

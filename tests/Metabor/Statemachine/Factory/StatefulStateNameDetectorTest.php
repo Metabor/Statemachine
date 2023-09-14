@@ -5,7 +5,7 @@ namespace Metabor\Statemachine\Factory;
 /**
  * @author Oliver Tischlinger
  */
-class StatefulStateNameDetectorTest extends \PHPUnit_Framework_TestCase
+class StatefulStateNameDetectorTest extends \PHPUnit\Framework\TestCase
 {
     public function testReturnsTheCurrentStateFromAStatefulObject()
     {
@@ -23,7 +23,7 @@ class StatefulStateNameDetectorTest extends \PHPUnit_Framework_TestCase
     {
         $subject = new \stdClass();
         $detector = new StatefulStateNameDetector();
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $detector->detectCurrentStateName($subject);
     }
 }

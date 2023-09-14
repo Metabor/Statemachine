@@ -26,7 +26,7 @@ class FilterStateByEvent extends \FilterIterator
     /**
      * @see FilterIterator::accept()
      */
-    public function accept()
+    public function accept(): bool
     {
         /* @var $state StateInterface */
         $state = $this->current();

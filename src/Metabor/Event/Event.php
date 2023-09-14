@@ -67,7 +67,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     /**
      * @see \ArrayAccess::offsetExists()
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->metadata->offsetExists($offset);
     }
@@ -75,7 +75,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     /**
      * @see \ArrayAccess::offsetGet()
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->metadata->offsetGet($offset);
     }
@@ -83,7 +83,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     /**
      * @see \ArrayAccess::offsetSet()
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->metadata->offsetSet($offset, $value);
     }
@@ -91,7 +91,7 @@ class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInt
     /**
      * @see \ArrayAccess::offsetUnset()
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->metadata->offsetUnset($offset);
     }

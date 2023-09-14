@@ -23,7 +23,7 @@ class Composite implements \ArrayAccess
     /**
      * @param \ArrayAccess $keyValue
      */
-    public function attach(\ArrayAccess $keyValue)
+    public function attach(\ArrayAccess $keyValue): void
     {
         $this->container->attach($keyValue);
     }
@@ -31,7 +31,7 @@ class Composite implements \ArrayAccess
     /**
      * @param \ArrayAccess $keyValue
      */
-    public function detach(\ArrayAccess $keyValue)
+    public function detach(\ArrayAccess $keyValue): void
     {
         $this->container->detach($keyValue);
     }
@@ -39,7 +39,7 @@ class Composite implements \ArrayAccess
     /**
      * @see ArrayAccess::offsetExists()
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         if ($this->container->count()) {
             $result = true;
@@ -57,7 +57,7 @@ class Composite implements \ArrayAccess
     /**
      * @see ArrayAccess::offsetGet()
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         $values = array();
         /* @var $keyValue \ArrayAccess */
@@ -68,7 +68,7 @@ class Composite implements \ArrayAccess
 
         switch (count($values)) {
             case 0:
-                return;
+                return null;
             case 1:
                 return reset($values);
             default:
@@ -79,7 +79,7 @@ class Composite implements \ArrayAccess
     /**
      * @see ArrayAccess::offsetSet()
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         /* @var $keyValue \ArrayAccess */
         foreach ($this->container as $keyValue) {
@@ -89,7 +89,7 @@ class Composite implements \ArrayAccess
     /**
      * @see ArrayAccess::offsetUnset()
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         /* @var $keyValue \ArrayAccess */
         foreach ($this->container as $keyValue) {

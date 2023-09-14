@@ -2,7 +2,7 @@
 
 namespace Metabor\Statemachine\Exception;
 
-class WrongEventForStateExceptionTest extends \PHPUnit_Framework_TestCase
+class WrongEventForStateExceptionTest extends \PHPUnit\Framework\TestCase
 {
     public function testStateNameIsAccessible()
     {

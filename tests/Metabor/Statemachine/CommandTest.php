@@ -4,14 +4,15 @@ namespace Metabor\Statemachine;
 
 use Metabor\Event\Event;
 use Metabor\Observer\Subject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @author Oliver Tischlinger
  */
-class CommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @return Command
+     * @return Command|MockObject
      */
     protected function createTestInstance(array $methods = array())
     {
@@ -33,7 +34,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $command = $this->createTestInstance();
         $subject = new Event('test');
         $subject->attach($command);
-        $this->setExpectedException('\Exception');
+        $this->expectException('\Exception');
         $subject('foo', 'bar', 'baz');
     }
 
@@ -51,7 +52,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $command = $this->createTestInstance(array('__invoke'));
         $subject = new Subject();
         $subject->attach($command);
-        $this->setExpectedException('\Exception');
+        $this->expectException('\Exception');
         $subject->notify();
     }
 

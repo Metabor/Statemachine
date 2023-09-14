@@ -96,7 +96,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     /**
      * @see ArrayAccess::offsetExists()
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->metadata->offsetExists($offset);
     }
@@ -104,7 +104,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     /**
      * @see ArrayAccess::offsetGet()
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->metadata->offsetGet($offset);
     }
@@ -112,7 +112,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     /**
      * @see ArrayAccess::offsetSet()
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->metadata->offsetSet($offset, $value);
     }
@@ -120,7 +120,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
     /**
      * @see ArrayAccess::offsetUnset()
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->metadata->offsetUnset($offset);
     }

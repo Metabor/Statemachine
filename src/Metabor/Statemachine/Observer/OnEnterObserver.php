@@ -30,7 +30,7 @@ class OnEnterObserver implements \SplObserver
     /**
      * @see SplObserver::update()
      */
-    public function update(\SplSubject $stateMachine)
+    public function update(\SplSubject $stateMachine): void
     {
         if ($stateMachine instanceof StatemachineInterface && $stateMachine->getCurrentState()->hasEvent($this->eventName)) {
             if ($stateMachine instanceof Statemachine) {

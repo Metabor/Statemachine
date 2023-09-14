@@ -5,7 +5,7 @@ namespace Metabor\KeyValue;
 /**
  * @author Oliver Tischlinger
  */
-class CompositeTest extends \PHPUnit_Framework_TestCase
+class CompositeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

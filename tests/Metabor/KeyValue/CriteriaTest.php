@@ -5,7 +5,7 @@ namespace Metabor\KeyValue;
 /**
  * @author Oliver Tischlinger
  */
-class CriteriaTest extends \PHPUnit_Framework_TestCase
+class CriteriaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

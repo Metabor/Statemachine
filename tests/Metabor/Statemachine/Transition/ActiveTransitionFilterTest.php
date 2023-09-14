@@ -7,7 +7,7 @@ use MetaborStd\Event\EventInterface;
 /**
  * ActiveTransitionFilter test case.
  */
-class ActiveTransitionFilterTest extends \PHPUnit_Framework_TestCase
+class ActiveTransitionFilterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param bool           $active

@@ -18,7 +18,7 @@ class OneOrNoneActiveTransition implements TransitionSelectorInterface
 
         switch (count($transitions)) {
             case 0:
-                return;
+                return null;
             case 1:
                 return reset($transitions);
             default:

@@ -10,7 +10,7 @@ class FilterStateByTransition extends \FilterIterator
     /**
      * @see FilterIterator::accept()
      */
-    public function accept()
+    public function accept(): bool
     {
         /* @var $state \MetaborStd\Statemachine\StateInterface */
         $state = $this->current();
