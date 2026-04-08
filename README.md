@@ -2,7 +2,7 @@
 
 Statemachine in PHP 8.2+
 
-> **Upgrading from a previous version?** See [UPGRADE-4.0.md](UPGRADE-4.0.md) for breaking changes and migration steps.
+> **Upgrading from a previous version?** See [UPGRADE-3.0.md](UPGRADE-3.0.md) for breaking changes and migration steps.
 
 ### Package Information
 
@@ -105,7 +105,7 @@ The recommended way to install this library is [through composer](http://getcomp
 {
     "require": {
         "php": ">=8.2",
-        "metabor/statemachine": "~4.0"
+        "metabor/statemachine": "~3.0"
     }
 }
 ```
@@ -123,7 +123,7 @@ To use this feature you also have to add this to your composer.json:
         "php": ">=8.2",
         "graphp/graphviz": "*",
         "clue/graph": "*",
-        "metabor/statemachine": "~4.0"
+        "metabor/statemachine": "~3.0"
     }
 }
 ```

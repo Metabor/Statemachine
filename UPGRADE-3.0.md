@@ -1,6 +1,6 @@
-# Upgrading to metabor/statemachine 4.0
+# Upgrading to metabor/statemachine 3.0
 
-This document describes breaking changes introduced in version 4.0 and how to update your code.
+This document describes breaking changes introduced in version 3.0 and how to update your code.
 
 ## Requirements
 
@@ -308,7 +308,7 @@ abstract class MyCommand extends Command
    {
        "require": {
            "php": ">=8.2",
-           "metabor/statemachine": "~4.0"
+           "metabor/statemachine": "~3.0"
        }
    }
    ```
