@@ -2,123 +2,58 @@
 
 namespace Metabor\Statemachine\Observer;
 
-use Metabor\Statemachine\Statemachine;
-use Metabor\StringConverter;
+use MetaborStd\NamedInterface;
 use MetaborStd\Statemachine\StatemachineInterface;
-use MetaborStd\Statemachine\TransitionInterface;
-use MetaborStd\StringConverterInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class TransitionLogger implements \SplObserver
 {
-    const CONTEXT_SUBJECT = 'subject';
-    const CONTEXT_CURRENT_STATE = 'currentState';
-    const CONTEXT_LAST_STATE = 'lastState';
-    const CONTEXT_TRANSITION = 'transition';
+    private LoggerInterface $logger;
+    private string $logLevel;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var string
-     */
-    protected $loggerLevel;
-
-    /**
-     * @var StringConverterInterface
-     */
-    private $stringConverter;
-
-    /**
-     * @param LoggerInterface          $logger
-     * @param string                   $loggerLevel
-     * @param StringConverterInterface $stringConverter
-     */
-    public function __construct(LoggerInterface $logger, $loggerLevel = LogLevel::INFO, StringConverterInterface $stringConverter = null)
+    public function __construct(LoggerInterface $logger, string $logLevel = LogLevel::INFO)
     {
         $this->logger = $logger;
-        $this->loggerLevel = $loggerLevel;
-        if ($stringConverter) {
-            $this->stringConverter = $stringConverter;
-        } else {
-            $this->stringConverter = new StringConverter();
-        }
+        $this->logLevel = $logLevel;
     }
 
-    /**
-     * @param StatemachineInterface $stateMachine
-     *
-     * @return array
-     */
-    protected function createLoggerContext(StatemachineInterface $stateMachine)
-    {
-        $context = array();
-        $context[self::CONTEXT_SUBJECT] = $stateMachine->getSubject();
-        $context[self::CONTEXT_CURRENT_STATE] = $stateMachine->getCurrentState();
-        if ($stateMachine instanceof Statemachine) {
-            $context[self::CONTEXT_LAST_STATE] = $stateMachine->getLastState();
-            $context[self::CONTEXT_TRANSITION] = $stateMachine->getSelectedTransition();
-        }
-
-        return $context;
-    }
-
-    /**
-     * @param array $context
-     *
-     * @return string
-     */
-    protected function createLoggerMessage(array $context)
+    protected function buildLogMessage(StatemachineInterface $statemachine): string
     {
         $message = 'Transition';
-
-        if (isset($context[self::CONTEXT_SUBJECT])) {
-            $message .= ' for "' . $this->stringConverter->convertToString($context[self::CONTEXT_SUBJECT]) . '"';
+        $subject = $statemachine->getSubject();
+        if ($subject instanceof NamedInterface) {
+            $message .= ' for "' . $subject->getName() . '"';
         }
-
-        if (isset($context[self::CONTEXT_LAST_STATE])) {
-            $message .= ' from "' . $this->stringConverter->convertToString($context[self::CONTEXT_LAST_STATE]) . '"';
-        }
-
-        if (isset($context[self::CONTEXT_CURRENT_STATE])) {
-            $message .= ' to "' . $this->stringConverter->convertToString($context[self::CONTEXT_CURRENT_STATE]) . '"';
-        }
-
-        if (isset($context[self::CONTEXT_TRANSITION])) {
-            /* @var $transition TransitionInterface */
-            $transition = $context[self::CONTEXT_TRANSITION];
-            $eventName = $transition->getEventName();
-            $condition = $transition->getConditionName();
-
-            if ($eventName || $condition) {
-                $message .= ' with';
-                if ($eventName) {
-                    $message .= ' event "' . $eventName . '"';
-                }
-                if ($eventName) {
-                    $message .= ' condition "' . $condition . '"';
-                }
-            }
-        }
-
+        $message .= ' to "' . $statemachine->getCurrentState()->getName() . '"';
         return $message;
     }
 
-    /**
-     * @see SplObserver::update()
-     */
-    public function update(\SplSubject $stateMachine)
+    protected function buildLogContext(StatemachineInterface $statemachine): array
     {
-        if ($stateMachine instanceof StatemachineInterface) {
-            $context = $this->createLoggerContext($stateMachine);
-            $message = $this->createLoggerMessage($context);
-            $this->logger->log($this->loggerLevel, $message, $context);
+        $subject = $statemachine->getSubject();
+        $lastState = method_exists($statemachine, 'getLastState') ? $statemachine->getLastState() : null;
+        $transition = method_exists($statemachine, 'getSelectedTransition') ? $statemachine->getSelectedTransition() : null;
+
+        return [
+            'subject'      => $subject,
+            'currentState' => $statemachine->getCurrentState(),
+            'lastState'    => $lastState,
+            'transition'   => $transition,
+        ];
+    }
+
+    public function update(\SplSubject $subject): void
+    {
+        if ($subject instanceof StatemachineInterface) {
+            $this->logger->log(
+                $this->logLevel,
+                $this->buildLogMessage($subject),
+                $this->buildLogContext($subject)
+            );
         }
     }
 }

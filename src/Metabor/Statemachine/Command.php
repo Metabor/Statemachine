@@ -2,37 +2,27 @@
 
 namespace Metabor\Statemachine;
 
-use MetaborStd\Event\EventInterface;
-
 /**
  * @author Oliver Tischlinger
  */
 abstract class Command implements \SplObserver
 {
-    /**
-     * @param \SplSubject $subject
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function update(\SplSubject $subject)
+    public function __invoke(mixed ...$args): void
     {
-        if (!$subject instanceof EventInterface) {
-            throw new \InvalidArgumentException('Command can only be attached to an event!');
-        }
-        if (method_exists($this, '__invoke')) {
-            call_user_func_array($this, $subject->getInvokeArgs());
-        } else {
-            throw new \Exception('Command should have at least one __invoke method');
-        }
+        throw new \RuntimeException('Command is not invokable');
     }
 
-    /**
-     * Overwrite this to change the name for the Command that is displayed in the graph.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function update(\SplSubject $subject): void
     {
-        return get_class($this);
+        if (!method_exists($subject, 'getInvokeArgs')) {
+            throw new \RuntimeException('Subject does not support getInvokeArgs');
+        }
+        $args = $subject->getInvokeArgs();
+        $this->__invoke(...$args);
+    }
+
+    public function __toString(): string
+    {
+        return static::class;
     }
 }

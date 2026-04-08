@@ -5,83 +5,47 @@ namespace Metabor\Semaphore;
 use MetaborStd\Semaphore\LockAdapterInterface;
 use MetaborStd\Semaphore\MutexInterface;
 
+/**
+ * @author Oliver Tischlinger
+ */
 class LockAdapterMutex implements MutexInterface
 {
-    /**
-     * @var LockAdapterInterface
-     */
-    private $lockAdapter;
+    private LockAdapterInterface $lockAdapter;
+    private string $resourceName;
+    private bool $acquired = false;
 
-    /**
-     * @var string
-     */
-    private $resourceName;
-
-    /**
-     * @var bool
-     */
-    private $acquired = false;
-
-    /**
-     * @param LockAdapterInterface $lockAdapter
-     * @param string               $resourceName
-     */
-    public function __construct(LockAdapterInterface $lockAdapter, $resourceName)
+    public function __construct(LockAdapterInterface $lockAdapter, string $resourceName)
     {
         $this->lockAdapter = $lockAdapter;
         $this->resourceName = $resourceName;
     }
 
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::releaseLock()
-     */
-    public function releaseLock()
+    public function acquireLock(): bool
     {
         if ($this->acquired) {
-            $result = $this->lockAdapter->releaseLock($this->resourceName);
-            if ($result) {
-                $this->acquired = false;
-            }
-
-            return $result;
-        } else {
-            return false;
+            return true;
         }
-    }
-
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::isAcquired()
-     */
-    public function isAcquired()
-    {
-        return $this->acquired;
-    }
-
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::acquireLock()
-     */
-    public function acquireLock()
-    {
-        if (!$this->acquired) {
-            $this->acquired = $this->lockAdapter->acquireLock($this->resourceName);
+        $result = $this->lockAdapter->acquireLock($this->resourceName);
+        if ($result) {
+            $this->acquired = true;
         }
-
-        return $this->acquired;
+        return $result;
     }
 
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::isLocked()
-     */
-    public function isLocked()
+    public function releaseLock(): bool
+    {
+        $result = $this->lockAdapter->releaseLock($this->resourceName);
+        $this->acquired = false;
+        return $result;
+    }
+
+    public function isLocked(): bool
     {
         return $this->lockAdapter->isLocked($this->resourceName);
     }
 
-    /**
-     * release lock if mutex instance is destroyed.
-     */
-    public function __destruct()
+    public function isAcquired(): bool
     {
-        $this->releaseLock();
+        return $this->acquired;
     }
 }

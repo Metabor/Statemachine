@@ -9,12 +9,12 @@ use Metabor\Statemachine\Transition;
 /**
  * @author Oliver Tischlinger
  */
-class WeightTransitionTest extends \PHPUnit_Framework_TestCase
+class WeightTransitionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
      */
-    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis()
+    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis(): void
     {
         $targetState = new State('TargetState');
 
@@ -38,7 +38,7 @@ class WeightTransitionTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testThrowsAnExceptionIfMoreThanOneTransitionHasHighestWeight()
+    public function testThrowsAnExceptionIfMoreThanOneTransitionHasHighestWeight(): void
     {
         $targetState = new State('TargetState');
 
@@ -52,7 +52,7 @@ class WeightTransitionTest extends \PHPUnit_Framework_TestCase
 
         $selector = new WeightTransition();
 
-        $this->setExpectedException('\RuntimeException');
+        $this->expectException('\RuntimeException');
         $selector->selectTransition(new \ArrayIterator($transitions));
     }
 }

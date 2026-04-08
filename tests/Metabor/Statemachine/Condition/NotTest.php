@@ -20,7 +20,7 @@ class NotTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testInversedTheInnerCondition()
+    public function testInversedTheInnerCondition(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();

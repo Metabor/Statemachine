@@ -7,49 +7,32 @@ namespace Metabor\Observer;
  */
 class Subject implements \SplSubject
 {
-    /**
-     * @var \SplObjectStorage
-     */
-    private $observers;
+    /** @var \SplObjectStorage */
+    private \SplObjectStorage $observers;
 
-    /**
-     */
     public function __construct()
     {
         $this->observers = new \SplObjectStorage();
     }
 
-    /**
-     * @see \SplSubject::attach()
-     */
-    public function attach(\SplObserver $observer)
+    public function attach(\SplObserver $observer): void
     {
         $this->observers->attach($observer);
     }
 
-    /**
-     * @see \SplSubject::detach()
-     */
-    public function detach(\SplObserver $observer)
+    public function detach(\SplObserver $observer): void
     {
         $this->observers->detach($observer);
     }
 
-    /**
-     * @see \SplSubject::notify()
-     */
-    public function notify()
+    public function notify(): void
     {
-        /* @var $observer \SplObserver */
         foreach ($this->observers as $observer) {
             $observer->update($this);
         }
     }
 
-    /**
-     * @return \Traversable
-     */
-    public function getObservers()
+    public function getObservers(): \Traversable
     {
         return $this->observers;
     }

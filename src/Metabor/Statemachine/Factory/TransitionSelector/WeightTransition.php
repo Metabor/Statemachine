@@ -3,57 +3,27 @@
 namespace Metabor\Statemachine\Factory\TransitionSelector;
 
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 use MetaborStd\WeightedInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
-class WeightTransition implements TransitionSelectorInterface
+class WeightTransition extends ScoreTransition
 {
-    /**
-     * @var TransitionSelectorInterface
-     */
-    protected $innerSelector;
+    private float $epsilon;
 
-    /**
-     * @var float
-     */
-    protected $epsilon;
-
-    /**
-     * @param TransitionSelectorInterface|null $innerSelector
-     * @param float $epsilon
-     */
-    public function __construct(TransitionSelectorInterface $innerSelector = null, $epsilon = 0.001)
+    public function __construct(?TransitionSelectorInterface $innerSelector = null, float $epsilon = 0.0001)
     {
-        if ($innerSelector) {
-            $this->innerSelector = $innerSelector;
-        } else {
-            $this->innerSelector = new OneOrNoneActiveTransition();
-        }
+        parent::__construct($innerSelector);
         $this->epsilon = $epsilon;
     }
 
-    /**
-     * @see \MetaborStd\Statemachine\Factory\TransitionSelectorInterface::selectTransition()
-     */
-    public function selectTransition(\Traversable $transitions)
+    protected function getScore(TransitionInterface $transition): float
     {
-        $bestTransitions = array();
-        $bestWeight = null;
-        foreach ($transitions as $transition) {
-            if ($transition instanceof WeightedInterface) {
-                $weight = $transition->getWeight();
-                $diff = ($weight - $bestWeight);
-                if (($bestWeight === null) || ($diff >= $this->epsilon)) {
-                    $bestWeight = $weight;
-                    $bestTransitions = array($transition);
-                } elseif (abs($diff) < $this->epsilon) {
-                    $bestTransitions[] = $transition;
-                }
-            }
+        if ($transition instanceof WeightedInterface) {
+            return $transition->getWeight();
         }
-
-        return $this->innerSelector->selectTransition(new \ArrayIterator($bestTransitions));
+        return parent::getScore($transition);
     }
 }

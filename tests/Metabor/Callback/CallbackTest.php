@@ -2,21 +2,23 @@
 
 namespace Metabor\Callback;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Oliver Tischlinger
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
-    private $wasCalled;
+    private bool $wasCalled;
 
-    private $parameter;
+    private mixed $parameter;
 
-    public function callableMethod()
+    public function callableMethod(): void
     {
         $this->wasCalled = true;
     }
 
-    public function __invoke($parameter)
+    public function __invoke($parameter): void
     {
         $this->wasCalled = true;
         $this->assertSame($this->parameter, $parameter);
@@ -25,7 +27,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testConvertsCallableToCallback()
+    public function testConvertsCallableToCallback(): void
     {
         $callable = array($this, 'callableMethod');
         $callback = new Callback($callable);
@@ -37,7 +39,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testDeligateAllParamterToTheContainedCallableWhenInvoked()
+    public function testDeligateAllParamterToTheContainedCallableWhenInvoked(): void
     {
         $callback = new Callback($this);
         $this->parameter = new \stdClass();

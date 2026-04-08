@@ -16,7 +16,7 @@ class FactoryTest extends FactoryInterfaceTest
      */
     protected function createTestInstance()
     {
-        $processDetector = $this->getMockForAbstractClass('\MetaborStd\Statemachine\Factory\ProcessDetectorInterface');
+        $processDetector = $this->createMock('\MetaborStd\Statemachine\Factory\ProcessDetectorInterface');
         $name = 'TestProcess';
         $initialState = new State('TestState');
         $process = new Process($name, $initialState);

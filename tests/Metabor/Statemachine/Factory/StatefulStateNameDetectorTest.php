@@ -5,12 +5,12 @@ namespace Metabor\Statemachine\Factory;
 /**
  * @author Oliver Tischlinger
  */
-class StatefulStateNameDetectorTest extends \PHPUnit_Framework_TestCase
+class StatefulStateNameDetectorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testReturnsTheCurrentStateFromAStatefulObject()
+    public function testReturnsTheCurrentStateFromAStatefulObject(): void
     {
         $name = 'TestStatus';
-        $subject = $this->getMockForAbstractClass('\MetaborStd\Statemachine\StatefulInterface');
+        $subject = $this->createMock('\MetaborStd\Statemachine\StatefulInterface');
         $subject->expects($this->once())->method('getCurrentStateName')->willReturn($name);
 
         $detector = new StatefulStateNameDetector();
@@ -19,11 +19,11 @@ class StatefulStateNameDetectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($name, $result);
     }
 
-    public function testThrowsAnExscptionIfObjectIsNotStateful()
+    public function testThrowsAnExscptionIfObjectIsNotStateful(): void
     {
         $subject = new \stdClass();
         $detector = new StatefulStateNameDetector();
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $detector->detectCurrentStateName($subject);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Metabor\Callback;
 
-use InvalidArgumentException;
 use MetaborStd\CallbackInterface;
 
 /**
@@ -10,29 +9,16 @@ use MetaborStd\CallbackInterface;
  */
 class Callback implements CallbackInterface
 {
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $callable;
 
-    /**
-     * @param callable $callable
-     */
-    public function __construct($callable)
+    public function __construct(callable $callable)
     {
-        if (!is_callable($callable)) {
-            throw new InvalidArgumentException('Argument is not callable!');
-        }
         $this->callable = $callable;
     }
 
-    /**
-     * @see MetaborStd.CallbackInterface::__invoke()
-     */
-    public function __invoke()
+    public function __invoke(mixed ...$args): mixed
     {
-        $args = func_get_args();
-
-        return call_user_func_array($this->callable, $args);
+        return ($this->callable)(...$args);
     }
 }

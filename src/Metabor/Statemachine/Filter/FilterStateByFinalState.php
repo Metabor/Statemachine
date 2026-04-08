@@ -2,19 +2,25 @@
 
 namespace Metabor\Statemachine\Filter;
 
+use MetaborStd\Statemachine\StateInterface;
+
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class FilterStateByFinalState extends \FilterIterator
 {
-    /**
-     * @see FilterIterator::accept()
-     */
-    public function accept()
+    public function __construct(\Traversable $iterator)
     {
-        /* @var $state \MetaborStd\Statemachine\StateInterface */
-        $state = $this->current();
+        parent::__construct(new \IteratorIterator($iterator));
+    }
 
-        return (iterator_count($state->getTransitions()) == 0);
+    public function accept(): bool
+    {
+        $state = $this->current();
+        if (!$state instanceof StateInterface) {
+            return false;
+        }
+        $transitions = iterator_to_array($state->getTransitions());
+        return empty($transitions);
     }
 }

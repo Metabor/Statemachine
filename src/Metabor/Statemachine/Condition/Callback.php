@@ -2,39 +2,25 @@
 
 namespace Metabor\Statemachine\Condition;
 
-use ArrayAccess;
-use InvalidArgumentException;
 use Metabor\Named;
 use MetaborStd\Statemachine\ConditionInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class Callback extends Named implements ConditionInterface
 {
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $callable;
 
-    /**
-     * @param string   $name
-     * @param callable $callable
-     */
-    public function __construct($name, $callable)
+    public function __construct(string $name, callable $callable)
     {
         parent::__construct($name);
-        if (!is_callable($callable)) {
-            throw new InvalidArgumentException('Argument is not callable!');
-        }
         $this->callable = $callable;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     */
-    public function checkCondition($subject, ArrayAccess $context)
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
-        return call_user_func($this->callable, $subject, $context);
+        return (bool) ($this->callable)($subject, $context);
     }
 }

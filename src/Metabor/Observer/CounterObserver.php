@@ -3,35 +3,23 @@
 namespace Metabor\Observer;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class CounterObserver implements \SplObserver
 {
-    /**
-     * @var int
-     */
-    protected $count = 0;
+    protected int $count = 0;
 
-    /**
-     * @see SplObserver::update()
-     */
-    public function update(\SplSubject $subject)
+    public function update(\SplSubject $subject): void
     {
-        ++$this->count;
+        $this->count++;
     }
 
-    /**
-     * @return int
-     */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
 
-    /**
-     * 
-     */
-    public function resetCount()
+    public function resetCount(): void
     {
         $this->count = 0;
     }

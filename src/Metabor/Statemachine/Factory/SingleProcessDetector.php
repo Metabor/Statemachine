@@ -6,29 +6,18 @@ use MetaborStd\Statemachine\Factory\ProcessDetectorInterface;
 use MetaborStd\Statemachine\ProcessInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class SingleProcessDetector implements ProcessDetectorInterface
 {
-    /**
-     * @var ProcessInterface
-     */
-    private $process;
+    private ProcessInterface $process;
 
-    /**
-     * SingleProcessDetector constructor.
-     * @param ProcessInterface $process
-     */
     public function __construct(ProcessInterface $process)
     {
         $this->process = $process;
     }
 
-    /**
-     * @param object $subject
-     * @return ProcessInterface
-     */
-    public function detectProcess($subject)
+    public function detectProcess(object $subject): ProcessInterface
     {
         return $this->process;
     }

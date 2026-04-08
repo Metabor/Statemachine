@@ -5,12 +5,12 @@ namespace Metabor\KeyValue;
 /**
  * @author Oliver Tischlinger
  */
-class CriteriaTest extends \PHPUnit_Framework_TestCase
+class CriteriaTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
      */
-    public function testChecksIfAllKeyValuesAreTheSameInTheArrayAccessObject()
+    public function testChecksIfAllKeyValuesAreTheSameInTheArrayAccessObject(): void
     {
         $array = array();
         $array['Foo'] = 'bar';
@@ -30,7 +30,7 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testChecksIsFalseIfAtLeastOneKeyValuesIsDifferent()
+    public function testChecksIsFalseIfAtLeastOneKeyValuesIsDifferent(): void
     {
         $array = array();
         $array['Foo'] = 'bar';
@@ -51,7 +51,7 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testChecksIsFalseIfAtLeastOneKeyValuesIsDifferent2()
+    public function testChecksIsFalseIfAtLeastOneKeyValuesIsDifferent2(): void
     {
         $array = array();
         $array['Foo'] = 'bar';

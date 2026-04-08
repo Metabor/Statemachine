@@ -20,7 +20,7 @@ class OrCompositeTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testCombinesTheInnerConditionWithOr()
+    public function testCombinesTheInnerConditionWithOr(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();

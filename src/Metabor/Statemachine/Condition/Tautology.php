@@ -2,19 +2,19 @@
 
 namespace Metabor\Statemachine\Condition;
 
-use Metabor\Named;
 use MetaborStd\Statemachine\ConditionInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
-class Tautology extends Named implements ConditionInterface
+class Tautology implements ConditionInterface
 {
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function checkCondition($subject, \ArrayAccess $context)
+    public function getName(): string
+    {
+        return 'tautology';
+    }
+
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
         return true;
     }

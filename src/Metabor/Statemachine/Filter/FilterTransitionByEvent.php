@@ -2,37 +2,24 @@
 
 namespace Metabor\Statemachine\Filter;
 
-use MetaborStd\Statemachine\StateInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 
 /**
- * @author oliver.tischlinger@metabor.de
+ * @author Oliver Tischlinger
  */
 class FilterTransitionByEvent extends \FilterIterator
 {
-    /**
-     * @var string
-     */
-    private $eventName;
+    private string $eventName;
 
-    /**
-     * @param \Traversable $transitions
-     * @param string $eventName
-     */
-    public function __construct(\Traversable $transitions, $eventName)
+    public function __construct(\Iterator $iterator, string $eventName)
     {
-        parent::__construct(new \IteratorIterator($transitions));
+        parent::__construct($iterator);
         $this->eventName = $eventName;
     }
 
-    /**
-     * @see FilterIterator::accept()
-     */
-    public function accept()
+    public function accept(): bool
     {
-        /* @var $transition TransitionInterface */
         $transition = $this->current();
-
-        return ($transition->getEventName() === $this->eventName);
+        return $transition instanceof TransitionInterface && $transition->getEventName() === $this->eventName;
     }
 }

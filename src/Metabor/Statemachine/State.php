@@ -16,25 +16,12 @@ use MetaborStd\Statemachine\TransitionInterface;
  */
 class State extends Named implements StateInterface, \ArrayAccess, MetadataInterface
 {
-    /**
-     * @var \SplObjectStorage
-     */
-    private $transitions;
+    /** @var \SplObjectStorage */
+    private \SplObjectStorage $transitions;
+    private NamedCollection $events;
+    private \ArrayAccess $metadata;
 
-    /**
-     * @var NamedCollection
-     */
-    private $events;
-
-    /**
-     * @var \ArrayAccess
-     */
-    private $metadata;
-
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         parent::__construct($name);
         $this->transitions = new \SplObjectStorage();
@@ -42,18 +29,12 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
         $this->metadata = new Nullable();
     }
 
-    /**
-     * @return \Traversable
-     */
-    public function getTransitions()
+    public function getTransitions(): \Traversable
     {
         return clone $this->transitions;
     }
 
-    /**
-     * @param TransitionInterface $transition
-     */
-    public function addTransition(TransitionInterface $transition)
+    public function addTransition(TransitionInterface $transition): void
     {
         $this->transitions->attach($transition);
         $eventName = $transition->getEventName();
@@ -62,26 +43,17 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
         }
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateInterface::getEventNames()
-     */
-    public function getEventNames()
+    public function getEventNames(): array
     {
         return $this->events->getNames();
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateInterface::hasEvent()
-     */
-    public function hasEvent($name)
+    public function hasEvent(string $name): bool
     {
         return $this->events->has($name);
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateInterface::getEvent()
-     */
-    public function getEvent($name)
+    public function getEvent(string $name): Event
     {
         if ($this->events->has($name)) {
             $event = $this->events->get($name);
@@ -89,49 +61,32 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
             $event = new Event($name);
             $this->events->add($event);
         }
-
         return $event;
     }
 
-    /**
-     * @see ArrayAccess::offsetExists()
-     */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return $this->metadata->offsetExists($offset);
     }
 
-    /**
-     * @see ArrayAccess::offsetGet()
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->metadata->offsetGet($offset);
     }
 
-    /**
-     * @see ArrayAccess::offsetSet()
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->metadata->offsetSet($offset, $value);
     }
 
-    /**
-     * @see ArrayAccess::offsetUnset()
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->metadata->offsetUnset($offset);
     }
 
-    /**
-     * @see \MetaborStd\MetadataInterface::getMetadata()
-     */
-    public function getMetadata()
+    public function getMetadata(): array
     {
         $converter = new ArrayAccessToArrayConverter($this->metadata);
-
         return $converter->toArray();
     }
 }

@@ -6,20 +6,16 @@ use MetaborStd\Statemachine\StatefulInterface;
 use MetaborStd\Statemachine\StatemachineInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class StatefulStatusChanger implements \SplObserver
 {
-    /**
-     * @see SplObserver::update()
-     */
-    public function update(\SplSubject $stateMachine)
+    public function update(\SplSubject $subject): void
     {
-        if ($stateMachine instanceof StatemachineInterface) {
-            $subject = $stateMachine->getSubject();
-            if ($subject instanceof StatefulInterface) {
-                $stateName = $stateMachine->getCurrentState()->getName();
-                $subject->setCurrentStateName($stateName);
+        if ($subject instanceof StatemachineInterface) {
+            $statefulSubject = $subject->getSubject();
+            if ($statefulSubject instanceof StatefulInterface) {
+                $statefulSubject->setCurrentStateName($subject->getCurrentState()->getName());
             }
         }
     }

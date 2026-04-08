@@ -18,65 +18,35 @@ use MetaborStd\Statemachine\TransitionInterface;
  */
 class StateCollectionMerger implements MergeableInterface
 {
-    /**
-     * @var StateCollectionInterface
-     */
-    private $targetCollection;
+    private StateCollectionInterface $targetCollection;
+    private ?string $stateNamePrefix = null;
 
-    /**
-     * @var string
-     */
-    private $stateNamePrefix;
-
-    /**
-     * @param StateCollectionInterface $targetCollection
-     */
     public function __construct(StateCollectionInterface $targetCollection)
     {
         $this->targetCollection = $targetCollection;
     }
 
-    /**
-     * @return string
-     */
-    public function getStateNamePrefix()
+    public function getStateNamePrefix(): ?string
     {
         return $this->stateNamePrefix;
     }
 
-    /**
-     * @param string $stateNamePrefix
-     */
-    public function setStateNamePrefix($stateNamePrefix)
+    public function setStateNamePrefix(?string $stateNamePrefix): void
     {
         $this->stateNamePrefix = $stateNamePrefix;
     }
 
-    /**
-     * @return \MetaborStd\Statemachine\StateCollectionInterface
-     */
-    public function getTargetCollection()
+    public function getTargetCollection(): StateCollectionInterface
     {
         return $this->targetCollection;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \MetaborStd\Statemachine\StateInterface
-     */
-    protected function createState($name)
+    protected function createState(string $name): StateInterface
     {
         return new State($name);
     }
 
-    /**
-     * @param StateInterface      $sourceState
-     * @param TransitionInterface $sourceTransition
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition)
+    protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition): void
     {
         if ($sourceState instanceof State) {
             $sourceState->addTransition($sourceTransition);
@@ -85,11 +55,7 @@ class StateCollectionMerger implements MergeableInterface
         }
     }
 
-    /**
-     * @param TransitionInterface $sourceTransition
-     * @return ConditionInterface
-     */
-    protected function createCondition(TransitionInterface $sourceTransition)
+    protected function createCondition(TransitionInterface $sourceTransition): ?ConditionInterface
     {
         if ($sourceTransition->getConditionName()) {
             if ($sourceTransition instanceof Transition) {
@@ -104,14 +70,7 @@ class StateCollectionMerger implements MergeableInterface
         return $condition;
     }
 
-    /**
-     * @param TransitionInterface $sourceTransition
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return \Metabor\Statemachine\Transition
-     */
-    protected function createTransition(TransitionInterface $sourceTransition)
+    protected function createTransition(TransitionInterface $sourceTransition): Transition
     {
         $targetStateName = $sourceTransition->getTargetState()->getName();
         $targetState = $this->findOrCreateState($targetStateName);
@@ -119,7 +78,7 @@ class StateCollectionMerger implements MergeableInterface
         $eventName = $sourceTransition->getEventName();
 
         $condition = $this->createCondition($sourceTransition);
-        
+
         $transition = new Transition($targetState, $eventName, $condition);
         if ($sourceTransition instanceof WeightedInterface) {
             $transition->setWeight($sourceTransition->getWeight());
@@ -128,13 +87,7 @@ class StateCollectionMerger implements MergeableInterface
         return $transition;
     }
 
-    /**
-     * @param object $source
-     * @param object $target
-     *
-     * @throws \RuntimeException
-     */
-    protected function mergeMetadata($source, $target)
+    protected function mergeMetadata(object $source, object $target): void
     {
         if ($source instanceof \ArrayAccess) {
             if ($target instanceof \ArrayAccess) {
@@ -152,12 +105,7 @@ class StateCollectionMerger implements MergeableInterface
         }
     }
 
-    /**
-     * @param StateInterface $state
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function addState(StateInterface $state)
+    protected function addState(StateInterface $state): void
     {
         if ($this->targetCollection instanceof StateCollection) {
             $this->targetCollection->addState($state);
@@ -166,12 +114,7 @@ class StateCollectionMerger implements MergeableInterface
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \MetaborStd\Statemachine\StateInterface
-     */
-    protected function findOrCreateState($name)
+    protected function findOrCreateState(string $name): StateInterface
     {
         $name = $this->stateNamePrefix . $name;
         if ($this->targetCollection->hasState($name)) {
@@ -184,12 +127,7 @@ class StateCollectionMerger implements MergeableInterface
         return $targetState;
     }
 
-    /**
-     * @param StateInterface $sourceState
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function mergeState(StateInterface $sourceState)
+    protected function mergeState(StateInterface $sourceState): void
     {
         $name = $sourceState->getName();
         $targetState = $this->findOrCreateState($name);
@@ -213,9 +151,7 @@ class StateCollectionMerger implements MergeableInterface
         }
     }
 
-    /**
-     */
-    protected function mergeStateCollection(StateCollectionInterface $source)
+    protected function mergeStateCollection(StateCollectionInterface $source): void
     {
         /* @var $sourceState StateInterface */
         foreach ($source->getStates() as $sourceState) {
@@ -223,10 +159,7 @@ class StateCollectionMerger implements MergeableInterface
         }
     }
 
-    /**
-     * @see \MetaborStd\MergeableInterface::merge()
-     */
-    public function merge($source)
+    public function merge(mixed $source): void
     {
         if ($source instanceof StateCollectionInterface) {
             $this->mergeStateCollection($source);

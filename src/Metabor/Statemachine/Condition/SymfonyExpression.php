@@ -8,65 +8,34 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class SymfonyExpression extends Named implements ConditionInterface
 {
-    /**
-     * @var ExpressionLanguage
-     */
-    private $expressionLanguage;
+    private ExpressionLanguage $expressionLanguage;
+    private ?Expression $expression = null;
+    private array $values;
 
-    /**
-     * @var Expression
-     */
-    private $expression;
-
-    /**
-     * @var array
-     */
-    private $values;
-
-    /**
-     * @param string             $name
-     * @param array              $values
-     * @param ExpressionLanguage $expressionLanguage
-     */
-    public function __construct($name, array $values = array(), ExpressionLanguage $expressionLanguage = null)
+    public function __construct(string $name, array $values = [], ?ExpressionLanguage $expressionLanguage = null)
     {
         parent::__construct($name);
         $this->values = $values;
-        if ($expressionLanguage) {
-            $this->expressionLanguage = $expressionLanguage;
-        } else {
-            $this->expressionLanguage = new ExpressionLanguage();
-        }
+        $this->expressionLanguage = $expressionLanguage ?? new ExpressionLanguage();
     }
 
-    /**
-     * @return \Symfony\Component\ExpressionLanguage\Expression
-     */
-    protected function getExpression()
+    protected function getExpression(): Expression
     {
-        if (!$this->expression) {
-            $keys = array_keys($this->values);
-            $keys[] = 'subject';
-            $keys[] = 'context';
-            $this->expression = $this->expressionLanguage->parse($this->getName(), $keys);
+        if ($this->expression === null) {
+            $this->expression = new Expression($this->getName());
         }
-
         return $this->expression;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     */
-    public function checkCondition($subject, \ArrayAccess $context)
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
         $values = $this->values;
         $values['subject'] = $subject;
         $values['context'] = $context;
-
         return (bool) $this->expressionLanguage->evaluate($this->getExpression(), $values);
     }
 }

@@ -6,16 +6,17 @@ use Metabor\Statemachine\Condition\Tautology;
 use Metabor\Statemachine\Factory\TransitionSelector\ScoreTransition;
 use Metabor\Statemachine\State;
 use Metabor\Statemachine\Transition;
+use PHPUnit\Framework\Attributes\Depends;
 
 /**
  * @author Oliver Tischlinger
  */
-class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
+class ScoreTransitionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @return \Metabor\Statemachine\Transition[]
      */
-    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis()
+    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis(): array
     {
         $targetState = new State('TargetState');
 
@@ -33,14 +34,8 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
         return $transitions;
     }
 
-    /**
-     * @depends testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis
-     *
-     * @param array $transitions
-     *
-     * @return \Metabor\Statemachine\Transition[]
-     */
-    public function testPreferTransitionWithCondition(array $transitions)
+    #[Depends('testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis')]
+    public function testPreferTransitionWithCondition(array $transitions): array
     {
         $targetState = new State('TargetState');
         $condition = new Tautology('Always True');
@@ -58,14 +53,8 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
         return $transitions;
     }
 
-    /**
-     * @depends testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis
-     *
-     * @param array $transitions
-     *
-     * @return \Metabor\Statemachine\Transition[]
-     */
-    public function testPreferTransitionWithEvent(array $transitions)
+    #[Depends('testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis')]
+    public function testPreferTransitionWithEvent(array $transitions): array
     {
         $targetState = new State('TargetState');
         $eventName = 'testEvent';
@@ -83,12 +72,8 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
         return $transitions;
     }
 
-    /**
-     * @depends testPreferTransitionWithCondition
-     *
-     * @param array $transitions
-     */
-    public function testPrefereTransitionWithEventAndCondition(array $transitions)
+    #[Depends('testPreferTransitionWithCondition')]
+    public function testPrefereTransitionWithEventAndCondition(array $transitions): void
     {
         $targetState = new State('TargetState');
         $eventName = 'testEvent';
@@ -108,7 +93,7 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testThrowsAnExceptionIfMoreThanOneTransitionIsInTheHighestLevel()
+    public function testThrowsAnExceptionIfMoreThanOneTransitionIsInTheHighestLevel(): void
     {
         $targetState = new State('TargetState');
 
@@ -118,7 +103,7 @@ class ScoreTransitionTest extends \PHPUnit_Framework_TestCase
 
         $selector = new ScoreTransition();
 
-        $this->setExpectedException('\RuntimeException');
+        $this->expectException('\RuntimeException');
         $selector->selectTransition(new \ArrayIterator($transitions));
     }
 }

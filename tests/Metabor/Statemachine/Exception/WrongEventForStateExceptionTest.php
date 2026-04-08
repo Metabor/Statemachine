@@ -2,16 +2,16 @@
 
 namespace Metabor\Statemachine\Exception;
 
-class WrongEventForStateExceptionTest extends \PHPUnit_Framework_TestCase
+class WrongEventForStateExceptionTest extends \PHPUnit\Framework\TestCase
 {
-    public function testStateNameIsAccessible()
+    public function testStateNameIsAccessible(): void
     {
         $exception = new WrongEventForStateException('stateName', 'eventName', 0);
 
         $this->assertSame('stateName', $exception->getStateName());
     }
 
-    public function testEventNameIsAccessible()
+    public function testEventNameIsAccessible(): void
     {
         $exception = new WrongEventForStateException('stateName', 'eventName', 0);
 

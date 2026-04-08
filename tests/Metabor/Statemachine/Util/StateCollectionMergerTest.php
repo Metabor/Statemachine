@@ -11,7 +11,7 @@ use Metabor\Statemachine\Transition;
 /**
  * @author Oliver Tischlinger
  */
-class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
+class StateCollectionMergerTest extends \PHPUnit\Framework\TestCase
 {
     const FLAG_FOR_TEST = 'Flag for Test';
     const FLAG_FOR_TEST_VALUE = 'Metabor';
@@ -49,7 +49,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         return $sourceCollection;
     }
 
-    public function testCreatesAllStatesFromSourceAtTargetColletions()
+    public function testCreatesAllStatesFromSourceAtTargetColletions(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);
@@ -67,7 +67,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($targetCollection->hasState('done'));
     }
 
-    public function testCreatedStatesAreEqualButNotTheSame()
+    public function testCreatedStatesAreEqualButNotTheSame(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);
@@ -98,7 +98,7 @@ class StateCollectionMergerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCopiesAllFlags()
+    public function testCopiesAllFlags(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);

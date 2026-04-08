@@ -20,15 +20,17 @@ class AndCompositeTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testCombinesTheInnerConditionWithAnd()
+    public function testCombinesTheInnerConditionWithAnd(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();
         $context = new \ArrayIterator();
         $result = $instance->checkCondition($subject, $context);
-        $this->assertTrue($result);
+        $this->assertIsBool($result);
+        $this->assertSame(true, $result);
         $instance->addAnd(new Contradiction('Other Condition'));
         $result = $instance->checkCondition($subject, $context);
-        $this->assertFalse($result);
+        $this->assertIsBool($result);
+        $this->assertSame(false, $result);
     }
 }

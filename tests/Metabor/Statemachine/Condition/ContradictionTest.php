@@ -20,7 +20,7 @@ class ContradictionTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testIsAllwaysFalse()
+    public function testIsAllwaysFalse(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();

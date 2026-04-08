@@ -3,34 +3,18 @@
 namespace Metabor\Statemachine\Transition;
 
 use MetaborStd\Event\EventInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class ActiveTransitionFilter extends \FilterIterator
 {
-    /**
-     * @var object
-     */
-    protected $subject;
+    private object $subject;
+    private \ArrayAccess $context;
+    private ?EventInterface $event;
 
-    /**
-     * @var \ArrayAccess
-     */
-    protected $context;
-
-    /**
-     * @var EventInterface
-     */
-    protected $event;
-
-    /**
-     * @param \Traversable   $transitions
-     * @param object         $subject
-     * @param \ArrayAccess   $context
-     * @param EventInterface $event
-     */
-    public function __construct(\Traversable $transitions, $subject, \ArrayAccess $context, EventInterface $event = null)
+    public function __construct(\Traversable $transitions, object $subject, \ArrayAccess $context, ?EventInterface $event = null)
     {
         parent::__construct(new \IteratorIterator($transitions));
         $this->subject = $subject;
@@ -38,13 +22,11 @@ class ActiveTransitionFilter extends \FilterIterator
         $this->event = $event;
     }
 
-    /**
-     * @see FilterIterator::accept()
-     */
-    public function accept()
+    public function accept(): bool
     {
         $transition = $this->current();
 
-        return $transition->isActive($this->subject, $this->context, $this->event);
+        return $transition instanceof TransitionInterface
+            && $transition->isActive($this->subject, $this->context, $this->event);
     }
 }

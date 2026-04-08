@@ -2,19 +2,19 @@
 
 namespace Metabor\Statemachine\Condition;
 
-use Metabor\Named;
 use MetaborStd\Statemachine\ConditionInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
-class Contradiction extends Named implements ConditionInterface
+class Contradiction implements ConditionInterface
 {
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function checkCondition($subject, \ArrayAccess $context)
+    public function getName(): string
+    {
+        return 'contradiction';
+    }
+
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
         return false;
     }

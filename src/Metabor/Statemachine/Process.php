@@ -15,26 +15,11 @@ use MetaborStd\Statemachine\TransitionInterface;
  */
 class Process extends Named implements ProcessInterface, MergeableInterface
 {
-    /**
-     * @var StateCollection
-     */
-    private $states;
+    private StateCollection $states;
+    private StateInterface $initialState;
+    private ?StateCollectionMerger $stateCollectionMerger = null;
 
-    /**
-     * @var StateInterface
-     */
-    private $initialState;
-
-    /**
-     * @var StateCollectionMerger
-     */
-    private $stateCollectionMerger;
-
-    /**
-     * @param string         $name
-     * @param StateInterface $initialState
-     */
-    public function __construct($name, StateInterface $initialState)
+    public function __construct(string $name, StateInterface $initialState)
     {
         parent::__construct($name);
         $this->initialState = $initialState;
@@ -42,10 +27,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
         $this->initProcess(new SetupHelper($this->states));
     }
 
-    /**
-     * @param StateInterface $state
-     */
-    protected function addState(StateInterface $state)
+    protected function addState(StateInterface $state): void
     {
         $name = $state->getName();
         if ($this->states->hasState($name)) {
@@ -62,60 +44,38 @@ class Process extends Named implements ProcessInterface, MergeableInterface
         }
     }
 
-    /**
-     * @param SetupHelper $setupHelper
-     */
-    protected function initProcess(SetupHelper $setupHelper)
+    protected function initProcess(SetupHelper $setupHelper): void
     {
         // overwrite to use SetupHelper
     }
 
-    /**
-     */
-    protected function createCollection()
+    protected function createCollection(): void
     {
         $this->states = new StateCollection();
         $this->addState($this->initialState);
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ProcessInterface::getInitialState()
-     */
-    public function getInitialState()
+    public function getInitialState(): StateInterface
     {
         return $this->initialState;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ProcessInterface::getStates()
-     */
-    public function getStates()
+    public function getStates(): \Traversable
     {
         return $this->states->getStates();
     }
 
-    /**
-     * @param string $name
-     */
-    public function getState($name)
+    public function getState(string $name): StateInterface
     {
         return $this->states->getState($name);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasState($name)
+    public function hasState(string $name): bool
     {
         return $this->states->hasState($name);
     }
 
-    /**
-     * @return StateCollectionMerger
-     */
-    public function getStateCollectionMerger()
+    public function getStateCollectionMerger(): StateCollectionMerger
     {
         if (!$this->stateCollectionMerger) {
             $this->stateCollectionMerger = new StateCollectionMerger($this->states);
@@ -124,10 +84,7 @@ class Process extends Named implements ProcessInterface, MergeableInterface
         return $this->stateCollectionMerger;
     }
 
-    /**
-     * @see \MetaborStd\MergeableInterface::merge()
-     */
-    public function merge($source)
+    public function merge(mixed $source): void
     {
         $merger = $this->getStateCollectionMerger();
         $merger->merge($source);

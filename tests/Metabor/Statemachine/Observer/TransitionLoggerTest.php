@@ -11,12 +11,12 @@ use Psr\Log\LogLevel;
 /**
  * @author otischlinger
  */
-class TransitionLoggerTest extends \PHPUnit_Framework_TestCase
+class TransitionLoggerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
      */
-    public function testChangesStatusOnStatefulObjects()
+    public function testChangesStatusOnStatefulObjects(): void
     {
         $subject = new Named('SubjectName');
         $state = new State('stateName');
@@ -30,7 +30,7 @@ class TransitionLoggerTest extends \PHPUnit_Framework_TestCase
         $context['lastState'] = null;
         $context['transition'] = null;
 
-        $logger = $this->getMockForAbstractClass('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger->expects($this->once())->method('log')->with(LogLevel::INFO, $message, $context);
         $observer = new TransitionLogger($logger);
         $observer->update($stateMachine);

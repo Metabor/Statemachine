@@ -5,20 +5,20 @@ namespace Metabor\Observer;
 /**
  * @author Oliver Tischlinger
  */
-class SubjectTest extends \PHPUnit_Framework_TestCase
+class SubjectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
      */
-    public function testImplementsSubjectPartOfObserverPattern()
+    public function testImplementsSubjectPartOfObserverPattern(): void
     {
         $subject = new Subject();
 
-        $observerA = $this->getMockForAbstractClass('\SplObserver');
+        $observerA = $this->createMock('\SplObserver');
         $observerA->expects($this->once())->method('update')->with($subject);
         $subject->attach($observerA);
 
-        $observerB = $this->getMockForAbstractClass('\SplObserver');
+        $observerB = $this->createMock('\SplObserver');
         $observerB->expects($this->never())->method('update')->with($subject);
         $subject->attach($observerB);
         $subject->detach($observerB);
@@ -29,14 +29,14 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testObserverCanBeAttachedAndDetach()
+    public function testObserverCanBeAttachedAndDetach(): void
     {
         $subject = new Subject();
 
-        $observerA = $this->getMockForAbstractClass('\SplObserver');
+        $observerA = $this->createMock('\SplObserver');
         $subject->attach($observerA);
 
-        $observerB = $this->getMockForAbstractClass('\SplObserver');
+        $observerB = $this->createMock('\SplObserver');
         $subject->attach($observerB);
         $subject->detach($observerB);
 

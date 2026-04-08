@@ -6,61 +6,41 @@ use ArrayAccess;
 use MetaborStd\ArrayConvertableInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class Nullable implements ArrayAccess, ArrayConvertableInterface
 {
-    /**
-     * @var array
-     */
-    private $keyValue = array();
+    private array $keyValue = [];
 
-    /**
-     * @param array $keyValue
-     */
-    public function __construct(array $keyValue = array())
+    public function __construct(array $keyValue = [])
     {
         $this->keyValue = $keyValue;
     }
 
-    /**
-     * @see ArrayAccess::offsetExists()
-     */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->keyValue[$offset]);
     }
 
-    /**
-     * @see ArrayAccess::offsetGet()
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         if (isset($this->keyValue[$offset])) {
             return $this->keyValue[$offset];
         }
+        return null;
     }
 
-    /**
-     * @see ArrayAccess::offsetSet()
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->keyValue[$offset] = $value;
     }
 
-    /**
-     * @see ArrayAccess::offsetUnset()
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->keyValue[$offset]);
     }
 
-    /**
-     * @see \MetaborStd\ArrayConvertableInterface::toArray()
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->keyValue;
     }

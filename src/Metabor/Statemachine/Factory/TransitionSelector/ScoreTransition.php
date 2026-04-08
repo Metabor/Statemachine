@@ -6,62 +6,45 @@ use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
 use MetaborStd\Statemachine\TransitionInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class ScoreTransition implements TransitionSelectorInterface
 {
-    /**
-     * @var TransitionSelectorInterface
-     */
-    protected $innerSelector;
+    private TransitionSelectorInterface $innerSelector;
 
-    /**
-     * @param TransitionSelectorInterface|null $innerSelector
-     */
-    public function __construct(TransitionSelectorInterface $innerSelector = null)
+    public function __construct(?TransitionSelectorInterface $innerSelector = null)
     {
-        if ($innerSelector) {
-            $this->innerSelector = $innerSelector;
-        } else {
-            $this->innerSelector = new OneOrNoneActiveTransition();
-        }
+        $this->innerSelector = $innerSelector ?? new OneOrNoneActiveTransition();
     }
 
-    /**
-     * @param TransitionInterface $transition
-     *
-     * @return int
-     */
-    protected function calculcateScore(TransitionInterface $transition)
+    protected function getScore(TransitionInterface $transition): float
     {
-        $score = 0;
-        if ($transition->getEventName()) {
-            $score += 2;
+        $score = 0.0;
+        if ($transition->getEventName() !== null) {
+            $score += 1.0;
         }
-        if ($transition->getConditionName()) {
-            ++$score;
+        if ($transition->getConditionName() !== null) {
+            $score += 1.0;
         }
-
         return $score;
     }
 
-    /**
-     * @see \MetaborStd\Statemachine\Factory\TransitionSelectorInterface::selectTransition()
-     */
-    public function selectTransition(\Traversable $transitions)
+    public function selectTransition(\Traversable $transitions): ?TransitionInterface
     {
-        $bestTransitions = array();
-        $bestScore = -1;
+        $scored = [];
         foreach ($transitions as $transition) {
-            $score = $this->calculcateScore($transition);
-            if ($score > $bestScore) {
-                $bestScore = $score;
-                $bestTransitions = array($transition);
-            } elseif ($score == $bestScore) {
-                $bestTransitions[] = $transition;
-            }
+            $scored[] = [$this->getScore($transition), $transition];
         }
 
-        return $this->innerSelector->selectTransition(new \ArrayIterator($bestTransitions));
+        if (empty($scored)) {
+            return null;
+        }
+
+        usort($scored, fn($a, $b) => $b[0] <=> $a[0]);
+        $maxScore = $scored[0][0];
+        $topTransitions = array_filter($scored, fn($item) => $item[0] === $maxScore);
+        $topTransitions = array_map(fn($item) => $item[1], $topTransitions);
+
+        return $this->innerSelector->selectTransition(new \ArrayIterator(array_values($topTransitions)));
     }
 }

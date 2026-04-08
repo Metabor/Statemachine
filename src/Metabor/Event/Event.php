@@ -3,106 +3,94 @@
 namespace Metabor\Event;
 
 use Metabor\KeyValue\Nullable;
+use Metabor\Named;
+use Metabor\NamedCollection;
 use Metabor\Observer\Subject;
 use Metabor\Statemachine\Util\ArrayAccessToArrayConverter;
 use MetaborStd\Event\EventInterface;
 use MetaborStd\MetadataInterface;
+use MetaborStd\NamedInterface;
 
 /**
  * @author Oliver Tischlinger
  */
-class Event extends Subject implements EventInterface, \ArrayAccess, MetadataInterface
+class Event extends Named implements EventInterface, \ArrayAccess, MetadataInterface
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private array $invokeArgs = [];
+    private \ArrayAccess $metadata;
+    /** @var \SplObjectStorage */
+    private \SplObjectStorage $observers;
 
-    /**
-     * @var array
-     */
-    private $invokeArgs = array();
-
-    /**
-     * @var \ArrayAccess
-     */
-    private $metadata;
-
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
-        parent::__construct();
-        $this->name = $name;
+        parent::__construct($name);
         $this->metadata = new Nullable();
+        $this->observers = new \SplObjectStorage();
     }
 
-    /**
-     * @see MetaborStd\Event.EventInterface::getInvokeArgs()
-     */
-    public function getInvokeArgs()
+    public function getInvokeArgs(): array
     {
         return $this->invokeArgs;
     }
 
-    /**
-     * @see \MetaborStd\CallbackInterface::__invoke()
-     */
-    public function __invoke()
+    public function __invoke(mixed ...$args): mixed
     {
-        $this->invokeArgs = func_get_args();
+        $this->invokeArgs = $args;
         $this->notify();
-        $this->invokeArgs = array();
+        $this->invokeArgs = [];
+        return null;
     }
 
-    /**
-     * @see \MetaborStd\NamedInterface::getName()
-     */
-    public function getName()
+    public function getName(): string
     {
-        return $this->name;
+        return parent::getName();
     }
 
-    /**
-     * @see \ArrayAccess::offsetExists()
-     */
-    public function offsetExists($offset)
+    public function attach(\SplObserver $observer): void
+    {
+        $this->observers->attach($observer);
+    }
+
+    public function detach(\SplObserver $observer): void
+    {
+        $this->observers->detach($observer);
+    }
+
+    public function notify(): void
+    {
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
+    }
+
+    public function getObservers(): \Traversable
+    {
+        return $this->observers;
+    }
+
+    public function offsetExists(mixed $offset): bool
     {
         return $this->metadata->offsetExists($offset);
     }
 
-    /**
-     * @see \ArrayAccess::offsetGet()
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->metadata->offsetGet($offset);
     }
 
-    /**
-     * @see \ArrayAccess::offsetSet()
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->metadata->offsetSet($offset, $value);
     }
 
-    /**
-     * @see \ArrayAccess::offsetUnset()
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->metadata->offsetUnset($offset);
     }
 
-    /**
-     * @see \MetaborStd\MetadataInterface::getMetadata()
-     */
-    public function getMetadata()
+    public function getMetadata(): array
     {
         $converter = new ArrayAccessToArrayConverter($this->metadata);
-
         return $converter->toArray();
     }
 }

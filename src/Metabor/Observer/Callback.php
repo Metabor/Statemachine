@@ -9,24 +9,15 @@ use MetaborStd\CallbackInterface;
  */
 class Callback implements \SplObserver
 {
-    /**
-     * @var CallbackInterface
-     */
-    private $callback;
+    private CallbackInterface $callback;
 
-    /**
-     * @param CallbackInterface $callback
-     */
     public function __construct(CallbackInterface $callback)
     {
         $this->callback = $callback;
     }
 
-    /**
-     * @see \SplObserver::update()
-     */
-    public function update(\SplSubject $subject)
+    public function update(\SplSubject $subject): void
     {
-        $this->callback->__invoke($subject);
+        ($this->callback)($subject);
     }
 }

@@ -10,9 +10,9 @@ use Metabor\Statemachine\Transition;
 /**
  * @author Oliver Tischlinger
  */
-class GraphBuilderTest extends \PHPUnit_Framework_TestCase
+class GraphBuilderTest extends \PHPUnit\Framework\TestCase
 {
-    public function testAddsStatesToGraph()
+    public function testAddsStatesToGraph(): void
     {
         $state = new State('first');
         $stateCollection = new StateCollection();
