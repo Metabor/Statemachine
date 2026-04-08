@@ -4,15 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "818579fda7c68e792ce8bb8c455d65d8",
+    "content-hash": "ce76c17f2683eb812093e59ffe41978b",
     "packages": [
         {
             "name": "metabor/metabor-std",
-            "version": "dev-3.0.x-dev",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Metabor/MetaborStd.git",
+                "reference": "d124ed006759ec5c830f326f398e936829982cca"
+            },
             "dist": {
-                "type": "path",
-                "url": "../MetaborStd",
-                "reference": "4e342ce2e204cd7d887fa67f1335e6ad4c1874b3"
+                "type": "zip",
+                "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/d124ed006759ec5c830f326f398e936829982cca",
+                "reference": "d124ed006759ec5c830f326f398e936829982cca",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
@@ -35,6 +41,7 @@
                     "MetaborStd\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -50,9 +57,11 @@
                 "interfaces",
                 "standard"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/Metabor/MetaborStd/issues",
+                "source": "https://github.com/Metabor/MetaborStd/tree/v3.0.0"
+            },
+            "time": "2026-04-08T16:05:30+00:00"
         }
     ],
     "packages-dev": [
@@ -3400,9 +3409,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "metabor/metabor-std": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

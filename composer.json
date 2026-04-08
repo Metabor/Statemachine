@@ -38,11 +38,5 @@
             "dev-master": "3.0.x-dev",
             "dev-3.0.x-dev": "3.0.x-dev"
         }
-    },
-    "repositories": {
-        "metabor-std": {
-            "type": "path",
-            "url": "../MetaborStd"
-        }
     }
 }
