@@ -18,7 +18,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
      */
     protected function createCallbackMock(InvocationOrder $matcher, $parameter = null)
     {
-        $mock = $this->getMockForAbstractClass('\MetaborStd\CallbackInterface');
+        $mock = $this->createMock('\MetaborStd\CallbackInterface');
         $method = $mock->expects($matcher)->method('__invoke');
         if ($parameter) {
             $method->with($parameter);
@@ -32,7 +32,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testCallsAllAttachedCallbacksWhenInvoked()
+    public function testCallsAllAttachedCallbacksWhenInvoked(): void
     {
         $composite = new Composite();
         $parameter = new \stdClass();

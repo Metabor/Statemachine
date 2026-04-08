@@ -14,7 +14,7 @@ class WeightTransitionTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis()
+    public function testIfThereIsOnlyOneTransitionWithoutEventAndTransitionUseThis(): void
     {
         $targetState = new State('TargetState');
 
@@ -38,7 +38,7 @@ class WeightTransitionTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testThrowsAnExceptionIfMoreThanOneTransitionHasHighestWeight()
+    public function testThrowsAnExceptionIfMoreThanOneTransitionHasHighestWeight(): void
     {
         $targetState = new State('TargetState');
 

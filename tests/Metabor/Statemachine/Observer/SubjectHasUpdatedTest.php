@@ -12,7 +12,7 @@ class SubjectHasUpdatedTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testCollectAllUpdatedSubjects()
+    public function testCollectAllUpdatedSubjects(): void
     {
         $subject = new Subject();
         $observer = new SubjectHasUpdated();

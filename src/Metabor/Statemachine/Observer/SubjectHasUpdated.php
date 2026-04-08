@@ -2,16 +2,19 @@
 
 namespace Metabor\Statemachine\Observer;
 
+use MetaborStd\Statemachine\StatemachineInterface;
+
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class SubjectHasUpdated extends \SplObjectStorage implements \SplObserver
 {
-    /**
-     * @see SplObserver::update()
-     */
     public function update(\SplSubject $subject): void
     {
-        $this->attach($subject);
+        if ($subject instanceof StatemachineInterface) {
+            $this->attach($subject->getSubject());
+        } else {
+            $this->attach($subject);
+        }
     }
 }

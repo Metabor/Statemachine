@@ -2,42 +2,32 @@
 
 namespace Metabor\Statemachine;
 
-use MetaborStd\NamedInterface;
+use Metabor\Named;
 
 /**
  * @author Oliver Tischlinger
  */
-abstract class NamedCommand extends Command implements NamedInterface
+abstract class NamedCommand extends Command
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $commandName;
 
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $commandName)
     {
-        $this->name = $name;
+        $this->commandName = $commandName;
     }
 
-    /**
-     * @see \MetaborStd\NamedInterface::getName()
-     */
-    public function getName()
+    public function getCommandName(): string
     {
-        return $this->name;
+        return $this->commandName;
     }
 
-    /**
-     * I would require to provide a name because its really needed for visualisation
-     * and the class name might be very long and not very descriptive.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function getName(): string
     {
-        return $this->getName();
+        return $this->commandName;
+    }
+
+    public function __toString(): string
+    {
+        return $this->commandName;
     }
 }

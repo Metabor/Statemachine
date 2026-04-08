@@ -10,11 +10,11 @@ class CallbackTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testConvertsACallbackIntoAnObserver()
+    public function testConvertsACallbackIntoAnObserver(): void
     {
-        $subject = $this->getMockForAbstractClass('\SplSubject');
+        $subject = $this->createMock('\SplSubject');
 
-        $callback = $this->getMockForAbstractClass('\MetaborStd\CallbackInterface');
+        $callback = $this->createMock('\MetaborStd\CallbackInterface');
         $callback->expects($this->once())->method('__invoke')->with($subject);
 
         $observer = new Callback($callback);

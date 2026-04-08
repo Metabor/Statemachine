@@ -5,32 +5,21 @@ namespace Metabor\Statemachine\Filter;
 use MetaborStd\Statemachine\StateInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class FilterStateByEvent extends \FilterIterator
 {
-    /**
-     * @var string
-     */
-    private $eventName;
+    private string $eventName;
 
-    /**
-     * @param string $eventName
-     */
-    public function __construct(\Traversable $states, $eventName)
+    public function __construct(\Traversable $iterator, string $eventName)
     {
-        parent::__construct(new \IteratorIterator($states));
+        parent::__construct(new \IteratorIterator($iterator));
         $this->eventName = $eventName;
     }
 
-    /**
-     * @see FilterIterator::accept()
-     */
     public function accept(): bool
     {
-        /* @var $state StateInterface */
         $state = $this->current();
-
-        return $state->hasEvent($this->eventName);
+        return $state instanceof StateInterface && $state->hasEvent($this->eventName);
     }
 }

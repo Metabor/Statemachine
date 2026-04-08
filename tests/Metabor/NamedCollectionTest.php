@@ -9,7 +9,7 @@ use MetaborStd\NamedInterfaceTest;
  */
 class NamedCollectionTest extends \PHPUnit\Framework\TestCase
 {
-    public function testStoresNamedObject()
+    public function testStoresNamedObject(): void
     {
         $objectName = 'TestName';
         $named1 =  new Named($objectName);

@@ -3,26 +3,21 @@
 namespace Metabor\Statemachine\Factory\TransitionSelector;
 
 use MetaborStd\Statemachine\Factory\TransitionSelectorInterface;
+use MetaborStd\Statemachine\TransitionInterface;
 
 /**
  * @author otischlinger
  */
 class OneOrNoneActiveTransition implements TransitionSelectorInterface
 {
-    /**
-     * @see \MetaborStd\Statemachine\Factory\TransitionSelectorInterface::selectTransition()
-     */
-    public function selectTransition(\Traversable $transitions)
+    public function selectTransition(\Traversable $transitions): ?TransitionInterface
     {
         $transitions = iterator_to_array($transitions);
 
-        switch (count($transitions)) {
-            case 0:
-                return null;
-            case 1:
-                return reset($transitions);
-            default:
-                throw new \RuntimeException('More than one transition is active!');
-        }
+        return match (count($transitions)) {
+            0 => null,
+            1 => reset($transitions),
+            default => throw new \RuntimeException('More than one transition is active!'),
+        };
     }
 }

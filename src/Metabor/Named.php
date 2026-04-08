@@ -9,31 +9,19 @@ use MetaborStd\NamedInterface;
  */
 class Named implements NamedInterface
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->setName($name);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    protected function setName($name)
+    protected function setName(string $name): void
     {
         $this->name = $name;
     }

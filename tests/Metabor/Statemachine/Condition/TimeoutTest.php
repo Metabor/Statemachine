@@ -20,10 +20,10 @@ class TimeoutTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testWillStayFalseUntilLastStateHasChangedDateReachedTimeoutIntervall()
+    public function testWillStayFalseUntilLastStateHasChangedDateReachedTimeoutIntervall(): void
     {
         $instance = $this->createTestInstance();
-        $subject = $this->getMockForAbstractClass('MetaborStd\Statemachine\LastStateHasChangedDateInterface');
+        $subject = $this->createMock('MetaborStd\Statemachine\LastStateHasChangedDateInterface');
         $subject->expects($this->atLeastOnce())
         ->method('getLastStateHasChangedDate')
         ->willReturn(new \DateTime());
@@ -35,10 +35,10 @@ class TimeoutTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testWillBecomeTrueAfterLastStateHasChangedDateReachedTimeoutIntervall()
+    public function testWillBecomeTrueAfterLastStateHasChangedDateReachedTimeoutIntervall(): void
     {
         $instance = $this->createTestInstance();
-        $subject = $this->getMockForAbstractClass('MetaborStd\Statemachine\LastStateHasChangedDateInterface');
+        $subject = $this->createMock('MetaborStd\Statemachine\LastStateHasChangedDateInterface');
         $subject->expects($this->atLeastOnce())
             ->method('getLastStateHasChangedDate')
             ->willReturn(new \DateTime('1 week ago'));

@@ -10,9 +10,9 @@ class CounterOberserverTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testCountsHowOftenTheObserverWasCalled()
+    public function testCountsHowOftenTheObserverWasCalled(): void
     {
-        $subject = $this->getMockForAbstractClass('\SplSubject');
+        $subject = $this->createMock('\SplSubject');
 
         $observer = new CounterObserver();
         $this->assertEquals(0, $observer->getCount());
@@ -24,9 +24,9 @@ class CounterOberserverTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testCanBeReset()
+    public function testCanBeReset(): void
     {
-        $subject = $this->getMockForAbstractClass('\SplSubject');
+        $subject = $this->createMock('\SplSubject');
 
         $observer = new CounterObserver();
         $this->assertEquals(0, $observer->getCount());

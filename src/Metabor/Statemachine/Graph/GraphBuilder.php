@@ -46,7 +46,7 @@ class GraphBuilder
      * @param Graph                    $graph
      * @param StringConverterInterface $stringConverter
      */
-    public function __construct(Graph $graph, StringConverterInterface $stringConverter = null)
+    public function __construct(Graph $graph, ?StringConverterInterface $stringConverter = null)
     {
         $this->layoutCallback = new \SplObjectStorage();
         $this->graph = $graph;

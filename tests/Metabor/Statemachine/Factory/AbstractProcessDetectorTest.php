@@ -19,17 +19,17 @@ class AbstractProcessDetectorTest extends \PHPUnit\Framework\TestCase
         return $subject->process;
     }
 
-    /**
-     *
-     */
-    public function testWillAlwaysReturnTheSameProcess()
+    public function testWillAlwaysReturnTheSameProcess(): void
     {
         $processA = new Process('A', new State('new'));
         $processB = new Process('B', new State('new'));
 
-        $detector = $this->getMockForAbstractClass('Metabor\Statemachine\Factory\AbstractNamedProcessDetector');
-        $detector->expects($this->atLeastOnce())->method('detectProcessName')
-            ->willReturnCallback(array($this, 'detectProcessName'));
+        $detector = new class extends \Metabor\Statemachine\Factory\AbstractNamedProcessDetector {
+            protected function detectProcessName(object $subject): string
+            {
+                return $subject->process;
+            }
+        };
         $detector->addProcess($processA);
         $detector->addProcess($processB);
 

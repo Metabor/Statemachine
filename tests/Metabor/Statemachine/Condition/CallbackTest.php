@@ -12,7 +12,7 @@ class CallbackTest extends NamedInterfaceTest
     /**
      * @var bool
      */
-    private $wasCalled = false;
+    private bool $wasCalled = false;
 
     /**
      * @see \MetaborStd\NamedInterfaceTest::createTestInstance()
@@ -25,7 +25,7 @@ class CallbackTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testConvertsCallableToCondition()
+    public function testConvertsCallableToCondition(): void
     {
         $instance = $this->createTestInstance();
         $this->wasCalled = false;
@@ -39,7 +39,7 @@ class CallbackTest extends NamedInterfaceTest
     /**
      * @return bool
      */
-    public function __invoke()
+    public function __invoke(): bool
     {
         $this->wasCalled = true;
 

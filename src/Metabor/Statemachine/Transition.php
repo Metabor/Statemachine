@@ -13,68 +13,37 @@ use MetaborStd\WeightedInterface;
  */
 class Transition implements TransitionInterface, WeightedInterface
 {
-    /**
-     * @var StateInterface
-     */
-    private $targetState;
+    private StateInterface $targetState;
+    private ?string $eventName;
+    private ?ConditionInterface $condition;
+    private float $weight = 1;
 
-    /**
-     * @var string
-     */
-    private $eventName;
-
-    /**
-     * @var ConditionInterface
-     */
-    private $condition;
-
-    /**
-     * @var float
-     */
-    private $weight = 1;
-
-    /**
-     * @param StateInterface     $targetState
-     * @param string             $eventName
-     * @param ConditionInterface $condition
-     */
-    public function __construct(StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
+    public function __construct(StateInterface $targetState, ?string $eventName = null, ?ConditionInterface $condition = null)
     {
         $this->targetState = $targetState;
         $this->eventName = $eventName;
         $this->condition = $condition;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.TransitionInterface::getTargetState()
-     */
-    public function getTargetState()
+    public function getTargetState(): StateInterface
     {
         return $this->targetState;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.TransitionInterface::getEventName()
-     */
-    public function getEventName()
+    public function getEventName(): ?string
     {
         return $this->eventName;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.TransitionInterface::getConditionName()
-     */
-    public function getConditionName()
+    public function getConditionName(): ?string
     {
         if ($this->condition) {
             return $this->condition->getName();
         }
+        return null;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.TransitionInterface::isActive()
-     */
-    public function isActive($subject, \ArrayAccess $context, EventInterface $event = null)
+    public function isActive(object $subject, \ArrayAccess $context, ?EventInterface $event = null): bool
     {
         if ($event) {
             $result = ($event->getName() == $this->eventName);
@@ -84,30 +53,20 @@ class Transition implements TransitionInterface, WeightedInterface
         if ($this->condition) {
             $result = $result && $this->condition->checkCondition($subject, $context);
         }
-
         return $result;
     }
 
-    /**
-     * @return \MetaborStd\Statemachine\ConditionInterface
-     */
-    public function getCondition()
+    public function getCondition(): ?ConditionInterface
     {
         return $this->condition;
     }
 
-    /**
-     * @return float
-     */
-    public function getWeight()
+    public function getWeight(): float
     {
         return $this->weight;
     }
 
-    /**
-     * @param float $weight
-     */
-    public function setWeight($weight)
+    public function setWeight(float $weight): void
     {
         $this->weight = $weight;
     }

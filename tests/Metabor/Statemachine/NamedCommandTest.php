@@ -12,20 +12,14 @@ class NamedCommandTest extends CommandTest
      */
     protected function createTestInstance(array $methods = array(), $name = 'name')
     {
-        $command = $this->getMockForAbstractClass(
-            'Metabor\Statemachine\NamedCommand',
-            array($name),
-            '',
-            true,
-            true,
-            true,
-            $methods
-        );
+        $builder = $this->getMockBuilder('Metabor\Statemachine\NamedCommand')
+            ->setConstructorArgs(array($name));
+        $builder->onlyMethods($methods);
 
-        return $command;
+        return $builder->getMock();
     }
 
-    public function testWillReturnNameIfCastedToAString()
+    public function testWillReturnNameIfCastedToAString(): void
     {
         $name = 'foo';
         $command = $this->createTestInstance(array(), $name);

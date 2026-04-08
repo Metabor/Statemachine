@@ -10,7 +10,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testDistributesValuesToContainedArrayAccessObjects()
+    public function testDistributesValuesToContainedArrayAccessObjects(): void
     {
         $composite = new Composite();
         $keyValue1 = new \ArrayIterator();
@@ -32,7 +32,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testHandleKeyAsExistingWhenAllContainedArrayAccessObjectsHaveThisKey()
+    public function testHandleKeyAsExistingWhenAllContainedArrayAccessObjectsHaveThisKey(): void
     {
         $key = 'Key';
         $value = 'Value';
@@ -50,7 +50,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testReturnsKeyValueWhenAllContainedArrayAccessObjectsHaveThisKeyValuePair1()
+    public function testReturnsKeyValueWhenAllContainedArrayAccessObjectsHaveThisKeyValuePair1(): void
     {
         $key = 'Key';
         $value = 'Value';
@@ -68,7 +68,7 @@ class CompositeTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testReturnsKeyValueWhenAllContainedArrayAccessObjectsHaveThisKeyValuePair2()
+    public function testReturnsKeyValueWhenAllContainedArrayAccessObjectsHaveThisKeyValuePair2(): void
     {
         $composite = new Composite();
         $keyValue1 = new \ArrayIterator();

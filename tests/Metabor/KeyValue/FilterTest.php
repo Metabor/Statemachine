@@ -10,7 +10,7 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testFiltersArrayAccessObjectsByCriteria()
+    public function testFiltersArrayAccessObjectsByCriteria(): void
     {
         $key = 'test';
         $value1 = 'v1';

@@ -12,7 +12,7 @@ use Metabor\Statemachine\Transition;
  */
 class GraphBuilderTest extends \PHPUnit\Framework\TestCase
 {
-    public function testAddsStatesToGraph()
+    public function testAddsStatesToGraph(): void
     {
         $state = new State('first');
         $stateCollection = new StateCollection();

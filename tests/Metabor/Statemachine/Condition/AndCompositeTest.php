@@ -20,7 +20,7 @@ class AndCompositeTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testCombinesTheInnerConditionWithAnd()
+    public function testCombinesTheInnerConditionWithAnd(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();

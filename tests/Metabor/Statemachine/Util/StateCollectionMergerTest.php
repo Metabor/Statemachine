@@ -49,7 +49,7 @@ class StateCollectionMergerTest extends \PHPUnit\Framework\TestCase
         return $sourceCollection;
     }
 
-    public function testCreatesAllStatesFromSourceAtTargetColletions()
+    public function testCreatesAllStatesFromSourceAtTargetColletions(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);
@@ -67,7 +67,7 @@ class StateCollectionMergerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($targetCollection->hasState('done'));
     }
 
-    public function testCreatedStatesAreEqualButNotTheSame()
+    public function testCreatedStatesAreEqualButNotTheSame(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);
@@ -98,7 +98,7 @@ class StateCollectionMergerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testCopiesAllFlags()
+    public function testCopiesAllFlags(): void
     {
         $targetCollection = new StateCollection();
         $merger = new StateCollectionMerger($targetCollection);

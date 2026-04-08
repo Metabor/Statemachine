@@ -10,7 +10,7 @@ class SymfonyExpressionTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testConvertsSymfonyExpressionToCallback()
+    public function testConvertsSymfonyExpressionToCallback(): void
     {
         $expression = '2 * 3';
         $callback = new SymfonyExpression($expression);
@@ -21,7 +21,7 @@ class SymfonyExpressionTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testInvokeParametersAreConsecutivelyMappedToKeys()
+    public function testInvokeParametersAreConsecutivelyMappedToKeys(): void
     {
         $expression = 'a < b';
         $keys = array('a', 'b');
@@ -35,7 +35,7 @@ class SymfonyExpressionTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testExpressionIsUsedAsStringRepresentationOfTheInstance()
+    public function testExpressionIsUsedAsStringRepresentationOfTheInstance(): void
     {
         $expression = '2 * 3';
         $callback = new SymfonyExpression($expression);

@@ -5,53 +5,44 @@ namespace Metabor\Statemachine\Condition;
 use Metabor\NamedCollection;
 use MetaborStd\Statemachine\ConditionInterface;
 
+/**
+ * @author Oliver Tischlinger
+ */
 class AndComposite implements ConditionInterface
 {
-    /**
-     * @var NamedCollection|ConditionInterface[]
-     */
-    private $conditions;
+    private NamedCollection $conditions;
 
-    /**
-     * @param ConditionInterface $condition
-     */
-    public function __construct(ConditionInterface $condition)
+    public function __construct(?ConditionInterface $condition = null)
     {
         $this->conditions = new NamedCollection();
-        $this->conditions->add($condition);
+        if ($condition) {
+            $this->conditions->add($condition);
+        }
     }
 
-    /**
-     * @param ConditionInterface $condition
-     *
-     * @return $this
-     */
-    public function addAnd(ConditionInterface $condition)
+    public function addAnd(ConditionInterface $condition): self
     {
         $this->conditions->add($condition);
-
         return $this;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     */
-    public function checkCondition($subject, \ArrayAccess $context)
+    public function addCondition(ConditionInterface $condition): self
+    {
+        return $this->addAnd($condition);
+    }
+
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
         foreach ($this->conditions as $condition) {
             if (!$condition->checkCondition($subject, $context)) {
                 return false;
             }
         }
-
         return true;
     }
 
-    /**
-     * @see MetaborStd.NamedInterface::getName()
-     */
-    public function getName()
+    public function getName(): string
     {
-        return '(' . implode(' and ', $this->conditions->getNames()) . ')';
+        return 'and(' . implode(', ', $this->conditions->getNames()) . ')';
     }
 }

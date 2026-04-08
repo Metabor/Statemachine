@@ -16,36 +16,19 @@ use MetaborStd\Statemachine\TransitionInterface;
  */
 class SetupHelper
 {
-    /**
-     * @var StateCollectionInterface
-     */
-    protected $stateCollection;
+    protected StateCollectionInterface $stateCollection;
 
-    /**
-     * @param StateCollectionInterface $stateCollection
-     */
     public function __construct(StateCollectionInterface $stateCollection)
     {
         $this->stateCollection = $stateCollection;
     }
 
-    /**
-     * @param string $name
-     * @return StateInterface
-     */
-    protected function createState($name)
+    protected function createState(string $name): StateInterface
     {
         return new State($name);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \MetaborStd\Statemachine\StateInterface
-     *
-     * @throws \Exception
-     */
-    public function findOrCreateState($name)
+    public function findOrCreateState(string $name): StateInterface
     {
         if (!$this->stateCollection->hasState($name)) {
             if ($this->stateCollection instanceof StateCollection) {
@@ -58,15 +41,7 @@ class SetupHelper
         return $this->stateCollection->getState($name);
     }
 
-    /**
-     * @param StateInterface     $sourceState
-     * @param StateInterface     $targetState
-     * @param string             $eventName
-     * @param ConditionInterface $condition
-     *
-     * @return TransitionInterface
-     */
-    protected function findTransition(StateInterface $sourceState, StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
+    protected function findTransition(StateInterface $sourceState, StateInterface $targetState, ?string $eventName = null, ?ConditionInterface $condition = null): ?TransitionInterface
     {
         $conditionName = $condition ? $condition->getName() : null;
         /* @var $transition TransitionInterface */
@@ -78,15 +53,11 @@ class SetupHelper
                 return $transition;
             }
         }
+
+        return null;
     }
 
-    /**
-     * @param StateInterface      $sourceState
-     * @param TransitionInterface $sourceTransition
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition)
+    protected function addTransition(StateInterface $sourceState, TransitionInterface $sourceTransition): void
     {
         if ($sourceState instanceof State) {
             $sourceState->addTransition($sourceTransition);
@@ -95,28 +66,12 @@ class SetupHelper
         }
     }
 
-    /**
-     * @param StateInterface     $sourceState
-     * @param StateInterface     $targetState
-     * @param string             $eventName
-     * @param ConditionInterface $condition
-     *
-     * @return TransitionInterface
-     */
-    public function createTransition(StateInterface $sourceState, StateInterface $targetState, $eventName = null, ConditionInterface $condition = null)
+    public function createTransition(StateInterface $sourceState, StateInterface $targetState, ?string $eventName = null, ?ConditionInterface $condition = null): TransitionInterface
     {
         return new Transition($targetState, $eventName, $condition);
     }
 
-    /**
-     * @param string             $sourceStateName
-     * @param string             $targetStateName
-     * @param string             $eventName
-     * @param ConditionInterface $condition
-     *
-     * @return TransitionInterface
-     */
-    public function findOrCreateTransition($sourceStateName, $targetStateName, $eventName = null, ConditionInterface $condition = null)
+    public function findOrCreateTransition(string $sourceStateName, string $targetStateName, ?string $eventName = null, ?ConditionInterface $condition = null): TransitionInterface
     {
         $sourceState = $this->findOrCreateState($sourceStateName);
         $targetState = $this->findOrCreateState($targetStateName);
@@ -129,13 +84,7 @@ class SetupHelper
         return $transition;
     }
 
-    /**
-     * @param StateInterface     $sourceState
-     * @param string             $eventName
-     *
-     * @return EventInterface
-     */
-    public function createEvent(StateInterface $sourceState, $eventName)
+    public function createEvent(StateInterface $sourceState, string $eventName): EventInterface
     {
         if ($sourceState instanceof State) {
             return $sourceState->getEvent($eventName);
@@ -144,12 +93,7 @@ class SetupHelper
         }
     }
 
-    /**
-     * @param string $sourceStateName
-     * @param string $eventName
-     * @return EventInterface
-     */
-    public function findOrCreateEvent($sourceStateName, $eventName)
+    public function findOrCreateEvent(string $sourceStateName, string $eventName): EventInterface
     {
         $sourceState = $this->findOrCreateState($sourceStateName);
         if ($sourceState->hasEvent($eventName)) {
@@ -161,22 +105,13 @@ class SetupHelper
 
     /**
      * If there is no Transition from the SourceState with this Event use addCommandAndSelfTransition().
-     *
-     * @param $sourceStateName
-     * @param string  $eventName
-     * @param \SplObserver $command
      */
-    public function addCommand($sourceStateName, $eventName, \SplObserver $command)
+    public function addCommand(string $sourceStateName, string $eventName, \SplObserver $command): void
     {
         $this->findOrCreateEvent($sourceStateName, $eventName)->attach($command);
     }
 
-    /**
-     * @param $sourceStateName
-     * @param string  $eventName
-     * @param \SplObserver $command
-     */
-    public function addCommandAndSelfTransition($sourceStateName, $eventName, \SplObserver $command)
+    public function addCommandAndSelfTransition(string $sourceStateName, string $eventName, \SplObserver $command): void
     {
         $this->addCommand($sourceStateName, $eventName, $command);
         $this->findOrCreateTransition($sourceStateName, $sourceStateName, $eventName);

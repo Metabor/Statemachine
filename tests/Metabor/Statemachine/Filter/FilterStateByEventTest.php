@@ -13,7 +13,7 @@ class FilterStateByEventTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testFiltersStatesThatHaveEvent()
+    public function testFiltersStatesThatHaveEvent(): void
     {
         $eventName = 'event';
         $stateCollection = new StateCollection();

@@ -10,7 +10,7 @@ use Metabor\Statemachine\State;
  */
 class SingleProcessDetectorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testWillAlwaysReturnTheSameProcess()
+    public function testWillAlwaysReturnTheSameProcess(): void
     {
         $process = new Process('test', new State('new'));
 

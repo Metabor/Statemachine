@@ -8,49 +8,31 @@ use MetaborStd\NamedInterface;
 /**
  * @author Oliver Tischlinger
  */
-class NamedCollection implements \IteratorAggregate, NamedCollectionInterface
+class NamedCollection implements NamedCollectionInterface, \IteratorAggregate
 {
-    /**
-     * @var array
-     */
-    private $collection = array();
+    private array $collection = [];
 
-    /**
-     * @see MetaborStd.NamedCollectionInterface::add()
-     */
-    public function add(NamedInterface $object)
+    public function add(NamedInterface $object): void
     {
         $this->collection[$object->getName()] = $object;
     }
 
-    /**
-     * @see MetaborStd.NamedCollectionInterface::get()
-     */
-    public function get($name)
-    {
-        return $this->collection[$name];
-    }
-
-    /**
-     * @see MetaborStd.NamedCollectionInterface::getNames()
-     */
-    public function getNames()
+    public function getNames(): array
     {
         return array_keys($this->collection);
     }
 
-    /**
-     * @see MetaborStd.NamedCollectionInterface::has()
-     */
-    public function has($name)
+    public function has(string $name): bool
     {
         return isset($this->collection[$name]);
     }
 
-    /**
-     * @see \IteratorAggregate::getIterator()
-     */
-    public function getIterator(): \Traversable
+    public function get(string $name): NamedInterface
+    {
+        return $this->collection[$name];
+    }
+
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->collection);
     }

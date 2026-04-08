@@ -16,7 +16,7 @@ class OnEnterObserverTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testTriggerEventIfStatusIsChangedAndNewStateHasRegisteredEvent()
+    public function testTriggerEventIfStatusIsChangedAndNewStateHasRegisteredEvent(): void
     {
         $process = new Process('process_name', new State('initinal'));
         $collection = new StateCollection();
@@ -38,17 +38,18 @@ class OnEnterObserverTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testContextIsPassedToOnEnterEvent() {
+    public function testContextIsPassedToOnEnterEvent(): void
+    {
         $context = new \ArrayObject(array('someContext'));
 
         $onEnterObserver = new OnEnterObserver('someEvent');
 
-        $state = $this->getMockForAbstractClass('\MetaborStd\Statemachine\StateInterface');
+        $state = $this->createMock('\MetaborStd\Statemachine\StateInterface');
         $state->method('hasEvent')->with($this->equalTo('someEvent'))->willReturn(true);
 
         $stateMachine = $this->getMockBuilder('Metabor\Statemachine\Statemachine')
                      ->disableOriginalConstructor()
-                     ->setMethods(array('getCurrentState', 'getCurrentContext', 'triggerEvent'))
+                     ->onlyMethods(array('getCurrentState', 'getCurrentContext', 'triggerEvent'))
                      ->getMock();
         $stateMachine->method('getCurrentState')->willReturn($state);
         $stateMachine->method('getCurrentContext')->willReturn($context);

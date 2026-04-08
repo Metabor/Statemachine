@@ -13,7 +13,7 @@ class FilterStateByFinalStateTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testFiltersStatesThatHaveNoOutgoingTransitions()
+    public function testFiltersStatesThatHaveNoOutgoingTransitions(): void
     {
         $eventName = 'event';
         $stateCollection = new StateCollection();

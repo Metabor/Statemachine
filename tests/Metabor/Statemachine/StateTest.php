@@ -20,7 +20,7 @@ class StateTest extends StateInterfaceTest
     /**
      *
      */
-    public function testUsesMetadataForFlags()
+    public function testUsesMetadataForFlags(): void
     {
         $offset = 'TestOffset';
         $value = 'TestValue';

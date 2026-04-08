@@ -2,36 +2,27 @@
 
 namespace Metabor\Statemachine\Condition;
 
-use ArrayAccess;
 use MetaborStd\Statemachine\ConditionInterface;
 
+/**
+ * @author Oliver Tischlinger
+ */
 class Not implements ConditionInterface
 {
-    /**
-     * @var ConditionInterface
-     */
-    private $condition;
-    /**
-     * @param ConditionInterface $condition
-     */
+    private ConditionInterface $condition;
+
     public function __construct(ConditionInterface $condition)
     {
         $this->condition = $condition;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     */
-    public function checkCondition($subject, ArrayAccess $context)
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
         return !$this->condition->checkCondition($subject, $context);
     }
 
-    /**
-     * @see MetaborStd.NamedInterface::getName()
-     */
-    public function getName()
+    public function getName(): string
     {
-        return 'not ( ' . $this->condition->getName() . ' )';
+        return 'not(' . $this->condition->getName() . ')';
     }
 }

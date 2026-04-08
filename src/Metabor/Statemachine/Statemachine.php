@@ -25,74 +25,24 @@ use MetaborStd\Statemachine\TransitionInterface;
  */
 class Statemachine extends Subject implements StatemachineInterface
 {
-    /**
-     * @var object
-     */
-    private $subject;
+    private object $subject;
+    private StateInterface $currentState;
+    private ?StateInterface $lastState = null;
+    private ?DispatcherInterface $dispatcher = null;
+    private ?EventInterface $currentEvent = null;
+    private ?\ArrayAccess $currentContext = null;
+    private TransitionSelectorInterface $transitonSelector;
+    private ?TransitionInterface $selectedTransition = null;
+    private ProcessInterface $process;
+    private MutexInterface $mutex;
+    private bool $autoreleaseLock = true;
 
-    /**
-     * @var StateInterface
-     */
-    private $currentState;
-
-    /**
-     * @var StateInterface
-     */
-    private $lastState;
-
-    /**
-     * @var DispatcherInterface
-     */
-    private $dispatcher;
-
-    /**
-     * @var EventInterface
-     */
-    private $currentEvent;
-
-    /**
-     * @var \ArrayAccess
-     */
-    private $currentContext;
-
-    /**
-     * @var TransitionSelectorInterface
-     */
-    private $transitonSelector;
-
-    /**
-     * @var TransitionInterface
-     */
-    private $selectedTransition;
-
-    /**
-     * @var ProcessInterface
-     */
-    private $process;
-
-    /**
-     * @var MutexInterface
-     */
-    private $mutex;
-
-    /**
-     * @var bool
-     */
-    private $autoreleaseLock = true;
-
-    /**
-     * @param object                      $subject
-     * @param ProcessInterface            $process
-     * @param string                      $stateName
-     * @param TransitionSelectorInterface $transitonSelector
-     * @param MutexInterface              $mutex
-     */
     public function __construct(
-        $subject,
+        object $subject,
         ProcessInterface $process,
-        $stateName = null,
-        TransitionSelectorInterface $transitonSelector = null,
-        MutexInterface $mutex = null
+        ?string $stateName = null,
+        ?TransitionSelectorInterface $transitonSelector = null,
+        ?MutexInterface $mutex = null
     ) {
         parent::__construct();
         $this->subject = $subject;
@@ -101,48 +51,27 @@ class Statemachine extends Subject implements StatemachineInterface
         } else {
             $this->currentState = $process->getInitialState();
         }
-        if ($transitonSelector) {
-            $this->transitonSelector = $transitonSelector;
-        } else {
-            $this->transitonSelector = new OneOrNoneActiveTransition();
-        }
+        $this->transitonSelector = $transitonSelector ?? new OneOrNoneActiveTransition();
         $this->process = $process;
-        if ($mutex) {
-            $this->mutex = $mutex;
-        } else {
-            $this->mutex = new NullMutex();
-        }
+        $this->mutex = $mutex ?? new NullMutex();
     }
 
-    /**
-     * @return ProcessInterface
-     */
-    public function getProcess()
+    public function getProcess(): ProcessInterface
     {
         return $this->process;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StatemachineInterface::getCurrentState()
-     */
-    public function getCurrentState()
+    public function getCurrentState(): StateInterface
     {
         return $this->currentState;
     }
 
-    /**
-     * @return StateInterface
-     */
-    public function getLastState()
+    public function getLastState(): ?StateInterface
     {
         return $this->lastState;
     }
 
-    /**
-     * @param \ArrayAccess   $context
-     * @param EventInterface $event
-     */
-    protected function doCheckTransitions(\ArrayAccess $context, EventInterface $event = null)
+    protected function doCheckTransitions(\ArrayAccess $context, ?EventInterface $event = null): void
     {
         try {
             $transitions = $this->currentState->getTransitions();
@@ -175,18 +104,15 @@ class Statemachine extends Subject implements StatemachineInterface
         }
     }
 
-    /**
-     * @return \MetaborStd\Statemachine\TransitionInterface
-     */
-    public function getSelectedTransition()
+    public function getSelectedTransition(): ?TransitionInterface
     {
         return $this->selectedTransition;
     }
 
     /**
-     * is called after dispatcher was executed.
+     * Is called after dispatcher was executed.
      */
-    public function onDispatcherReady()
+    public function onDispatcherReady(): void
     {
         if ($this->dispatcher && $this->dispatcher->isReady()) {
             $context = $this->currentContext;
@@ -201,14 +127,7 @@ class Statemachine extends Subject implements StatemachineInterface
         }
     }
 
-    /**
-     * @param DispatcherInterface $dispatcher
-     * @param string              $name
-     * @param \ArrayAccess        $context
-     *
-     * @throws \RuntimeException
-     */
-    public function dispatchEvent(DispatcherInterface $dispatcher, $name, \ArrayAccess $context = null)
+    public function dispatchEvent(DispatcherInterface $dispatcher, string $name, ?\ArrayAccess $context = null): void
     {
         if ($this->dispatcher) {
             throw new \RuntimeException('Event dispatching is still running!');
@@ -220,36 +139,29 @@ class Statemachine extends Subject implements StatemachineInterface
                 if ($context) {
                     $this->currentContext = $context;
                 } else {
-                    $this->currentContext = new \ArrayIterator(array());
+                    $this->currentContext = new \ArrayIterator([]);
                 }
                 $this->currentEvent = $this->currentState->getEvent($name);
 
-                $dispatcher->dispatch($this->currentEvent, array($this->subject, $this->currentContext), new Callback(array($this, 'onDispatcherReady')));
+                $dispatcher->dispatch($this->currentEvent, [$this->subject, $this->currentContext], new Callback([$this, 'onDispatcherReady']));
             } else {
                 throw new WrongEventForStateException($this->currentState->getName(), $name);
             }
         }
     }
 
-    /**
-     * @param string $name
-     * @param \ArrayAccess|null $context
-     */
-    public function triggerEvent($name, \ArrayAccess $context = null)
+    public function triggerEvent(string $name, ?\ArrayAccess $context = null): void
     {
         $dispatcher = new Dispatcher();
         $this->dispatchEvent($dispatcher, $name, $context);
         $dispatcher();
     }
 
-    /**
-     * @param \ArrayAccess|null $context
-     */
-    public function checkTransitions(\ArrayAccess $context = null)
+    public function checkTransitions(?\ArrayAccess $context = null): void
     {
         $this->acquireLockOrThrowException();
         if (!$context) {
-            $context = new \ArrayIterator(array());
+            $context = new \ArrayIterator([]);
         }
         $this->doCheckTransitions($context);
         if ($this->autoreleaseLock) {
@@ -257,55 +169,38 @@ class Statemachine extends Subject implements StatemachineInterface
         }
     }
 
-    /**
-     * @see \MetaborStd\Statemachine\StatemachineInterface::getSubject()
-     */
-    public function getSubject()
+    public function getSubject(): object
     {
         return $this->subject;
     }
 
-    /**
-     * @return \ArrayAccess
-     */
-    public function getCurrentContext()
+    public function getCurrentContext(): ?\ArrayAccess
     {
         return $this->currentContext;
     }
 
-    /**
-     * @throws LockCanNotBeAcquiredException
-     */
-    protected function acquireLockOrThrowException()
+    protected function acquireLockOrThrowException(): void
     {
         if (!$this->acquireLock()) {
             throw new LockCanNotBeAcquiredException('Lock can not be acquired!');
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function isAutoreleaseLock()
+    public function isAutoreleaseLock(): bool
     {
         return $this->autoreleaseLock;
     }
 
-    /**
-     * @param bool $autoreleaseLock
-     */
-    public function setAutoreleaseLock($autoreleaseLock)
+    public function setAutoreleaseLock(bool $autoreleaseLock): void
     {
         $this->autoreleaseLock = $autoreleaseLock;
     }
 
     /**
-     * Use this function if you want to aquire lock before calling triggerEvent or checkTransitions.
-     * Lock is aquired automatically when calling dispatchEvent or checkTransitions.
-     *
-     * @return bool
+     * Use this function if you want to acquire lock before calling triggerEvent or checkTransitions.
+     * Lock is acquired automatically when calling dispatchEvent or checkTransitions.
      */
-    public function acquireLock()
+    public function acquireLock(): bool
     {
         if ($this->mutex->isAcquired()) {
             return true;
@@ -315,18 +210,15 @@ class Statemachine extends Subject implements StatemachineInterface
     }
 
     /**
-     * Manuall release of the lock.
-     * Can be used for example if you disable autorelase of locks
+     * Manual release of the lock.
+     * Can be used for example if you disable autorelease of locks.
      */
-    public function releaseLock()
+    public function releaseLock(): void
     {
         $this->mutex->releaseLock();
     }
 
-    /**
-     * @return bool
-     */
-    public function isLockAcquired()
+    public function isLockAcquired(): bool
     {
         return $this->mutex->isAcquired();
     }

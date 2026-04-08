@@ -6,19 +6,17 @@ use MetaborStd\Statemachine\Factory\StateNameDetectorInterface;
 use MetaborStd\Statemachine\StatefulInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class StatefulStateNameDetector implements StateNameDetectorInterface
 {
-    /**
-     * @see \MetaborStd\Statemachine\Factory\StateNameDetectorInterface::detectCurrentStateName()
-     */
-    public function detectCurrentStateName($subject)
+    public function detectCurrentStateName(object $subject): ?string
     {
-        if ($subject instanceof StatefulInterface) {
-            return $subject->getCurrentStateName();
-        } else {
-            throw new \InvalidArgumentException('Subject has to implement the StatefulInterface!');
+        if (!$subject instanceof StatefulInterface) {
+            throw new \InvalidArgumentException(
+                sprintf('Subject of type "%s" does not implement StatefulInterface', get_class($subject))
+            );
         }
+        return $subject->getCurrentStateName();
     }
 }

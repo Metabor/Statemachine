@@ -13,59 +13,35 @@ use MetaborStd\Statemachine\StateInterface;
  */
 class StateCollection implements StateCollectionInterface, MergeableInterface
 {
-    /**
-     * @var NamedCollection
-     */
-    private $states;
+    private NamedCollection $states;
+    private ?StateCollectionMerger $stateCollectionMerger = null;
 
-    /**
-     * @var StateCollectionMerger
-     */
-    private $stateCollectionMerger;
-
-    /**
-     */
     public function __construct()
     {
         $this->states = new NamedCollection();
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateCollectionInterface::getState()
-     */
-    public function getState($name)
+    public function getState(string $name): StateInterface
     {
         return $this->states->get($name);
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateCollectionInterface::getStates()
-     */
-    public function getStates()
+    public function getStates(): \Traversable
     {
         return $this->states->getIterator();
     }
 
-    /**
-     * @see MetaborStd\Statemachine.StateCollectionInterface::hasState()
-     */
-    public function hasState($name)
+    public function hasState(string $name): bool
     {
         return $this->states->has($name);
     }
 
-    /**
-     * @param StateInterface $state
-     */
-    public function addState(StateInterface $state)
+    public function addState(StateInterface $state): void
     {
         $this->states->add($state);
     }
 
-    /**
-     * @return StateCollectionMerger
-     */
-    public function getStateCollectionMerger()
+    public function getStateCollectionMerger(): StateCollectionMerger
     {
         if (!$this->stateCollectionMerger) {
             $this->stateCollectionMerger = new StateCollectionMerger($this);
@@ -74,10 +50,7 @@ class StateCollection implements StateCollectionInterface, MergeableInterface
         return $this->stateCollectionMerger;
     }
 
-    /**
-     * @see \MetaborStd\MergeableInterface::merge()
-     */
-    public function merge($source)
+    public function merge(mixed $source): void
     {
         $merger = $this->getStateCollectionMerger();
         $merger->merge($source);

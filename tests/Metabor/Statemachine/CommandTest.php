@@ -16,20 +16,13 @@ class CommandTest extends \PHPUnit\Framework\TestCase
      */
     protected function createTestInstance(array $methods = array())
     {
-        $command = $this->getMockForAbstractClass(
-            'Metabor\Statemachine\Command',
-            array(),
-            '',
-            true,
-            true,
-            true,
-            $methods
-        );
+        $builder = $this->getMockBuilder('Metabor\Statemachine\Command');
+        $builder->onlyMethods($methods);
 
-        return $command;
+        return $builder->getMock();
     }
 
-    public function testWillThrowAnExceptionIfCommandIsNotInvokable()
+    public function testWillThrowAnExceptionIfCommandIsNotInvokable(): void
     {
         $command = $this->createTestInstance();
         $subject = new Event('test');
@@ -38,7 +31,7 @@ class CommandTest extends \PHPUnit\Framework\TestCase
         $subject('foo', 'bar', 'baz');
     }
 
-    public function testDelegatesUpdateFromEventToInvoke()
+    public function testDelegatesUpdateFromEventToInvoke(): void
     {
         $command = $this->createTestInstance(array('__invoke'));
         $subject = new Event('test');
@@ -47,7 +40,7 @@ class CommandTest extends \PHPUnit\Framework\TestCase
         $subject('foo', 'bar', 'baz');
     }
 
-    public function testWillThrowAnExcpetionIfObserverIsNotAnEvent()
+    public function testWillThrowAnExcpetionIfObserverIsNotAnEvent(): void
     {
         $command = $this->createTestInstance(array('__invoke'));
         $subject = new Subject();
@@ -56,7 +49,7 @@ class CommandTest extends \PHPUnit\Framework\TestCase
         $subject->notify();
     }
 
-    public function testIsCastableToAString()
+    public function testIsCastableToAString(): void
     {
         $command = $this->createTestInstance();
         $string = (string) $command;

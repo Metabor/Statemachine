@@ -4,46 +4,32 @@ namespace Metabor\Semaphore;
 
 use MetaborStd\Semaphore\MutexInterface;
 
+/**
+ * @author Oliver Tischlinger
+ */
 class NullMutex implements MutexInterface
 {
-    /**
-     * @var bool
-     */
-    private $acquired = false;
+    private bool $acquired = false;
 
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::releaseLock()
-     */
-    public function releaseLock()
+    public function acquireLock(): bool
     {
-        $this->acquired = false;
-
+        $this->acquired = true;
         return true;
     }
 
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::isAcquired()
-     */
-    public function isAcquired()
+    public function releaseLock(): bool
+    {
+        $this->acquired = false;
+        return true;
+    }
+
+    public function isLocked(): bool
     {
         return $this->acquired;
     }
 
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::acquireLock()
-     */
-    public function acquireLock()
+    public function isAcquired(): bool
     {
-        $this->acquired = true;
-
-        return true;
-    }
-
-    /**
-     * @see \MetaborStd\Semaphore\MutexInterface::isLocked()
-     */
-    public function isLocked()
-    {
-        return false;
+        return $this->acquired;
     }
 }

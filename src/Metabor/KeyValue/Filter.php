@@ -3,31 +3,22 @@
 namespace Metabor\KeyValue;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class Filter extends \FilterIterator
 {
-    /**
-     * @var Criteria
-     */
-    private $criteria;
+    private Criteria $criteria;
 
-    /**
-     * @param \Traversable $iterator
-     */
     public function __construct(\Traversable $iterator, Criteria $criteria)
     {
         parent::__construct(new \IteratorIterator($iterator));
         $this->criteria = $criteria;
     }
 
-    /**
-     * @see FilterIterator::accept()
-     */
     public function accept(): bool
     {
         $current = $this->current();
 
-        return (($current instanceof \ArrayAccess) && $this->criteria->check($current));
+        return ($current instanceof \ArrayAccess) && $this->criteria->check($current);
     }
 }

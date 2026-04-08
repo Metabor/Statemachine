@@ -20,7 +20,7 @@ class TautologyTest extends NamedInterfaceTest
     /**
      *
      */
-    public function testIsAllwaysTrue()
+    public function testIsAllwaysTrue(): void
     {
         $instance = $this->createTestInstance();
         $subject = new \stdClass();

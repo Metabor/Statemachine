@@ -7,12 +7,9 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
+    <source>
+        <include>
             <directory suffix=".php">src/Metabor/</directory>
-        </whitelist>
-        <blacklist>
-            <directory>vendor/</directory>
-        </blacklist>
-    </filter>
+        </include>
+    </source>
 </phpunit>

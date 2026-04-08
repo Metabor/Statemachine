@@ -6,63 +6,42 @@ use MetaborStd\Statemachine\ConditionInterface;
 use MetaborStd\Statemachine\LastStateHasChangedDateInterface;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class Timeout implements ConditionInterface
 {
-    /**
-     * @var string
-     */
-    protected $timeout;
+    private string $timeout;
 
-    /**
-     * @param string $timeout
-     */
-    public function __construct($timeout)
+    public function __construct(string $timeout)
     {
         $this->timeout = $timeout;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
-        return 'Timeout: ' . $this->timeout;
+        return 'timeout(' . $this->timeout . ')';
     }
 
-    /**
-     * @return \DateInterval
-     */
-    public function getDateInterval()
+    public function getTimeout(): \DateInterval
     {
-        return \DateInterval::createFromDateString($this->timeout);
-    }
-
-    /**
-     * @param object       $subject
-     * @param \ArrayAccess $context
-     *
-     * @return \DateTime
-     */
-    protected function getLastStateHasChangedDate($subject, \ArrayAccess $context)
-    {
-        if ($subject instanceof LastStateHasChangedDateInterface) {
-            return $subject->getLastStateHasChangedDate();
-        } else {
-            throw new \InvalidArgumentException('Overwrite this method to implement a different type!');
+        $interval = \DateInterval::createFromDateString($this->timeout);
+        if ($interval === false) {
+            throw new \InvalidArgumentException('Invalid timeout string: ' . $this->timeout);
         }
+        return $interval;
     }
 
-    /**
-     * @see MetaborStd\Statemachine.ConditionInterface::checkCondition()
-     */
-    public function checkCondition($subject, \ArrayAccess $context)
+    public function checkCondition(object $subject, \ArrayAccess $context): bool
     {
-        // clone date to not change original object
-        $date = clone $this->getLastStateHasChangedDate($subject, $context);
-        $date->add($this->getDateInterval());
-
-        return ($date <= new \DateTime());
+        if (!$subject instanceof LastStateHasChangedDateInterface) {
+            return false;
+        }
+        $lastChanged = $subject->getLastStateHasChangedDate();
+        $now = new \DateTime();
+        $elapsed = $now->diff($lastChanged);
+        $timeoutInterval = $this->getTimeout();
+        $timeoutDate = new \DateTime();
+        $timeoutDate->sub($timeoutInterval);
+        return $lastChanged <= $timeoutDate;
     }
 }

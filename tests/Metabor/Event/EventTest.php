@@ -20,7 +20,7 @@ class EventTest extends EventInterfaceTest
     /**
      *
      */
-    public function testUsesMetadataForFlags()
+    public function testUsesMetadataForFlags(): void
     {
         $offset = 'TestOffset';
         $value = 'TestValue';

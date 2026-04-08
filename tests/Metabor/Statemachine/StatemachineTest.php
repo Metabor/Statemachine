@@ -65,14 +65,14 @@ class StatemachineTest extends StatemachineInterfaceTest
         return new Transition($endState, null, $condition);
     }
 
-    public function testThrowsExcpetionIfCurrentStateDidNotHaveTriggeredEvent()
+    public function testThrowsExcpetionIfCurrentStateDidNotHaveTriggeredEvent(): void
     {
         $statemachine = $this->createTestInstance();
         $this->expectException('Metabor\Statemachine\Exception\WrongEventForStateException');
         $statemachine->triggerEvent('foo');
     }
 
-    public function testAllowLockToBeManagedFromOutside()
+    public function testAllowLockToBeManagedFromOutside(): void
     {
         $statemachine = $this->createTestInstance();
         $isAquired = $statemachine->acquireLock();

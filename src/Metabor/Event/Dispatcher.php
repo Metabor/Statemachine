@@ -11,67 +11,35 @@ use MetaborStd\Event\EventInterface;
  */
 class Dispatcher implements DispatcherInterface
 {
-    /**
-     * @var array
-     */
-    private $commands = array();
+    private array $commands = [];
+    private array $onReadyCallbacks = [];
+    private bool $isReady = false;
 
-    /**
-     * @var array
-     */
-    private $onReadyCallbacks = array();
-
-    /**
-     * @var bool
-     */
-    private $isReady = false;
-
-    /**
-     * @param callable $command
-     * @param array    $arguments
-     */
-    protected function addCommand($command, array $arguments)
+    protected function addCommand(callable $command, array $arguments): void
     {
-        $this->commands[] = array($command, $arguments);
+        $this->commands[] = [$command, $arguments];
     }
 
-    /**
-     * @return array
-     */
-    protected function getCommands()
+    protected function getCommands(): array
     {
         return $this->commands;
     }
 
-    /**
-     * @param callable $command
-     * @param array    $arguments
-     */
-    protected function removeCommand($command, array $arguments)
+    protected function removeCommand(callable $command, array $arguments): void
     {
-        $key = array_search(array($command, $arguments), $this->commands);
+        $key = array_search([$command, $arguments], $this->commands);
         if ($key !== false) {
             unset($this->commands[$key]);
         }
     }
 
-    /**
-     * @param EventInterface $event
-     * @param array          $arguments
-     */
-    protected function addEvent(EventInterface $event, array $arguments)
+    protected function addEvent(EventInterface $event, array $arguments): void
     {
         $this->addCommand($event, $arguments);
     }
 
-    /**
-     * @see \MetaborStd\Event\DispatcherInterface::dispatch()
-     */
-    public function dispatch(
-        EventInterface $event,
-        array $arguments = array(),
-        CallbackInterface $onReadyCallback = null
-    ) {
+    public function dispatch(EventInterface $event, array $arguments = [], ?CallbackInterface $onReadyCallback = null): void
+    {
         if (!$this->isReady) {
             $this->addEvent($event, $arguments);
             if ($onReadyCallback) {
@@ -82,29 +50,24 @@ class Dispatcher implements DispatcherInterface
         }
     }
 
-    /**
-     * @see \MetaborStd\CallbackInterface::__invoke()
-     */
-    public function __invoke()
+    public function __invoke(mixed ...$args): mixed
     {
         if ($this->isReady) {
             throw new \RuntimeException('Was already invoked!');
         } else {
             foreach ($this->getCommands() as $list) {
-                list($command, $arguments) = $list;
-                call_user_func_array($command, $arguments);
+                [$command, $arguments] = $list;
+                $command(...$arguments);
             }
             $this->isReady = true;
             foreach ($this->onReadyCallbacks as $onReadyCallback) {
                 $onReadyCallback();
             }
         }
+        return null;
     }
 
-    /**
-     * @return bool
-     */
-    public function isReady()
+    public function isReady(): bool
     {
         return $this->isReady;
     }

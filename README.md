@@ -1,62 +1,20 @@
 # metabor/statemachine
 
-Statemachine in PHP 5.6 / PHP 7
+Statemachine in PHP 8.2+
 
-### Support
-
-#### Gitter
-[![Gitter chat](https://badges.gitter.im/Metabor/Statemachine.png)](https://gitter.im/Metabor/Statemachine)
-
-### Continuous Integration/Deployment
-
-#### TravisCI
-[![Build Status](http://img.shields.io/travis/Metabor/Statemachine.svg)](https://travis-ci.org/Metabor/Statemachine)
-
-#### Open Issues
-[![Open Issues](http://img.shields.io/github/issues/Metabor/Statemachine.svg)](https://github.com/Metabor/Statemachine/issues?state=open)
+> **Upgrading from a previous version?** See [UPGRADE-4.0.md](UPGRADE-4.0.md) for breaking changes and migration steps.
 
 ### Package Information
 
 #### Packagist
 [![Packagist](http://img.shields.io/packagist/v/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
-[![Packagist](http://img.shields.io/packagist/dt/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
-[![Packagist](http://img.shields.io/packagist/dm/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
-[![Packagist](http://img.shields.io/packagist/dd/Metabor/Statemachine.svg)](https://packagist.org/packages/metabor/statemachine)
 
-#### Compatibility
-[![MetaborStd Version](http://img.shields.io/badge/MetaborStd-1.2-green.svg)](https://github.com/Metabor/MetaborStd)
-
-### Dependency Status
-
-#### VersionEye
-[![Dependency Status](https://www.versioneye.com/php/metabor:statemachine/badge.svg)](https://www.versioneye.com/php/metabor:statemachine)
-
-### Test Coverage
-
-#### Scrutinizer
-[![Code Coverage](https://scrutinizer-ci.com/g/Metabor/Statemachine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
-
-### Code Quality
-
-#### Codeship
-[ ![Codeship Status](https://codeship.com/projects/63d9a3e0-95d6-0133-dd6b-4e4e4a8e2117/status?branch=master)](https://codeship.com/projects/125285)
-
-#### Codacy
-[![Codacy](https://www.codacy.com/project/badge/c83d65fc6188425d92c6b7de57f201eb)](https://www.codacy.com/public/Metabor/Statemachine.git)
-
-#### Code Climate
-[![Code Climate](http://img.shields.io/codeclimate/github/Metabor/Statemachine.svg)](https://codeclimate.com/github/Metabor/Statemachine)
-
-#### Scrutinizer
-[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/Metabor/Statemachine.svg)](https://scrutinizer-ci.com/g/Metabor/Statemachine/?branch=master)
-
-#### SensioLabsInsight
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ac1d76c8-e9e1-4780-b21f-a0d01f582a21/big.png)](https://insight.sensiolabs.com/projects/ac1d76c8-e9e1-4780-b21f-a0d01f582a21)
+#### Open Issues
+[![Open Issues](http://img.shields.io/github/issues/Metabor/Statemachine.svg)](https://github.com/Metabor/Statemachine/issues?state=open)
 
 ### Other
 
 [![License](http://img.shields.io/packagist/l/Metabor/Statemachine.svg)](http://opensource.org/licenses/MIT)
-[![Gittip](http://img.shields.io/gittip/metabor.svg)](https://www.gittip.com/metabor/)
 
 ## Quickstart examples
 
@@ -127,7 +85,7 @@ echo 'Status:' . $statemachine->getCurrentState()->getName() . PHP_EOL;
 
 ## Features
 
-This library implements a [finite-state machine](http://en.wikipedia.org/wiki/Finite-state_machine) in PHP 5.3.
+This library implements a [finite-state machine](http://en.wikipedia.org/wiki/Finite-state_machine) in PHP 8.2+.
 
 It was first developed for a talk at a conference. The example from my talk is available on Github and Packagist as [metabor/statemachine-example](https://github.com/Metabor/Statemachine-Example).
 
@@ -146,7 +104,8 @@ The recommended way to install this library is [through composer](http://getcomp
 ```JSON
 {
     "require": {
-        "metabor/statemachine": "~1.2"
+        "php": ">=8.2",
+        "metabor/statemachine": "~4.0"
     }
 }
 ```
@@ -161,9 +120,10 @@ To use this feature you also have to add this to your composer.json:
 ```JSON
 {
     "require": {
+        "php": ">=8.2",
         "graphp/graphviz": "*",
         "clue/graph": "*",
-        "metabor/statemachine": "~1.2"
+        "metabor/statemachine": "~4.0"
     }
 }
 ```

@@ -15,12 +15,12 @@ class StatefulStatusChangerTest extends \PHPUnit\Framework\TestCase implements S
     /**
      * @var string
      */
-    private $currentStateName;
+    private string $currentStateName;
 
     /**
      * @return string
      */
-    public function getCurrentStateName()
+    public function getCurrentStateName(): string
     {
         return $this->currentStateName;
     }
@@ -28,7 +28,7 @@ class StatefulStatusChangerTest extends \PHPUnit\Framework\TestCase implements S
     /**
      * @param string $currentStateName
      */
-    public function setCurrentStateName($currentStateName)
+    public function setCurrentStateName($currentStateName): void
     {
         $this->currentStateName = $currentStateName;
     }
@@ -36,7 +36,7 @@ class StatefulStatusChangerTest extends \PHPUnit\Framework\TestCase implements S
     /**
      *
      */
-    public function testChangesStatusOnStatefulObjects()
+    public function testChangesStatusOnStatefulObjects(): void
     {
         $stateName = 'stateName';
         $state = new State($stateName);

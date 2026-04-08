@@ -8,73 +8,43 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\ParsedExpression;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
-class SymfonyExpression extends Expression implements CallbackInterface
+class SymfonyExpression implements CallbackInterface
 {
-    /**
-     * @var ExpressionLanguage
-     */
-    private $expressionLanguage;
+    private ExpressionLanguage $expressionLanguage;
+    private ParsedExpression $parsedExpression;
+    private array $keys;
 
-    /**
-     * @var ParsedExpression
-     */
-    private $parsedExpression;
-
-    /**
-     * @var array
-     */
-    private $keys;
-
-    /**
-     * @param string             $expression
-     * @param array              $keys
-     * @param ExpressionLanguage $expressionLanguage
-     */
-    public function __construct($expression, array $keys = array(), ExpressionLanguage $expressionLanguage = null)
+    public function __construct(string $expression, array $keys = [], ?ExpressionLanguage $expressionLanguage = null)
     {
-        parent::__construct($expression);
-        $this->keys = $keys;
         if ($expressionLanguage) {
             $this->expressionLanguage = $expressionLanguage;
         } else {
             $this->expressionLanguage = new ExpressionLanguage();
         }
+        $this->keys = $keys;
+        $this->parsedExpression = $this->expressionLanguage->parse($expression, $keys);
     }
 
-    /**
-     * @return \Symfony\Component\ExpressionLanguage\ParsedExpression
-     */
-    protected function getExpression()
+    public function getExpression(): ParsedExpression
     {
-        if (!$this->parsedExpression) {
-            $this->parsedExpression = $this->expressionLanguage->parse($this, $this->keys);
-        }
-
         return $this->parsedExpression;
     }
 
-    /**
-     * @return string
-     */
-    public function __invoke()
+    public function __invoke(mixed ...$args): mixed
     {
-        if (empty($this->keys)) {
-            $values = array();
-        } else {
-            $args = func_get_args();
-            $values = array_combine($this->keys, $args);
-        }
-
-        return $this->expressionLanguage->evaluate($this->getExpression(), $values);
+        $values = array_combine($this->keys, $args);
+        return $this->expressionLanguage->evaluate($this->parsedExpression, $values);
     }
 
-    /**
-     * @return array
-     */
-    public function getKeys()
+    public function getKeys(): array
     {
         return $this->keys;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->parsedExpression;
     }
 }

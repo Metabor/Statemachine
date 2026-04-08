@@ -19,7 +19,7 @@ class ActiveTransitionFilterTest extends \PHPUnit\Framework\TestCase
      */
     protected function createTransition($active, $subject, \ArrayAccess $context, EventInterface $event = null)
     {
-        $transition = $this->getMockForAbstractClass('\MetaborStd\Statemachine\TransitionInterface');
+        $transition = $this->createMock('\MetaborStd\Statemachine\TransitionInterface');
         $transition->expects($this->atLeastOnce())->method('isActive')->with($subject, $context, $event)
                 ->willReturn($active);
 
@@ -29,7 +29,7 @@ class ActiveTransitionFilterTest extends \PHPUnit\Framework\TestCase
     /**
      *
      */
-    public function testFiltersAllNotActiveTransitions()
+    public function testFiltersAllNotActiveTransitions(): void
     {
         $subject = new \stdClass();
         $context = new \ArrayObject();

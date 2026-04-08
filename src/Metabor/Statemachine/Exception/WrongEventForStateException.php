@@ -2,29 +2,15 @@
 
 namespace Metabor\Statemachine\Exception;
 
+/**
+ * @author Oliver Tischlinger
+ */
 class WrongEventForStateException extends \RuntimeException
 {
-    /**
-     * The event that was triggered.
-     *
-     * @var string
-     */
-    protected $eventName;
+    private string $stateName;
+    private string $eventName;
 
-    /**
-     * The subject's current state.
-     *
-     * @var string
-     */
-    protected $stateName;
-
-    /**
-     * @param string     $stateName
-     * @param string     $eventName
-     * @param int        $code
-     * @param \Exception $previous
-     */
-    public function __construct($stateName, $eventName, $code = 0, \Exception $previous = null)
+    public function __construct(string $stateName, string $eventName, int $code = 0, ?\Throwable $previous = null)
     {
         $this->stateName = $stateName;
         $this->eventName = $eventName;
@@ -33,12 +19,12 @@ class WrongEventForStateException extends \RuntimeException
         parent::__construct($message, $code, $previous);
     }
 
-    public function getEventName()
+    public function getEventName(): string
     {
         return $this->eventName;
     }
 
-    public function getStateName()
+    public function getStateName(): string
     {
         return $this->stateName;
     }

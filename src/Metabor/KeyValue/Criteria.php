@@ -3,16 +3,11 @@
 namespace Metabor\KeyValue;
 
 /**
- * @author otischlinger
+ * @author Oliver Tischlinger
  */
 class Criteria extends \ArrayObject
 {
-    /**
-     * @param \ArrayAccess $keyvalue
-     *
-     * @return bool
-     */
-    public function check(\ArrayAccess $keyvalue)
+    public function check(\ArrayAccess $keyvalue): bool
     {
         foreach ($this as $key => $value) {
             if (!($keyvalue->offsetExists($key) && ($keyvalue->offsetGet($key) === $value))) {

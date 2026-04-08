@@ -10,51 +10,32 @@ use NinjaMutex\Lock\LockInterface;
  */
 class NinjaMutexLockAdapter implements LockAdapterInterface
 {
-    /**
-     * @var LockInterface
-     */
-    private $ninjaMutexLock;
-
-    /**
-     * @var null|int
-     */
-    private $timeout;
+    private LockInterface $ninjaMutexLock;
+    private ?int $timeout;
 
     /**
      * @param LockInterface $ninjaMutexLock
-     * @param  null|int $timeout 1. null if you want blocking lock
-     *                           2. 0 if you want just lock and go
-     *                           3. $timeout > 0 if you want to wait for lock some time (in milliseconds)
+     * @param null|int $timeout 1. null if you want blocking lock
+     *                          2. 0 if you want just lock and go
+     *                          3. $timeout > 0 if you want to wait for lock some time (in milliseconds)
      */
-    public function __construct(LockInterface $ninjaMutexLock, $timeout = null)
+    public function __construct(LockInterface $ninjaMutexLock, ?int $timeout = null)
     {
         $this->ninjaMutexLock = $ninjaMutexLock;
         $this->timeout = $timeout;
     }
 
-    /**
-     * @param string $resourceName
-     * @return bool
-     */
-    public function acquireLock($resourceName)
+    public function acquireLock(string $resourceName): bool
     {
         return $this->ninjaMutexLock->acquireLock($resourceName, $this->timeout);
     }
 
-    /**
-     * @param string $resourceName
-     * @return bool
-     */
-    public function releaseLock($resourceName)
+    public function releaseLock(string $resourceName): bool
     {
         return $this->ninjaMutexLock->releaseLock($resourceName);
     }
 
-    /**
-     * @param string $resourceName
-     * @return bool
-     */
-    public function isLocked($resourceName)
+    public function isLocked(string $resourceName): bool
     {
         return $this->ninjaMutexLock->isLocked($resourceName);
     }
