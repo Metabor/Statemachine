@@ -16,12 +16,12 @@ class Composite implements \ArrayAccess
 
     public function attach(\ArrayAccess $keyValue): void
     {
-        $this->container->attach($keyValue);
+        $this->container->offsetSet($keyValue, null);
     }
 
     public function detach(\ArrayAccess $keyValue): void
     {
-        $this->container->detach($keyValue);
+        $this->container->offsetUnset($keyValue);
     }
 
     public function offsetExists(mixed $offset): bool
