@@ -88,7 +88,7 @@ class GraphBuilder
      */
     public function attachLayoutCallback(Callback $callback)
     {
-        $this->layoutCallback->attach($callback);
+        $this->layoutCallback->offsetSet($callback, null);
     }
 
     /**
@@ -96,7 +96,7 @@ class GraphBuilder
      */
     public function detachLayoutCallback(Callback $callback)
     {
-        $this->layoutCallback->detach($callback);
+        $this->layoutCallback->offsetUnset($callback);
     }
 
     /**

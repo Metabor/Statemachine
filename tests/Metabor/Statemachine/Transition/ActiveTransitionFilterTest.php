@@ -37,9 +37,9 @@ class ActiveTransitionFilterTest extends \PHPUnit\Framework\TestCase
 
         $transitions = new \SplObjectStorage();
         $transitionActive = $this->createTransition(true, $subject, $context, $event);
-        $transitions->attach($transitionActive);
+        $transitions->offsetSet($transitionActive, null);
         $transitionNotActive = $this->createTransition(false, $subject, $context, $event);
-        $transitions->attach($transitionNotActive);
+        $transitions->offsetSet($transitionNotActive, null);
 
         $filteredTransitions = new ActiveTransitionFilter($transitions, $subject, $context, $event);
         $this->assertContains($transitionActive, $filteredTransitions);

@@ -27,12 +27,12 @@ class Composite implements CallbackInterface, \Countable, \IteratorAggregate
 
     public function attach(CallbackInterface $callback): void
     {
-        $this->callbacks->attach($callback);
+        $this->callbacks->offsetSet($callback, null);
     }
 
     public function detach(CallbackInterface $callback): void
     {
-        $this->callbacks->detach($callback);
+        $this->callbacks->offsetUnset($callback);
     }
 
     public function getIterator(): \Traversable

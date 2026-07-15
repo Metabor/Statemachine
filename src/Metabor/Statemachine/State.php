@@ -36,7 +36,7 @@ class State extends Named implements StateInterface, \ArrayAccess, MetadataInter
 
     public function addTransition(TransitionInterface $transition): void
     {
-        $this->transitions->attach($transition);
+        $this->transitions->offsetSet($transition, null);
         $eventName = $transition->getEventName();
         if ($eventName) {
             $this->getEvent($eventName);

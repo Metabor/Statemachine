@@ -41,12 +41,12 @@ class Factory implements FactoryInterface
 
     public function attachStatemachineObserver(\SplObserver $observer): void
     {
-        $this->statemachineObserver->attach($observer);
+        $this->statemachineObserver->offsetSet($observer, null);
     }
 
     public function detachStatemachineObserver(\SplObserver $observer): void
     {
-        $this->statemachineObserver->detach($observer);
+        $this->statemachineObserver->offsetUnset($observer);
     }
 
     public function getStatemachineObserver(): \Traversable

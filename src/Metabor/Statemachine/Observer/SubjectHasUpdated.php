@@ -12,9 +12,9 @@ class SubjectHasUpdated extends \SplObjectStorage implements \SplObserver
     public function update(\SplSubject $subject): void
     {
         if ($subject instanceof StatemachineInterface) {
-            $this->attach($subject->getSubject());
+            $this->offsetSet($subject->getSubject(), null);
         } else {
-            $this->attach($subject);
+            $this->offsetSet($subject, null);
         }
     }
 }
